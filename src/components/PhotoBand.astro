@@ -1,0 +1,58 @@
+---
+import { photoVar } from '../lib/photos';
+
+interface Props {
+  image: string;
+  quote: string;
+  caption?: string;
+}
+const { image, quote, caption } = Astro.props;
+---
+
+<section class="photo-band" style={photoVar(image)}>
+  <div class="container photo-band__inner">
+    <span class="ornament" aria-hidden="true"></span>
+    <p class="photo-band__quote">{quote}</p>
+    {caption && <p class="photo-band__caption">{caption}</p>}
+  </div>
+</section>
+
+<style>
+  .photo-band {
+    position: relative;
+    color: var(--ivory);
+    text-align: center;
+    padding-block: clamp(5rem, 14vw, 10rem);
+    background-color: var(--navy-900);
+    background-image:
+      linear-gradient(180deg, rgb(14 26 46 / 0.78), rgb(14 26 46 / 0.88)),
+      var(--photo, repeating-linear-gradient(90deg, rgb(205 176 122 / 0.07) 0 1px, transparent 1px 96px));
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  @media (max-width: 1060px), (prefers-reduced-motion: reduce) {
+    .photo-band {
+      background-attachment: scroll;
+    }
+  }
+  .photo-band__inner {
+    max-width: 900px;
+  }
+  .photo-band__quote {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.4vw, 3.4rem);
+    font-weight: 500;
+    line-height: 1.15;
+    margin: 0 0 1rem;
+    text-wrap: balance;
+  }
+  .photo-band__caption {
+    color: var(--gold-400);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 0;
+  }
+</style>

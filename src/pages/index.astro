@@ -10,6 +10,8 @@ import FaqList from '../components/FaqList.astro';
 import Reviews from '../components/Reviews.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
+import PhotoBand from '../components/PhotoBand.astro';
+import { photoVar, photo } from '../lib/photos';
 import { site } from '../config/site';
 import { services, notCovered } from '../data/services';
 import { faqs } from '../data/faq';
@@ -25,18 +27,18 @@ const lead = site.team[0];
   description={site.description}
 >
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" style={photoVar('hero')}>
     <div class="container hero__inner">
       <div class="hero__copy">
         <span class="eyebrow">{site.descriptor}</span>
         <h1>Tu IVA y tus retenciones, presentados a tiempo y sin sorpresas</h1>
         <p class="lead">
-          Preparamos y presentamos tus modelos trimestrales y anuales con Hacienda. Antes de cada presentación recibes el
+          Preparamos y presentamos tus modelos trimestrales y anuales con Hacienda. Antes de cada presentación recibes el{' '}
           <strong>papel de trabajo</strong> con el detalle del cálculo y el <strong>borrador</strong> para tu aprobación.
         </p>
         <div class="btn-row">
-          <a class="btn btn--primary" href="/contacto/?motivo=propuesta">Solicitar propuesta <Icon name="arrow" size={18} /></a>
-          <a class="btn btn--secondary" href="/como-funciona/">Cómo trabajamos</a>
+          <a class="btn btn--gold" href="/contacto/?motivo=propuesta">Solicitar propuesta <Icon name="arrow" size={18} /></a>
+          <a class="btn btn--ghost-light" href="/como-funciona/">Cómo trabajamos</a>
         </div>
         <div class="hero__trust">
           <TrustBar />
@@ -135,6 +137,12 @@ const lead = site.team[0];
     </div>
   </section>
 
+  <PhotoBand
+    image="despacho"
+    quote="Cada cifra, justificada. Cada plazo, cumplido."
+    caption="El rigor de un despacho · La cercanía de tu asesor"
+  />
+
   <!-- GARANTÍAS -->
   <section class="section section--soft">
     <div class="container">
@@ -167,7 +175,15 @@ const lead = site.team[0];
         <a href="/quienes-somos/">Conoce al equipo</a>
       </div>
       <div class="card who__card">
-        <div class="who__avatar" aria-hidden="true"><Icon name="user" size={40} /></div>
+        {
+          photo('fernando') ? (
+            <img class="who__photo" src={photo('fernando')} alt={`Retrato de ${site.founder}`} width="160" height="200" />
+          ) : (
+            <div class="who__avatar" aria-hidden="true">
+              <Icon name="user" size={40} />
+            </div>
+          )
+        }
         <h3>{lead.name}</h3>
         <p class="muted mb-0">{lead.role}</p>
         <p class="small muted">{lead.credentials}</p>
@@ -218,12 +234,44 @@ const lead = site.team[0];
 
 <style>
   .hero {
-    background: linear-gradient(180deg, var(--ivory-200) 0%, var(--ivory) 100%);
-    padding-block: clamp(3rem, 7vw, 5.5rem);
-    border-bottom: 1px solid var(--line);
+    position: relative;
+    color: #d9dfe9;
+    padding-block: clamp(4rem, 9vw, 7.5rem);
+    background-color: var(--navy-900);
+    background-image:
+      linear-gradient(100deg, rgb(14 26 46 / 0.96) 0%, rgb(14 26 46 / 0.86) 48%, rgb(14 26 46 / 0.6) 100%),
+      var(--photo, repeating-linear-gradient(90deg, rgb(205 176 122 / 0.06) 0 1px, transparent 1px 96px));
+    background-size: cover;
+    background-position: center;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-600), transparent);
+  }
+  .hero h1 {
+    color: var(--ivory);
+  }
+  .hero .eyebrow {
+    color: var(--gold-400);
+  }
+  .hero .lead {
+    color: #d3dae5;
+  }
+  .hero .lead strong {
+    color: var(--ivory);
+  }
+  .hero :global(.trust-bar) {
+    color: #d3dae5;
+  }
+  .hero :global(.trust-bar svg) {
+    color: var(--gold-400);
   }
   .hero h1 {
     font-size: clamp(2.5rem, 5vw, 3.7rem);
+    color: var(--ivory);
   }
   .hero__inner {
     display: grid;
@@ -244,6 +292,7 @@ const lead = site.team[0];
   /* Borrador con aspecto de documento: papel, membrete y doble filete */
   .draft-card {
     position: relative;
+    color: var(--ink);
     background: var(--paper);
     border: 1px solid var(--line-strong);
     border-radius: var(--radius-sm);
@@ -325,6 +374,14 @@ const lead = site.team[0];
   }
   .who {
     align-items: center;
+  }
+  .who__photo {
+    width: 160px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--gold-600);
+    margin-bottom: 1rem;
   }
   .who__avatar {
     width: 72px;

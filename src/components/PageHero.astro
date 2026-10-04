@@ -1,4 +1,6 @@
 ---
+import { photoVar } from '../lib/photos';
+
 interface Crumb {
   href?: string;
   label: string;
@@ -23,7 +25,7 @@ const breadcrumbLd = {
 };
 ---
 
-<section class="page-hero">
+<section class="page-hero" style={photoVar('cabecera')}>
   <div class="container">
     {
       crumbs.length > 0 && (

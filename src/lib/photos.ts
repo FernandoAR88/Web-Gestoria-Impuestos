@@ -1,0 +1,22 @@
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
+/**
+ * Fotos corporativas opcionales en public/img/ (formato .jpg, horizontal, ≥ 1920 px).
+ * Si la foto existe se usa; si no, la web muestra un fondo de «raya diplomática»
+ * azul tinta y oro. Así puedes ir añadiendo fotos sin tocar el código.
+ *
+ *   hero.jpg       Portada: despacho, reunión o persona trabajando
+ *   despacho.jpg   Banda intermedia de la portada
+ *   cabecera.jpg   Fondo de las cabeceras de las páginas interiores
+ *   fernando.jpg   Retrato del fundador (vertical, ≥ 800 px)
+ */
+export function photo(name: string): string | null {
+  return existsSync(join(process.cwd(), 'public', 'img', `${name}.jpg`)) ? `/img/${name}.jpg` : null;
+}
+
+/** Variable CSS --photo lista para usar en un atributo style. */
+export function photoVar(name: string): string | undefined {
+  const p = photo(name);
+  return p ? `--photo: url('${p}')` : undefined;
+}
