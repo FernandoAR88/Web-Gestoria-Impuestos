@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../config/site';
+---
+
+<BaseLayout title="Mensaje recibido" description="Hemos recibido tu consulta." noindex>
+  <section class="section">
+    <div class="container container--narrow text-center">
+      <div class="icon-badge icon-badge--green thanks-icon"><Icon name="check" size={32} /></div>
+      <h1>¡Gracias! Hemos recibido tu mensaje</h1>
+      <p class="lead">Te responderemos en menos de {site.contact.responseTime}. Si es urgente, llámanos al {site.contact.phoneDisplay}.</p>
+      <div class="btn-row" style="justify-content:center">
+        <a class="btn btn--secondary" href="/guias/">Mientras tanto, lee nuestras guías</a>
+        <a class="btn btn--primary" href="/">Volver al inicio</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .thanks-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    margin-inline: auto;
+  }
+</style>

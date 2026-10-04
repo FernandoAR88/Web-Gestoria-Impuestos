@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../config/site';
+---
+
+<BaseLayout
+  title="Quiénes somos"
+  description={`Conoce al equipo de ${site.name}: asesoría fiscal online especializada en IVA, retenciones e IRPF de autónomos y pymes.`}
+>
+  <PageHero
+    eyebrow="Quiénes somos"
+    title={`${site.name}: la asesoría fiscal online de ${site.founder}`}
+    lead="Creemos que los impuestos de un autónomo no deberían ser caros ni opacos. Por eso nos centramos en pocos modelos, los automatizamos y ponemos a una persona a revisar cada uno."
+    crumbs={[{ label: 'Quiénes somos' }]}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>El equipo</h2>
+        <p class="lead">Las personas que preparan y revisan tus declaraciones, con nombre, cara y credenciales.</p>
+      </div>
+      <div class="grid grid-3">
+        {
+          site.team.map((m) => (
+            <article class="card member">
+              <div class="member__avatar" aria-hidden="true">
+                <Icon name="user" size={44} />
+              </div>
+              <h3>{m.name}</h3>
+              <p class="member__role">{m.role}</p>
+              <p class="small muted">{m.credentials}</p>
+              <p>{m.bio}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container grid grid-2">
+      <div>
+        <h2>Cómo entendemos este trabajo</h2>
+        <ul class="check-list">
+          <li><strong>Claridad.</strong> Precios públicos, borradores explicados y respuestas sin tecnicismos.</li>
+          <li><strong>Prevención.</strong> Preferimos avisarte antes que arreglarlo después.</li>
+          <li><strong>Especialización.</strong> Hacemos pocos modelos y los conocemos al detalle.</li>
+          <li><strong>Responsabilidad.</strong> Si nos equivocamos, lo asumimos y lo pagamos nosotros.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 class="h3-like">Datos de la empresa</h2>
+        <dl class="facts">
+          <div><dt>Titular</dt><dd>{site.legal.ownerName}</dd></div>
+          <div><dt>NIF</dt><dd>{site.legal.taxId}</dd></div>
+          <div><dt>Domicilio</dt><dd>{site.legal.address}</dd></div>
+          <div><dt>Colegiación / asociación</dt><dd>{site.legal.professionalBody}</dd></div>
+          {site.credentials.seguroRC && (
+            <div>
+              <dt>Seguro de RC profesional</dt>
+              <dd>
+                {site.legal.insurer} · {site.credentials.seguroRCImporte}
+              </dd>
+            </div>
+          )}
+          <div><dt>Atención</dt><dd>{site.contact.hours}</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  .member__avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--blue-50);
+    color: var(--navy-700);
+    margin-bottom: 1rem;
+  }
+  .member__role {
+    font-weight: 600;
+    color: var(--green-700);
+    margin-bottom: 0.2rem;
+  }
+  .h3-like {
+    font-size: 1.3rem;
+  }
+  .facts {
+    margin: 0;
+  }
+  .facts div {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .facts div:last-child {
+    border-bottom: 0;
+  }
+  .facts dt {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .facts dd {
+    margin: 0;
+    font-weight: 600;
+  }
+</style>

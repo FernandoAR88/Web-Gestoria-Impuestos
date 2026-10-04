@@ -1,0 +1,83 @@
+---
+import '../styles/global.css';
+import { site, pendingFields } from '../config/site';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Ruta de la imagen Open Graph dentro de /public. */
+  image?: string;
+  noindex?: boolean;
+  /** Datos estructurados adicionales (schema.org) específicos de la página. */
+  jsonLd?: Record<string, unknown>[];
+}
+
+const { title, description = site.description, image = '/og-default.png', noindex = false, jsonLd = [] } = Astro.props;
+
+const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: site.name,
+  description: site.description,
+  url: Astro.site?.toString(),
+  logo: new URL('/favicon.svg', Astro.site).toString(),
+  email: site.contact.email,
+  telephone: site.contact.phone,
+  areaServed: { '@type': 'Country', name: 'España' },
+  priceRange: '€€',
+  knowsLanguage: 'es',
+};
+
+// Aviso en el build de los datos que siguen pendientes (solo una vez por build).
+const g = globalThis as { __pendingWarned?: boolean };
+if (import.meta.env.PROD && !g.__pendingWarned) {
+  g.__pendingWarned = true;
+  const pending = pendingFields();
+  if (pending.length) {
+    console.warn(`\n[web] Datos pendientes de completar en src/config/site.ts (${pending.length}):\n  - ${pending.join('\n  - ')}\n`);
+  }
+}
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#102a4c" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={site.locale} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(organization)} />
+    {jsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <Header />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

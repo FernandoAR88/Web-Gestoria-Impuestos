@@ -1,0 +1,50 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { formatDate } from '../../data/calendar';
+import { site } from '../../config/site';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guias');
+  return guides.map((guide) => ({ params: { slug: guide.id }, props: { guide } }));
+}
+
+interface Props {
+  guide: CollectionEntry<'guias'>;
+}
+const { guide } = Astro.props;
+const { Content } = await render(guide);
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: guide.data.title,
+  description: guide.data.description,
+  dateModified: guide.data.updated,
+  inLanguage: 'es',
+  author: { '@type': 'Person', name: site.founder },
+  publisher: { '@type': 'Organization', name: site.name },
+};
+---
+
+<BaseLayout title={guide.data.title} description={guide.data.description} jsonLd={[articleLd]}>
+  <PageHero title={guide.data.title} crumbs={[{ href: '/guias/', label: 'Guías' }, { label: guide.data.title }]}>
+    <p class="small muted mb-0">
+      Por {site.founder} · Actualizada el {formatDate(guide.data.updated)}
+    </p>
+  </PageHero>
+  <section class="section">
+    <div class="container">
+      <article class="prose">
+        <Content />
+        <p class="small muted mt-2">
+          Esta guía es informativa y no sustituye el asesoramiento sobre tu caso concreto. Para consultas sobre tu situación,
+          <a href="/contacto/">escríbenos</a>.
+        </p>
+      </article>
+    </div>
+  </section>
+  <CtaBand />
+</BaseLayout>

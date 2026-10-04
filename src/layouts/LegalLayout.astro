@@ -1,0 +1,30 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../config/site';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero title={title} crumbs={[{ label: title }]}>
+    <p class="small muted mb-0">Última actualización: {site.legal.lastReview}</p>
+  </PageHero>
+  <section class="section">
+    <div class="container">
+      <article class="prose legal">
+        <slot />
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal :global(h2) {
+    font-size: 1.3rem;
+  }
+</style>

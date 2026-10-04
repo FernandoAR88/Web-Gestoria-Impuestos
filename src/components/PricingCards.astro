@@ -1,0 +1,220 @@
+---
+import { plans, eur, withVat } from '../data/pricing';
+
+interface Props {
+  /** Muestra el selector mensual/anual. */
+  showToggle?: boolean;
+}
+const { showToggle = true } = Astro.props;
+---
+
+<div class="pricing" data-billing="monthly">
+  {
+    showToggle && (
+      <div class="billing-toggle" role="group" aria-label="Forma de pago">
+        <button type="button" data-set-billing="monthly" aria-pressed="true">
+          Pago mensual
+        </button>
+        <button type="button" data-set-billing="yearly" aria-pressed="false">
+          Pago anual <span class="badge badge--green">2 meses gratis</span>
+        </button>
+      </div>
+    )
+  }
+
+  <div class="pricing__grid">
+    {
+      plans.map((p) => (
+        <article class:list={['plan', { 'plan--highlighted': p.highlighted }]} aria-labelledby={`plan-${p.id}`}>
+          {p.highlighted && <span class="plan__ribbon">El más elegido</span>}
+          <h3 id={`plan-${p.id}`}>{p.name}</h3>
+          <p class="plan__audience">{p.audience}</p>
+
+          <div class="plan__price" data-period="monthly">
+            <span class="plan__amount">{eur(p.monthly)}</span>
+            <span class="plan__unit">/mes + IVA</span>
+            <span class="plan__vat">{eur(withVat(p.monthly))}/mes con IVA</span>
+          </div>
+          <div class="plan__price" data-period="yearly" hidden>
+            <span class="plan__amount">{eur(p.yearly)}</span>
+            <span class="plan__unit">/año + IVA</span>
+            <span class="plan__vat">
+              Equivale a {eur(Math.round((p.yearly / 12) * 100) / 100)}/mes · {eur(withVat(p.yearly))} con IVA
+            </span>
+          </div>
+
+          <p class="plan__invoices">Hasta {p.invoicesPerQuarter} facturas al trimestre</p>
+
+          <ul class="check-list">
+            {p.includes.map((i) => (
+              <li>{i}</li>
+            ))}
+          </ul>
+          {p.notIncluded && (
+            <ul class="cross-list small">
+              {p.notIncluded.map((i) => (
+                <li>No incluye: {i}</li>
+              ))}
+            </ul>
+          )}
+
+          <a
+            class:list={['btn btn--block plan__cta', p.highlighted ? 'btn--primary' : 'btn--secondary']}
+            href={`/contacto/?motivo=alta&plan=${p.id}`}
+          >
+            Elegir {p.name}
+          </a>
+        </article>
+      ))
+    }
+  </div>
+  <p class="pricing__note small muted">
+    Sin permanencia ni cuota de alta. Precios para servicios a profesionales: se muestran sin IVA y con el 21 % de IVA incluido.
+  </p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.pricing').forEach((root) => {
+    const buttons = root.querySelectorAll<HTMLButtonElement>('[data-set-billing]');
+    buttons.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        const billing = btn.dataset.setBilling!;
+        root.dataset.billing = billing;
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        root.querySelectorAll<HTMLElement>('[data-period]').forEach((el) => {
+          el.hidden = el.dataset.period !== billing;
+        });
+        root.querySelectorAll<HTMLAnchorElement>('.plan__cta').forEach((a) => {
+          const url = new URL(a.href);
+          url.searchParams.set('pago', billing === 'yearly' ? 'anual' : 'mensual');
+          a.href = url.pathname + url.search;
+        });
+      }),
+    );
+  });
+</script>
+
+<style>
+  .billing-toggle {
+    display: inline-flex;
+    gap: 0.25rem;
+    padding: 0.3rem;
+    margin: 0 auto 2rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: #fff;
+  }
+  .pricing {
+    text-align: center;
+  }
+  .billing-toggle button {
+    font: inherit;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 0;
+    background: transparent;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    color: var(--ink-soft);
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    min-height: 44px;
+  }
+  .billing-toggle button[aria-pressed='true'] {
+    background: var(--navy-800);
+    color: #fff;
+  }
+  .billing-toggle button[aria-pressed='true'] .badge {
+    background: #2fd3a0;
+    color: var(--navy-900);
+  }
+  .pricing__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+    text-align: left;
+  }
+  .plan {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 2rem 1.6rem 1.6rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .plan--highlighted {
+    border: 2px solid var(--green-600);
+    box-shadow: var(--shadow-lg);
+  }
+  .plan__ribbon {
+    position: absolute;
+    top: -0.85rem;
+    left: 1.6rem;
+    background: var(--green-600);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.25rem 0.8rem;
+    border-radius: 999px;
+  }
+  .plan h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+  }
+  .plan__audience {
+    color: var(--muted);
+    font-size: 0.95rem;
+    min-height: 3em;
+  }
+  .plan__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 0.35rem;
+    margin-bottom: 0.5rem;
+  }
+  .plan__price[hidden] {
+    display: none;
+  }
+  .plan__amount {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--navy-900);
+    letter-spacing: -0.03em;
+  }
+  .plan__unit {
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .plan__vat {
+    flex-basis: 100%;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .plan__invoices {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--navy-700);
+    background: var(--blue-50);
+    border-radius: 8px;
+    padding: 0.4rem 0.7rem;
+    margin-bottom: 1.25rem;
+  }
+  .plan .check-list {
+    flex: 1;
+  }
+  .plan .cross-list {
+    margin-bottom: 1.25rem;
+  }
+  .plan__cta {
+    margin-top: auto;
+  }
+  .pricing__note {
+    margin-top: 1.5rem;
+  }
+</style>

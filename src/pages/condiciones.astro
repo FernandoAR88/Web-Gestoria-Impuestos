@@ -1,0 +1,114 @@
+---
+// PLANTILLA: estas condiciones son el contrato con tus clientes. Revísalas con un abogado antes de publicar.
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site } from '../config/site';
+import { plans, eur } from '../data/pricing';
+const l = site.legal;
+const g = site.guarantees;
+---
+
+<LegalLayout
+  title="Condiciones de contratación"
+  description="Condiciones generales del servicio de asesoría fiscal online: alta, precio, pago, duración, baja, obligaciones y garantías."
+>
+  <h2>1. Partes y objeto</h2>
+  <p>
+    Estas condiciones regulan la contratación de los servicios de {site.name}, prestados por {l.ownerName} (NIF {l.taxId}), en adelante
+    «el prestador», a la persona física o jurídica que los contrata, en adelante «el cliente». El servicio consiste en la preparación y
+    presentación telemática de los modelos tributarios incluidos en el plan contratado o encargados de forma individual.
+  </p>
+
+  <h2>2. Contratación</h2>
+  <p>
+    La contratación se realiza online. Antes de empezar, el cliente acredita su identidad conforme a la Ley 10/2010 de prevención del
+    blanqueo de capitales y otorga al prestador la representación necesaria ante la Agencia Tributaria mediante apoderamiento inscrito en
+    su registro{site.credentials.colaboradorSocialAEAT ? ' o autorización en el marco de la colaboración social' : ''}. El contrato
+    queda archivado y el cliente puede pedir una copia en cualquier momento.
+  </p>
+
+  <h2>3. Precio y forma de pago</h2>
+  <ul>
+    {
+      plans.map((p) => (
+        <li>
+          Plan {p.name}: {eur(p.monthly)} al mes o {eur(p.yearly)} al año, IVA no incluido. Hasta {p.invoicesPerQuarter} facturas por
+          trimestre.
+        </li>
+      ))
+    }
+  </ul>
+  <p>
+    Las cuotas se cobran por adelantado al inicio de cada periodo (mensual o anual) mediante [domiciliación SEPA / tarjeta]. Los modelos
+    sueltos y los servicios extra se pagan antes de su presentación, previo presupuesto aceptado. Los impuestos resultantes de las
+    declaraciones no forman parte del precio y los paga el cliente directamente a la Administración.
+  </p>
+  <p>
+    El prestador puede actualizar las tarifas avisando con al menos 30 días de antelación. Si el cliente no está de acuerdo, puede darse
+    de baja sin coste antes de que se apliquen.
+  </p>
+
+  <h2>4. Duración y baja</h2>
+  <p>
+    {
+      g.noPermanence
+        ? 'El servicio no tiene permanencia. El cliente puede darse de baja en cualquier momento por email o desde su área de cliente; la baja será efectiva al final del periodo ya pagado. En los planes anuales, [se devuelve la parte proporcional de los meses completos no disfrutados / no se devuelve importe].'
+        : '[DURACIÓN Y CONDICIONES DE BAJA]'
+    }
+    Tras la baja, el prestador entregará al cliente su documentación y revocará o pedirá revocar el apoderamiento.
+  </p>
+
+  <h2>5. Obligaciones del cliente</h2>
+  <ul>
+    <li>Facilitar información y documentación veraz, completa y a tiempo: como máximo el día {site.docsDeadlineDay} del mes de presentación.</li>
+    <li>Revisar el borrador recibido y comunicar su aprobación o sus objeciones antes del vencimiento.</li>
+    <li>Comunicar cualquier cambio relevante (actividad, domicilio, trabajadores, operaciones con el extranjero...).</li>
+    <li>Mantener los fondos necesarios cuando el pago de un impuesto esté domiciliado.</li>
+  </ul>
+
+  <h2>6. Obligaciones del prestador</h2>
+  <ul>
+    <li>Preparar las declaraciones con la diligencia profesional exigible y conforme a la normativa vigente.</li>
+    {g.approvalBeforeFiling && <li>Enviar al cliente el borrador de cada declaración y no presentarla sin su aprobación, salvo instrucción en contrario para evitar un recargo por presentación fuera de plazo.</li>}
+    <li>Presentar en plazo cuando la documentación se reciba en la fecha indicada.</li>
+    <li>Guardar secreto profesional y proteger los datos del cliente.</li>
+  </ul>
+
+  <h2>7. Responsabilidad y garantía</h2>
+  {
+    g.deadlineGuarantee && (
+      <p>
+        Si una declaración se presenta fuera de plazo o con errores imputables al prestador, este la corregirá sin coste y asumirá los
+        recargos, intereses y sanciones que se deriven directamente de su error.
+      </p>
+    )
+  }
+  <p>
+    El prestador no responde de las consecuencias derivadas de información falsa, incompleta o entregada fuera de plazo por el cliente, ni
+    de las cuotas tributarias que legalmente correspondan al cliente. {
+      site.credentials.seguroRC
+        ? `El prestador tiene contratado un seguro de responsabilidad civil profesional con ${l.insurer} por ${site.credentials.seguroRCImporte}.`
+        : ''
+    }
+  </p>
+
+  <h2>8. Protección de datos y encargo del tratamiento</h2>
+  <p>
+    El tratamiento de los datos del cliente se describe en la <a href="/privacidad/">política de privacidad</a>. Respecto de los datos de
+    terceros contenidos en la documentación del cliente, el prestador actúa como encargado del tratamiento conforme al artículo 28 del RGPD,
+    con las condiciones del anexo de encargo del tratamiento que se firma junto al contrato.
+  </p>
+
+  <h2>9. Derecho de desistimiento</h2>
+  <p>
+    Si el cliente tiene la condición de consumidor, puede desistir del contrato en 14 días naturales desde su celebración sin indicar el
+    motivo. Si solicita expresamente que el servicio empiece durante ese plazo, abonará la parte proporcional del servicio prestado, y
+    perderá el derecho de desistimiento una vez el servicio se haya ejecutado completamente (por ejemplo, una declaración ya presentada).
+  </p>
+
+  <h2>10. Reclamaciones, ley aplicable y jurisdicción</h2>
+  <p>
+    Puedes enviarnos cualquier queja o reclamación a <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>; te
+    responderemos en un plazo máximo de [30] días. Estas condiciones se rigen por la ley española. Si el cliente es consumidor, serán
+    competentes los juzgados de su domicilio.
+  </p>
+</LegalLayout>

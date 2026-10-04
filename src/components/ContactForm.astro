@@ -1,0 +1,115 @@
+---
+import { site } from '../config/site';
+import { plans } from '../data/pricing';
+
+const { provider, action, successPath } = site.form;
+const formAction = provider === 'netlify' ? successPath : action;
+---
+
+<form
+  class="contact-form"
+  name="contacto"
+  method="POST"
+  action={formAction}
+  data-netlify={provider === 'netlify' ? 'true' : undefined}
+  netlify-honeypot={provider === 'netlify' ? 'empresa_web' : undefined}
+>
+  {provider === 'netlify' && <input type="hidden" name="form-name" value="contacto" />}
+  {provider === 'formspree' && <input type="hidden" name="_next" value={new URL(successPath, Astro.site).toString()} />}
+  <p class="hp-field" aria-hidden="true">
+    <label>No rellenes este campo <input name="empresa_web" tabindex="-1" autocomplete="off" /></label>
+  </p>
+
+  <div class="grid grid-2" style="gap: 0 1rem;">
+    <div class="field">
+      <label for="cf-nombre">Nombre y apellidos</label>
+      <input id="cf-nombre" name="nombre" autocomplete="name" required />
+    </div>
+    <div class="field">
+      <label for="cf-email">Email</label>
+      <input id="cf-email" name="email" type="email" autocomplete="email" required />
+    </div>
+    <div class="field">
+      <label for="cf-telefono">Teléfono <span class="muted">(opcional)</span></label>
+      <input id="cf-telefono" name="telefono" type="tel" autocomplete="tel" />
+    </div>
+    <div class="field">
+      <label for="cf-perfil">¿Cuál es tu situación?</label>
+      <select id="cf-perfil" name="perfil" required>
+        <option value="">Elige una opción</option>
+        <option>Voy a darme de alta como autónomo</option>
+        <option>Ya soy autónomo</option>
+        <option>Tengo una sociedad</option>
+        <option>Otra</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="cf-motivo">Motivo</label>
+      <select id="cf-motivo" name="motivo" required>
+        <option value="info">Quiero información</option>
+        <option value="alta">Quiero contratar un plan</option>
+        <option value="suelto">Quiero presentar un modelo suelto</option>
+        <option value="cambio">Vengo de otra gestoría o asesoría</option>
+        <option value="atrasados">Tengo trimestres atrasados</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="cf-plan">Plan que te interesa</label>
+      <select id="cf-plan" name="plan">
+        <option value="">Aún no lo sé</option>
+        {plans.map((p) => <option value={p.id}>{p.name}</option>)}
+      </select>
+      <input type="hidden" name="pago" id="cf-pago" value="" />
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="cf-mensaje">Cuéntanos brevemente tu caso</label>
+    <textarea id="cf-mensaje" name="mensaje" placeholder="Actividad, si tienes empleados o local alquilado, si vendes a otros países de la UE..."></textarea>
+  </div>
+
+  <label class="checkbox">
+    <input type="checkbox" name="acepta_privacidad" required />
+    <span>
+      He leído y acepto la <a href="/privacidad/" target="_blank">política de privacidad</a>.
+    </span>
+  </label>
+
+  <p class="small muted rgpd">
+    <strong>Información básica sobre protección de datos.</strong> Responsable: {site.legal.ownerName}. Finalidad: responder a
+    tu consulta y, si lo pides, enviarte un presupuesto. Legitimación: tu consentimiento y la aplicación de medidas precontractuales.
+    Destinatarios: no se ceden datos a terceros salvo obligación legal. Derechos: acceso, rectificación, supresión y otros, como
+    se explica en la <a href="/privacidad/">política de privacidad</a>.
+  </p>
+
+  <button class="btn btn--primary" type="submit">Enviar consulta</button>
+  <p class="small muted">Te respondemos en menos de {site.contact.responseTime}.</p>
+</form>
+
+<script>
+  // Rellena el formulario con lo elegido en la tabla de precios (?motivo=alta&plan=completo&pago=anual).
+  const params = new URLSearchParams(location.search);
+  const setValue = (id: string, value: string | null) => {
+    const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null;
+    if (el && value && (el.tagName !== 'SELECT' || [...(el as HTMLSelectElement).options].some((o) => o.value === value))) {
+      el.value = value;
+    }
+  };
+  setValue('cf-motivo', params.get('motivo'));
+  setValue('cf-plan', params.get('plan'));
+  setValue('cf-pago', params.get('pago'));
+</script>
+
+<style>
+  .contact-form {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: clamp(1.25rem, 4vw, 2rem);
+    box-shadow: var(--shadow);
+  }
+  .rgpd {
+    border-top: 1px solid var(--line);
+    padding-top: 1rem;
+  }
+</style>

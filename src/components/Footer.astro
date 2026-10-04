@@ -1,0 +1,150 @@
+---
+import { site, whatsappUrl } from '../config/site';
+import { services } from '../data/services';
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <Logo inverted />
+        <p>{site.descriptor}. Precio cerrado, sin permanencia y sin presentar nada sin tu visto bueno.</p>
+        <ul class="site-footer__contact">
+          <li><Icon name="phone" size={18} /><a href={`tel:${site.contact.phone}`}>{site.contact.phoneDisplay}</a></li>
+          <li><Icon name="whatsapp" size={18} /><a href={whatsappUrl()} rel="noopener">WhatsApp</a></li>
+          <li><Icon name="mail" size={18} /><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></li>
+          <li><Icon name="clock" size={18} /><span>{site.contact.hours}</span></li>
+        </ul>
+      </div>
+
+      <nav aria-label="Servicios">
+        <h2>Servicios</h2>
+        <ul>
+          {services.map((s) => <li><a href={`/servicios/${s.slug}/`}>{s.title}</a></li>)}
+          <li><a href="/precios/">Precios</a></li>
+          <li><a href="/precios/#modelos-sueltos">Modelos sueltos</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Recursos">
+        <h2>Recursos</h2>
+        <ul>
+          <li><a href="/como-funciona/">Cómo funciona</a></li>
+          <li><a href="/calendario-fiscal/">Calendario fiscal</a></li>
+          <li><a href="/guias/">Guías</a></li>
+          <li><a href="/preguntas-frecuentes/">Preguntas frecuentes</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Empresa">
+        <h2>Empresa</h2>
+        <ul>
+          <li><a href="/quienes-somos/">Quiénes somos</a></li>
+          <li><a href="/seguridad/">Seguridad y privacidad</a></li>
+          <li><a href="/contacto/">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-footer__legal">
+      <p>
+        {site.legal.ownerName} · NIF {site.legal.taxId} · {site.legal.address}
+      </p>
+      <ul>
+        <li><a href="/aviso-legal/">Aviso legal</a></li>
+        <li><a href="/privacidad/">Privacidad</a></li>
+        <li><a href="/cookies/">Cookies</a></li>
+        <li><a href="/condiciones/">Condiciones de contratación</a></li>
+      </ul>
+      <p class="site-footer__copy">© {year} {site.name}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--navy-900);
+    color: #b9c7d8;
+    padding-block: 4rem 2rem;
+    font-size: 0.95rem;
+  }
+  .site-footer a {
+    color: #dfe8f4;
+    text-decoration: none;
+  }
+  .site-footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+  .site-footer__brand p {
+    margin: 1rem 0;
+    max-width: 380px;
+  }
+  .site-footer h2 {
+    color: #fff;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+  .site-footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .site-footer nav li {
+    margin-bottom: 0.55rem;
+  }
+  .site-footer__contact li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+  .site-footer__contact :global(svg) {
+    flex: none;
+    margin-top: 0.2rem;
+    color: #2fd3a0;
+  }
+  .site-footer__legal {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #22395a;
+    font-size: 0.85rem;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .site-footer__legal p {
+    margin: 0;
+  }
+  .site-footer__legal ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+  }
+  .site-footer__copy {
+    color: #8597ad;
+  }
+  @media (max-width: 860px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .site-footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 480px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

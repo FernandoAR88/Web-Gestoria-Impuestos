@@ -1,0 +1,335 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TrustBar from '../components/TrustBar.astro';
+import NextDeadline from '../components/NextDeadline.astro';
+import Steps from '../components/Steps.astro';
+import PricingCards from '../components/PricingCards.astro';
+import Guarantees from '../components/Guarantees.astro';
+import FaqList from '../components/FaqList.astro';
+import Reviews from '../components/Reviews.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../config/site';
+import { services, notCovered } from '../data/services';
+import { faqs } from '../data/faq';
+import { plans, eur } from '../data/pricing';
+
+const homeFaqs = faqs.filter((f) =>
+  ['¿Hay permanencia?', '¿Presentáis algo sin que yo lo vea antes?', '¿Cómo presentáis los impuestos en mi nombre?', '¿Y si os equivocáis vosotros?', '¿Puedo cambiarme desde otra gestoría o asesoría?'].includes(f.q),
+);
+const fromPrice = Math.min(...plans.map((p) => p.monthly));
+const lead = site.team[0];
+---
+
+<BaseLayout
+  title={`${site.name} · IVA, retenciones e IRPF de autónomos online desde ${eur(fromPrice)}/mes`}
+  description={site.description}
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <span class="eyebrow">{site.descriptor}</span>
+        <h1>Tu IVA y tus retenciones, presentados a tiempo y sin sorpresas</h1>
+        <p class="lead">
+          Nos encargamos de tus modelos trimestrales y anuales con Hacienda por un precio cerrado desde
+          <strong class="nowrap">{eur(fromPrice)}/mes</strong>. Tú nos mandas las facturas; nosotros te enseñamos el resultado antes de
+          presentarlo.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="/precios/">Ver planes y precios <Icon name="arrow" size={18} /></a>
+          <a class="btn btn--secondary" href="/contacto/">Hablar con un asesor</a>
+        </div>
+        <div class="hero__trust">
+          <TrustBar />
+        </div>
+      </div>
+
+      <div class="hero__visual" aria-label="Ejemplo de borrador que recibes antes de cada presentación">
+        <NextDeadline />
+        <div class="draft-card">
+          <div class="draft-card__head">
+            <span class="badge">Ejemplo</span>
+            <span class="small muted">Borrador · 3.er trimestre</span>
+          </div>
+          <dl class="draft-card__rows">
+            <div><dt>IVA repercutido</dt><dd>3.150,00 €</dd></div>
+            <div><dt>IVA soportado deducible</dt><dd>− 1.237,65 €</dd></div>
+            <div class="draft-card__total"><dt>Modelo 303 · a ingresar</dt><dd>1.912,35 €</dd></div>
+            <div><dt>Modelo 130 · a ingresar</dt><dd>486,20 €</dd></div>
+          </dl>
+          <div class="draft-card__actions">
+            <span class="draft-card__btn"><Icon name="check" size={18} /> Aprobar y presentar</span>
+            <span class="small muted">o pregúntanos cualquier duda</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Qué hacemos</span>
+        <h2>Solo impuestos periódicos. Y los hacemos muy bien.</h2>
+        <p class="lead">
+          Nos especializamos en los modelos que todo autónomo y pequeña empresa tiene que presentar cada trimestre. Al centrarnos en
+          ellos, podemos automatizar el trabajo, cobrar menos y no fallar un plazo.
+        </p>
+      </div>
+      <div class="grid grid-3">
+        {
+          services.map((s) => (
+            <a class="card service-card" href={`/servicios/${s.slug}/`}>
+              <div class="icon-badge">
+                <Icon name={s.icon} />
+              </div>
+              <h3>{s.title}</h3>
+              <p class="muted">{s.short}</p>
+              <p class="service-card__models">
+                {s.models.map((m) => (
+                  <span class="model-code">{m.code}</span>
+                ))}
+              </p>
+              <span class="service-card__more">
+                Ver detalle <Icon name="arrow" size={16} />
+              </span>
+            </a>
+          ))
+        }
+      </div>
+      <p class="mt-2">
+        ¿Solo necesitas presentar un modelo concreto? <a href="/precios/#modelos-sueltos">Consulta los precios de modelos sueltos</a>, sin
+        suscripción.
+      </p>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <span class="eyebrow">Cómo funciona</span>
+        <h2>De tus facturas al justificante de Hacienda en 4 pasos</h2>
+        <p class="lead">Todo online, desde el móvil o el ordenador. Sin desplazamientos ni papeles.</p>
+      </div>
+      <Steps />
+      <p class="text-center mt-2"><a href="/como-funciona/">Ver el proceso en detalle</a></p>
+    </div>
+  </section>
+
+  <!-- PRECIOS -->
+  <section class="section" id="precios">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <span class="eyebrow">Precios</span>
+        <h2>Tarifa plana, sin letra pequeña</h2>
+        <p class="lead">Elige el plan según los modelos que necesitas. Puedes cambiar de plan o darte de baja cuando quieras.</p>
+      </div>
+      <PricingCards showToggle={false} />
+      <p class="text-center mt-2">
+        <a class="btn btn--secondary" href="/precios/">Comparar planes, pago anual y modelos sueltos</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- GARANTÍAS -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Nuestros compromisos</span>
+        <h2>Confianza que puedes comprobar</h2>
+        <p class="lead">No te pedimos que te fíes: te damos garantías por escrito en las condiciones del servicio.</p>
+      </div>
+      <Guarantees />
+    </div>
+  </section>
+
+  <!-- QUIÉN ESTÁ DETRÁS -->
+  <section class="section">
+    <div class="container grid grid-2 who">
+      <div>
+        <span class="eyebrow">Quién está detrás</span>
+        <h2>Personas reales, no un algoritmo</h2>
+        <p class="lead">
+          {site.name} es la asesoría fiscal online de {site.founder}. Automatizamos lo repetitivo para dedicar el tiempo a lo
+          importante: revisar cada declaración y responderte cuando tienes una duda.
+        </p>
+        <ul class="check-list">
+          <li>Un asesor fiscal revisa cada modelo antes de enviártelo.</li>
+          <li>Te responde una persona en menos de {site.contact.responseTime}.</li>
+          <li>Teléfono, WhatsApp y email con horario publicado.</li>
+          {site.credentials.colaboradorSocialAEAT && <li>Somos colaboradores sociales de la Agencia Tributaria.</li>}
+          {site.credentials.seguroRC && <li>Seguro de responsabilidad civil profesional contratado.</li>}
+        </ul>
+        <a href="/quienes-somos/">Conoce al equipo</a>
+      </div>
+      <div class="card who__card">
+        <div class="who__avatar" aria-hidden="true"><Icon name="user" size={40} /></div>
+        <h3>{lead.name}</h3>
+        <p class="muted mb-0">{lead.role}</p>
+        <p class="small muted">{lead.credentials}</p>
+        <p>{lead.bio}</p>
+        <a class="btn btn--secondary" href="/seguridad/"><Icon name="lock" size={18} /> Cómo protegemos tus datos</a>
+      </div>
+    </div>
+  </section>
+
+  <Reviews />
+
+  <!-- PARA QUIÉN -->
+  <section class="section section--soft">
+    <div class="container grid grid-2">
+      <div class="card">
+        <h2 class="h3-like">Es para ti si…</h2>
+        <ul class="check-list">
+          <li>Eres autónomo en estimación directa o tienes una pequeña sociedad.</li>
+          <li>Quieres olvidarte de los plazos trimestrales de Hacienda.</li>
+          <li>Prefieres un precio cerrado a pagar por horas.</li>
+          <li>Te basta con que todo sea online, con un asesor que te atienda cuando lo necesites.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 class="h3-like">De momento no podemos ayudarte con…</h2>
+        <ul class="cross-list">
+          {notCovered.map((n) => <li>{n}</li>)}
+        </ul>
+        <p class="small muted mt-2 mb-0">Preferimos decírtelo claro desde el principio.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="section-head section-head--center">
+        <span class="eyebrow">Dudas frecuentes</span>
+        <h2>Lo que nos suelen preguntar</h2>
+      </div>
+      <FaqList items={homeFaqs} />
+      <p class="text-center mt-2"><a href="/preguntas-frecuentes/">Ver todas las preguntas</a></p>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  .hero {
+    background:
+      radial-gradient(1000px 500px at 85% -10%, #dbe8f8 0%, transparent 60%),
+      linear-gradient(180deg, var(--blue-50) 0%, #fff 100%);
+    padding-block: clamp(3rem, 7vw, 5.5rem);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .hero__copy .lead {
+    max-width: 600px;
+  }
+  .hero__trust {
+    margin-top: 2rem;
+  }
+  .hero__visual {
+    display: grid;
+    gap: 1rem;
+  }
+  .draft-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.4rem;
+    box-shadow: var(--shadow-lg);
+  }
+  .draft-card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .draft-card__rows {
+    margin: 0;
+  }
+  .draft-card__rows div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .draft-card__rows dt {
+    color: var(--ink-soft);
+  }
+  .draft-card__rows dd {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .draft-card__total dt,
+  .draft-card__total dd {
+    color: var(--navy-900);
+    font-weight: 800;
+  }
+  .draft-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.2rem;
+  }
+  .draft-card__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--green-600);
+    color: #fff;
+    font-weight: 700;
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+  }
+  .service-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .service-card__models {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .service-card__more {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 700;
+    color: var(--blue-600);
+  }
+  .who {
+    align-items: center;
+  }
+  .who__avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--blue-50);
+    color: var(--navy-700);
+    margin-bottom: 1rem;
+  }
+  .h3-like {
+    font-size: 1.3rem;
+  }
+  @media (max-width: 900px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

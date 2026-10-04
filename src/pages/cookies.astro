@@ -1,0 +1,26 @@
+---
+// PLANTILLA: si añades analítica o herramientas de terceros que usen cookies, actualiza esta página y añade un banner de consentimiento.
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site } from '../config/site';
+---
+
+<LegalLayout title="Política de cookies" description="Información sobre el uso de cookies en este sitio web.">
+  <h2>¿Usamos cookies?</h2>
+  <p>
+    Este sitio web <strong>no utiliza cookies de análisis, publicidad ni seguimiento</strong>. Por eso no te mostramos un banner de
+    consentimiento: no hay nada que aceptar.
+  </p>
+  <p>
+    Solo podrían instalarse cookies técnicas estrictamente necesarias para el funcionamiento de la web o del formulario de contacto (por
+    ejemplo, para evitar envíos automatizados), que están exentas de consentimiento según el artículo 22.2 de la LSSI.
+  </p>
+
+  <h2>Medición de visitas</h2>
+  <p>
+    Si en el futuro medimos visitas, usaremos una herramienta que no utilice cookies ni identifique a los usuarios, o te pediremos
+    consentimiento previo. Actualizaremos esta página antes de hacerlo.
+  </p>
+
+  <h2>Contacto</h2>
+  <p>Para cualquier duda sobre esta política, escríbenos a <a href={`mailto:${site.legal.dpoEmail}`}>{site.legal.dpoEmail}</a>.</p>
+</LegalLayout>

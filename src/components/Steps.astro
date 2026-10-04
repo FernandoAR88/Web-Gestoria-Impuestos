@@ -1,0 +1,76 @@
+---
+import { site } from '../config/site';
+import Icon, { type IconName } from './Icon.astro';
+
+const steps: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: 'user',
+    title: 'Te das de alta en 5 minutos',
+    text: 'Eliges plan, firmas el contrato online y autorizas a la Agencia Tributaria para que podamos presentar por ti. Te guiamos en cada paso.',
+  },
+  {
+    icon: 'upload',
+    title: 'Nos envías tus facturas',
+    text: `Súbelas en PDF o foto, o reenvíalas por email, cuando quieras durante el trimestre. Como muy tarde, el día ${site.docsDeadlineDay} del mes de presentación.`,
+  },
+  {
+    icon: 'eye',
+    title: 'Revisas el borrador',
+    text: 'Preparamos tus modelos y te enviamos el resultado: cuánto pagas, compensas o te devuelven, con una explicación clara.',
+  },
+  {
+    icon: 'send',
+    title: 'Presentamos y te enviamos el justificante',
+    text: 'Con tu visto bueno, presentamos en plazo y te mandamos el justificante oficial de la AEAT. Todo queda guardado en tu área.',
+  },
+];
+---
+
+<ol class="steps">
+  {
+    steps.map((s, i) => (
+      <li class="step">
+        <div class="step__num" aria-hidden="true">
+          {i + 1}
+        </div>
+        <div class="icon-badge icon-badge--green">
+          <Icon name={s.icon} />
+        </div>
+        <h3>{s.title}</h3>
+        <p>{s.text}</p>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 1.5rem;
+    counter-reset: step;
+  }
+  .step {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.6rem;
+  }
+  .step__num {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.3rem;
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: var(--blue-50);
+    line-height: 1;
+  }
+  .step p {
+    color: var(--ink-soft);
+    margin: 0;
+  }
+</style>

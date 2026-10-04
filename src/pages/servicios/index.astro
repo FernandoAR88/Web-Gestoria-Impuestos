@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import { services, notCovered } from '../../data/services';
+---
+
+<BaseLayout
+  title="Servicios: IVA, retenciones e IRPF de autónomos"
+  description="Presentamos tus modelos 303, 390, 349, 347, 111, 115, 190, 180, 130 y 036, y tu declaración de la renta. Asesoría fiscal online para autónomos y pymes."
+>
+  <PageHero
+    eyebrow="Servicios"
+    title="Todos tus modelos periódicos con Hacienda, en un solo sitio"
+    lead="Nos centramos en los impuestos que se repiten cada trimestre y cada año. Así podemos automatizar, revisar a fondo y cobrarte un precio cerrado."
+    crumbs={[{ label: 'Servicios' }]}
+  />
+
+  <section class="section">
+    <div class="container stack">
+      {
+        services.map((s) => (
+          <article class="card svc-row">
+            <div class="icon-badge">
+              <Icon name={s.icon} />
+            </div>
+            <div class="svc-row__body">
+              <h2 class="svc-row__title">
+                <a href={`/servicios/${s.slug}/`}>{s.title}</a>
+              </h2>
+              <p class="muted">{s.short}</p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Modelo</th>
+                      <th scope="col">Qué es</th>
+                      <th scope="col">Plazo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {s.models.map((m) => (
+                      <tr>
+                        <td>
+                          <span class="model-code">{m.code}</span>
+                        </td>
+                        <td>{m.name}</td>
+                        <td class="small">{m.when}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p class="mt-2 mb-0">
+                <a href={`/servicios/${s.slug}/`}>
+                  Más sobre {s.title === 'IVA' ? 'el IVA' : s.title.toLowerCase().startsWith('irpf') ? 'el IRPF del autónomo' : 'las retenciones'}
+                </a>
+              </p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container container--narrow">
+      <h2>Lo que no hacemos (todavía)</h2>
+      <p class="lead">Preferimos hacer pocas cosas y hacerlas bien. Si tu caso incluye alguna de estas, te lo diremos antes de contratar.</p>
+      <ul class="cross-list">
+        {notCovered.map((n) => <li>{n}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  .svc-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
+  }
+  .svc-row__title {
+    font-size: 1.5rem;
+  }
+  .svc-row__title a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .svc-row__title a:hover {
+    text-decoration: underline;
+  }
+  .svc-row__body {
+    min-width: 0;
+  }
+  @media (max-width: 600px) {
+    .svc-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

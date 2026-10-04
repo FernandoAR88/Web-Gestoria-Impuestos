@@ -1,0 +1,62 @@
+---
+import { site } from '../config/site';
+import Icon from './Icon.astro';
+
+// Solo se renderiza si hay reseñas reales configuradas. Inventar opiniones es
+// ilegal (Ley de Competencia Desleal y Directiva Ómnibus) y destruye la confianza.
+const reviews = site.reviews;
+---
+
+{
+  reviews.length > 0 && (
+    <section class="section section--soft">
+      <div class="container">
+        <div class="section-head section-head--center">
+          <span class="eyebrow">Opiniones verificadas</span>
+          <h2>Lo que dicen nuestros clientes</h2>
+        </div>
+        <div class="grid grid-3">
+          {reviews.map((r) => (
+            <figure class="card review">
+              {r.rating && (
+                <div class="review__stars" aria-label={`${r.rating} de 5 estrellas`}>
+                  {Array.from({ length: r.rating }).map(() => (
+                    <Icon name="star" size={18} />
+                  ))}
+                </div>
+              )}
+              <blockquote>
+                <p>{r.text}</p>
+              </blockquote>
+              <figcaption>
+                <strong>{r.author}</strong> · {r.url ? <a href={r.url}>{r.source}</a> : r.source}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        {site.reviewsProfileUrl && (
+          <p class="text-center mt-2">
+            <a href={site.reviewsProfileUrl}>Ver todas las opiniones</a>
+          </p>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .review {
+    margin: 0;
+  }
+  .review blockquote {
+    margin: 0.5rem 0 1rem;
+  }
+  .review__stars {
+    display: flex;
+    gap: 2px;
+    color: #e0a100;
+  }
+  .review__stars :global(svg) {
+    fill: currentColor;
+  }
+</style>

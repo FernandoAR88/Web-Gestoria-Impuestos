@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Icon from '../components/Icon.astro';
+import { site, whatsappUrl } from '../config/site';
+---
+
+<BaseLayout
+  title="Contacto"
+  description="Cuéntanos tu caso y te recomendamos el plan que necesitas. Teléfono, WhatsApp, email y formulario. Respuesta en menos de 24 horas laborables."
+>
+  <PageHero
+    eyebrow="Contacto"
+    title="Hablemos de tus impuestos"
+    lead="Cuéntanos tu situación y te diremos qué modelos te tocan y qué plan te encaja. Sin compromiso y sin llamadas comerciales insistentes."
+    crumbs={[{ label: 'Contacto' }]}
+  />
+
+  <section class="section">
+    <div class="container contact">
+      <ContactForm />
+      <aside class="contact__aside">
+        <div class="card">
+          <h2 class="h3-like">Otras formas de contactar</h2>
+          <ul class="contact__list">
+            <li>
+              <Icon name="phone" />
+              <div>
+                <a href={`tel:${site.contact.phone}`}><strong>{site.contact.phoneDisplay}</strong></a>
+                <span class="small muted">Llamada sin coste adicional</span>
+              </div>
+            </li>
+            <li>
+              <Icon name="whatsapp" />
+              <div>
+                <a href={whatsappUrl()} rel="noopener"><strong>WhatsApp</strong></a>
+                <span class="small muted">Escríbenos y te respondemos en horario de atención</span>
+              </div>
+            </li>
+            <li>
+              <Icon name="mail" />
+              <div>
+                <a href={`mailto:${site.contact.email}`}><strong>{site.contact.email}</strong></a>
+                <span class="small muted">Respuesta en menos de {site.contact.responseTime}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2 class="h3-like">Horario</h2>
+          <p class="mb-0">{site.contact.hours}.</p>
+          <p class="small muted mt-0">{site.contact.hoursPeak}.</p>
+        </div>
+        <div class="notice">
+          <p>
+            <strong>100 % online en toda España.</strong> No necesitas desplazarte: todo se hace por la web, email, teléfono o videollamada.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .contact__aside {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .h3-like {
+    font-size: 1.2rem;
+  }
+  .contact__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .contact__list li {
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+  .contact__list li > :global(svg) {
+    flex: none;
+    color: var(--green-600);
+    margin-top: 0.15rem;
+  }
+  .contact__list div {
+    display: grid;
+  }
+  @media (max-width: 900px) {
+    .contact {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { faqs } from '../data/faq';
+
+const groups = [
+  { id: 'servicio', title: 'Sobre el servicio' },
+  { id: 'precios', title: 'Precios y contratación' },
+  { id: 'seguridad', title: 'Seguridad y datos' },
+  { id: 'impuestos', title: 'Impuestos y plazos' },
+] as const;
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<BaseLayout
+  title="Preguntas frecuentes"
+  description="Respuestas sobre cómo trabajamos, precios, permanencia, seguridad de tus datos y plazos de Hacienda."
+  jsonLd={[faqLd]}
+>
+  <PageHero
+    eyebrow="Ayuda"
+    title="Preguntas frecuentes"
+    lead="Si no encuentras tu respuesta, escríbenos y te contestamos en menos de un día laborable."
+    crumbs={[{ label: 'Preguntas frecuentes' }]}
+  />
+
+  <section class="section">
+    <div class="container container--narrow">
+      {
+        groups.map((g) => (
+          <section class="faq-group" aria-labelledby={`faq-${g.id}`}>
+            <h2 id={`faq-${g.id}`}>{g.title}</h2>
+            <FaqList items={faqs.filter((f) => f.group === g.id)} />
+          </section>
+        ))
+      }
+    </div>
+  </section>
+
+  <CtaBand title="¿Tienes otra pregunta?" text="Escríbenos o llámanos. Te responde una persona del equipo." />
+</BaseLayout>
+
+<style>
+  .faq-group + .faq-group {
+    margin-top: 3rem;
+  }
+</style>

@@ -1,0 +1,155 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { deadlinesForYear, generalCalendar, formatDate } from '../data/calendar';
+import { site } from '../config/site';
+
+const now = new Date();
+const today = now.toISOString().slice(0, 10);
+const year = now.getFullYear();
+const all = [...deadlinesForYear(year), ...deadlinesForYear(year + 1), ...deadlinesForYear(year + 2)];
+---
+
+<BaseLayout
+  title="Calendario fiscal del autónomo: plazos de los modelos 303, 130, 111 y 115"
+  description="Fechas límite para presentar el IVA, las retenciones y el pago fraccionado del IRPF: trimestrales, resúmenes anuales y renta."
+>
+  <PageHero
+    eyebrow="Calendario fiscal"
+    title="Calendario fiscal para autónomos y pymes"
+    lead="Los plazos de los modelos que más se presentan, para que no se te pase ninguno. Si trabajas con nosotros, te avisamos con tiempo de cada uno."
+    crumbs={[{ label: 'Calendario fiscal' }]}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Próximos vencimientos</h2>
+        <p class="muted">
+          Si el último día cae en sábado, domingo o festivo nacional, el plazo pasa al siguiente día hábil. Si domicilias el pago, el plazo
+          termina 5 días antes.
+        </p>
+      </div>
+      <ol class="timeline" data-timeline>
+        {
+          all.map((d) => (
+            <li class="timeline__item" data-date={d.date} hidden={d.date < today}>
+              <time datetime={d.date} class="timeline__date">
+                {formatDate(d.date, { day: 'numeric', month: 'short', year: 'numeric' })}
+              </time>
+              <div>
+                <strong>{d.title}</strong> <span class="badge">{d.period}</span>
+                <div class="timeline__models">
+                  {d.models.map((m) => (
+                    <span class="model-code">{m}</span>
+                  ))}
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="small muted mt-2">
+        Fechas calculadas según el calendario general de la Agencia Tributaria. Consulta siempre el
+        <a href="https://sede.agenciatributaria.gob.es/Sede/calendario-contribuyente.html" rel="noopener">calendario oficial del contribuyente</a>
+        por si hubiera cambios.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head">
+        <h2>Cómo se reparte el año</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Periodo</th>
+              <th scope="col">Plazo</th>
+              <th scope="col">Modelos</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              generalCalendar.map((r) => (
+                <tr>
+                  <td>{r.period}</td>
+                  <td>{r.deadline}</td>
+                  <td>{r.models}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="notice mt-2">
+        <p>
+          <strong>Con nosotros:</strong> envíanos tu documentación antes del día {site.docsDeadlineDay} del mes de presentación y te enviaremos
+          el borrador con margen para revisarlo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Olvídate de los plazos" text="Te avisamos de cada vencimiento, preparamos tus modelos y los presentamos a tiempo." />
+</BaseLayout>
+
+<script>
+  // Oculta los vencimientos pasados según la fecha real del visitante y limita a los 10 siguientes.
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const d = new Date();
+  const today = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  let shown = 0;
+  document.querySelectorAll<HTMLElement>('[data-timeline] [data-date]').forEach((el) => {
+    const visible = el.dataset.date! >= today && shown < 10;
+    el.hidden = !visible;
+    if (visible) shown++;
+    el.classList.toggle('is-next', visible && shown === 1);
+  });
+</script>
+
+<style>
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .timeline__item {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr;
+    gap: 1rem;
+    align-items: start;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+  }
+  .timeline__item[hidden] {
+    display: none;
+  }
+  .timeline__item.is-next {
+    border: 2px solid var(--green-600);
+    box-shadow: var(--shadow);
+  }
+  .timeline__date {
+    font-weight: 800;
+    color: var(--navy-900);
+  }
+  .timeline__models {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.4rem;
+  }
+  @media (max-width: 560px) {
+    .timeline__item {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+    }
+  }
+</style>

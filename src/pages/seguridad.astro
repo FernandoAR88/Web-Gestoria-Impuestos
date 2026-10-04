@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon, { type IconName } from '../components/Icon.astro';
+import { site } from '../config/site';
+
+const blocks: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: 'lock',
+    title: 'Cifrado en tránsito y en reposo',
+    text: 'Toda la comunicación con la web y con tu área de cliente va cifrada (HTTPS/TLS). Tus documentos se guardan cifrados en reposo.',
+  },
+  {
+    icon: 'shield',
+    title: 'Servidores en la Unión Europea',
+    text: 'Alojamos tus datos en proveedores con centros de datos en la UE y contrato de encargo del tratamiento conforme al RGPD.',
+  },
+  {
+    icon: 'user',
+    title: 'Acceso mínimo',
+    text: 'Solo acceden a tu documentación las personas que llevan tu cuenta, con autenticación en dos pasos y registro de accesos.',
+  },
+  {
+    icon: 'eye',
+    title: 'Tú mantienes el control',
+    text: 'El apoderamiento en la Agencia Tributaria es revocable en cualquier momento y puedes consultar todo lo presentado en tu propia área de Hacienda.',
+  },
+  {
+    icon: 'file',
+    title: 'Secreto profesional',
+    text: 'Todo el equipo firma un compromiso de confidencialidad. Nunca cedemos ni vendemos tus datos.',
+  },
+  {
+    icon: 'refresh',
+    title: 'Copias de seguridad',
+    text: 'Copias automáticas diarias y conservación de tu documentación durante los plazos legales. Si te vas, te la entregamos completa.',
+  },
+];
+---
+
+<BaseLayout
+  title="Seguridad y protección de datos"
+  description="Cómo protegemos tu información fiscal: cifrado, servidores en la UE, acceso mínimo, apoderamiento revocable y cumplimiento del RGPD."
+>
+  <PageHero
+    eyebrow="Seguridad"
+    title="Tu información fiscal, protegida"
+    lead="Nos confías datos muy sensibles. Esto es lo que hacemos para protegerlos, explicado sin letra pequeña."
+    crumbs={[{ label: 'Seguridad y privacidad' }]}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3">
+        {
+          blocks.map((b) => (
+            <div class="card">
+              <div class="icon-badge icon-badge--green">
+                <Icon name={b.icon} />
+              </div>
+              <h2 class="h3-like">{b.title}</h2>
+              <p class="muted">{b.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container container--narrow prose">
+      <h2 class="mt-0">Cómo presentamos en tu nombre</h2>
+      <p>
+        Para presentar tus declaraciones utilizamos un <strong>apoderamiento</strong> inscrito en el Registro de Apoderamientos de la
+        Agencia Tributaria{site.credentials.colaboradorSocialAEAT ? ' o nuestra condición de colaboradores sociales' : ''}. No necesitamos
+        tu contraseña ni tu certificado digital, y nunca te los pediremos.
+      </p>
+      <div class="notice notice--amber">
+        <p>
+          <strong>Aviso de seguridad:</strong> nunca te pediremos tus claves de Cl@ve, tu certificado digital ni los datos de tu tarjeta por
+          email, WhatsApp o teléfono. Si recibes un mensaje así en nuestro nombre, no respondas y avísanos en
+          <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+        </p>
+      </div>
+      <h2>Tus derechos</h2>
+      <p>
+        Puedes acceder a tus datos, rectificarlos, suprimirlos, oponerte a su tratamiento o pedir su portabilidad escribiendo a
+        <a href={`mailto:${site.legal.dpoEmail}`}>{site.legal.dpoEmail}</a>. Tienes toda la información en nuestra
+        <a href="/privacidad/">política de privacidad</a>.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  .h3-like {
+    font-size: 1.2rem;
+  }
+</style>

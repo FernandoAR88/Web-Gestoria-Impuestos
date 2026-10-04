@@ -1,0 +1,42 @@
+---
+import { site } from '../config/site';
+import Icon, { type IconName } from './Icon.astro';
+
+const g = site.guarantees;
+const items = [
+  g.approvalBeforeFiling && {
+    icon: 'eye',
+    title: 'Nada se presenta sin tu visto bueno',
+    text: 'Siempre verás el borrador y el importe antes. Sin sorpresas el día del cargo.',
+  },
+  g.deadlineGuarantee && {
+    icon: 'shield',
+    title: 'Garantía de plazo',
+    text: 'Si un modelo se presenta tarde o mal por un error nuestro, lo corregimos gratis y pagamos el recargo o la sanción.',
+  },
+  g.noPermanence && {
+    icon: 'refresh',
+    title: 'Sin permanencia',
+    text: 'Te quedas porque quieres. Te das de baja cuando quieras y te llevas toda tu documentación.',
+  },
+  {
+    icon: 'euro',
+    title: 'Precio cerrado',
+    text: 'Lo que ves en la tabla es lo que pagas. Cualquier trabajo extra se presupuesta antes y solo se hace si lo aceptas.',
+  },
+].filter(Boolean) as { icon: IconName; title: string; text: string }[];
+---
+
+<div class="grid grid-4">
+  {
+    items.map((i) => (
+      <div class="card">
+        <div class="icon-badge icon-badge--green">
+          <Icon name={i.icon} />
+        </div>
+        <h3>{i.title}</h3>
+        <p class="muted">{i.text}</p>
+      </div>
+    ))
+  }
+</div>

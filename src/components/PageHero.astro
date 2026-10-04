@@ -1,0 +1,51 @@
+---
+interface Crumb {
+  href?: string;
+  label: string;
+}
+interface Props {
+  title: string;
+  lead?: string;
+  eyebrow?: string;
+  crumbs?: Crumb[];
+}
+const { title, lead, eyebrow, crumbs = [] } = Astro.props;
+const all: Crumb[] = [{ href: '/', label: 'Inicio' }, ...crumbs];
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: all.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.label,
+    ...(c.href ? { item: new URL(c.href, Astro.site).toString() } : {}),
+  })),
+};
+---
+
+<section class="page-hero">
+  <div class="container">
+    {
+      crumbs.length > 0 && (
+        <nav class="breadcrumbs" aria-label="Ruta de navegación">
+          <ol>
+            {all.map((c) =>
+              c.href ? (
+                <li>
+                  <a href={c.href}>{c.label}</a>
+                </li>
+              ) : (
+                <li aria-current="page">{c.label}</li>
+              ),
+            )}
+          </ol>
+        </nav>
+      )
+    }
+    {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+    <h1>{title}</h1>
+    {lead && <p class="lead">{lead}</p>}
+    <slot />
+  </div>
+  {crumbs.length > 0 && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />}
+</section>

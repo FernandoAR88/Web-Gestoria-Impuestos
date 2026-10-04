@@ -1,0 +1,204 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import PricingCards from '../components/PricingCards.astro';
+import SingleModelsTable from '../components/SingleModelsTable.astro';
+import Guarantees from '../components/Guarantees.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { plans, extras, eur } from '../data/pricing';
+import { faqs } from '../data/faq';
+import { site } from '../config/site';
+
+type Row = { label: string; values: (boolean | string)[] };
+const rows: Row[] = [
+  { label: 'IVA trimestral (303) y resumen anual (390)', values: [true, true, true] },
+  { label: 'Pago fraccionado IRPF (130)', values: [true, true, true] },
+  { label: 'Alta, cambios y baja en Hacienda (036)', values: [true, true, true] },
+  { label: 'Retenciones de profesionales y trabajadores (111 y 190)', values: [false, true, true] },
+  { label: 'Retenciones de alquiler (115 y 180)', values: [false, true, true] },
+  { label: 'Operaciones intracomunitarias (349)', values: [false, true, true] },
+  { label: 'Operaciones con terceros (347)', values: [false, true, true] },
+  { label: 'Declaración de la renta (100)', values: ['59 € + IVA', true, true] },
+  { label: 'Facturas al trimestre', values: plans.map((p) => `Hasta ${p.invoicesPerQuarter}`) },
+  { label: 'Válido para sociedades', values: [false, false, true] },
+  { label: 'Requerimientos de Hacienda sobre nuestros modelos', values: ['Desde 60 €', 'Desde 60 €', true] },
+  { label: 'Revisión fiscal trimestral por videollamada', values: [false, false, true] },
+  { label: 'Soporte', values: ['Email y chat', '+ Teléfono y WhatsApp', 'Prioritario (4 h)'] },
+];
+
+const priceFaqs = faqs.filter((f) => f.group === 'precios');
+
+const offerLd = {
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: `Planes de ${site.name}`,
+  itemListElement: plans.map((p) => ({
+    '@type': 'Offer',
+    name: `Plan ${p.name}`,
+    description: p.audience,
+    price: p.monthly.toFixed(2),
+    priceCurrency: 'EUR',
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: p.monthly.toFixed(2),
+      priceCurrency: 'EUR',
+      unitText: 'MONTH',
+      valueAddedTaxIncluded: false,
+    },
+  })),
+};
+---
+
+<BaseLayout
+  title="Precios: planes desde 24,90 €/mes sin permanencia"
+  description="Tarifas claras para presentar tu IVA, retenciones e IRPF: planes Esencial, Completo y Plus, pago anual con 2 meses gratis y modelos sueltos sin suscripción."
+  jsonLd={[offerLd]}
+>
+  <PageHero
+    eyebrow="Precios"
+    title="Precios claros desde el primer día"
+    lead="Una cuota mensual fija según los modelos que necesitas. Sin permanencia, sin cuota de alta y con el IVA siempre a la vista."
+    crumbs={[{ label: 'Precios' }]}
+  />
+
+  <section class="section">
+    <div class="container">
+      <PricingCards />
+    </div>
+  </section>
+
+  <section class="section section--soft" id="comparativa">
+    <div class="container">
+      <div class="section-head">
+        <h2>Compara los planes</h2>
+      </div>
+      <div class="table-wrap">
+        <table class="compare">
+          <caption class="sr-only">Comparativa de lo que incluye cada plan</caption>
+          <thead>
+            <tr>
+              <th scope="col">Incluye</th>
+              {
+                plans.map((p) => (
+                  <th scope="col" class="text-center">
+                    {p.name}
+                    <div class="compare__price">{eur(p.monthly)}/mes</div>
+                  </th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {
+              rows.map((r) => (
+                <tr>
+                  <th scope="row">{r.label}</th>
+                  {r.values.map((v) => (
+                    <td class="text-center">
+                      {v === true ? (
+                        <span class="yes" aria-label="Incluido">✓</span>
+                      ) : v === false ? (
+                        <span class="no" aria-label="No incluido">—</span>
+                      ) : (
+                        <span class="small">{v}</span>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="modelos-sueltos">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Sin suscripción</span>
+        <h2>Modelos sueltos</h2>
+        <p class="lead">
+          ¿Solo necesitas una presentación puntual? Paga solo por ese modelo. Si luego te interesa un plan, te descontamos lo pagado ese
+          trimestre.
+        </p>
+      </div>
+      <SingleModelsTable />
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head">
+        <h2>Extras y casos especiales</h2>
+        <p class="lead">Si algo no está incluido, te damos el precio antes. Nunca hacemos un trabajo extra sin tu aprobación.</p>
+      </div>
+      <div class="grid grid-4">
+        {
+          extras.map((x) => (
+            <div class="card">
+              <h3>{x.name}</h3>
+              <p class="extra-price">{x.price}</p>
+              <p class="small muted">{x.detail}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="small muted mt-2">Todos los precios se indican sin IVA (21 %). Los impuestos que resulten de tus declaraciones se pagan directamente a Hacienda y no están incluidos en la cuota.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Incluido en todos los planes</h2>
+      </div>
+      <Guarantees />
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container container--narrow">
+      <h2>Preguntas sobre precios</h2>
+      <FaqList items={priceFaqs} />
+    </div>
+  </section>
+
+  <CtaBand title="¿No sabes qué plan elegir?" text="Cuéntanos tu actividad y te recomendamos el plan más barato que cubre todo lo que necesitas." />
+</BaseLayout>
+
+<style>
+  .compare th[scope='row'] {
+    background: #fff;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 0.97rem;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .compare thead th {
+    vertical-align: bottom;
+  }
+  .compare__price {
+    font-size: 0.85rem;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .yes {
+    color: var(--green-700);
+    font-weight: 800;
+    font-size: 1.15rem;
+  }
+  .no {
+    color: #a0abb8;
+  }
+  .extra-price {
+    font-weight: 800;
+    color: var(--navy-900);
+    font-size: 1.15rem;
+    margin-bottom: 0.4rem;
+  }
+</style>

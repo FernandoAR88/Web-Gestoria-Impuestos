@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import { formatDate } from '../../data/calendar';
+
+const guides = (await getCollection('guias')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Guías fiscales para autónomos"
+  description="Guías claras sobre los modelos 303, 111, 115 y 130, y sobre Verifactu. Escritas por asesores fiscales y actualizadas."
+>
+  <PageHero
+    eyebrow="Guías"
+    title="Guías fiscales sin tecnicismos"
+    lead="Lo que necesitas saber de tus impuestos trimestrales, explicado con ejemplos y actualizado a la normativa vigente."
+    crumbs={[{ label: 'Guías' }]}
+  />
+
+  <section class="section">
+    <div class="container grid grid-3">
+      {
+        guides.map((g) => (
+          <a class="card guide-card" href={`/guias/${g.id}/`}>
+            <div class="icon-badge">
+              <Icon name="file" />
+            </div>
+            <h2 class="guide-card__title">{g.data.title}</h2>
+            <p class="muted small">{g.data.description}</p>
+            <p class="small muted mb-0 guide-card__date">Actualizada el {formatDate(g.data.updated)}</p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  .guide-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .guide-card__title {
+    font-size: 1.15rem;
+  }
+  .guide-card__date {
+    margin-top: auto;
+  }
+</style>
