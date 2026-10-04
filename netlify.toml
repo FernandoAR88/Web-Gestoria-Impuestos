@@ -1,0 +1,30 @@
+# Configuración de despliegue en Netlify (no se usa hasta conectar el repositorio).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"
+
+# Cabeceras de seguridad para todas las páginas.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+# Las fuentes y los recursos con huella se pueden guardar en caché un año.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Si en el futuro volviera a existir /precios/, redirige a contacto.
+[[redirects]]
+  from = "/precios/*"
+  to = "/contacto/?motivo=propuesta"
+  status = 301
