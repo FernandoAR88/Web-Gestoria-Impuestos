@@ -217,14 +217,12 @@ const lead = site.team[0];
 
 <style>
   .hero {
-    background:
-      radial-gradient(1000px 500px at 85% -10%, #dbe8f8 0%, transparent 60%),
-      linear-gradient(180deg, var(--blue-50) 0%, #fff 100%);
+    background: linear-gradient(180deg, var(--ivory-200) 0%, var(--ivory) 100%);
     padding-block: clamp(3rem, 7vw, 5.5rem);
     border-bottom: 1px solid var(--line);
   }
   .hero h1 {
-    font-size: clamp(2rem, 4vw, 2.85rem);
+    font-size: clamp(2.5rem, 5vw, 3.7rem);
   }
   .hero__inner {
     display: grid;
@@ -242,12 +240,22 @@ const lead = site.team[0];
     display: grid;
     gap: 1rem;
   }
+  /* Borrador con aspecto de documento: papel, membrete y doble filete */
   .draft-card {
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 1.4rem;
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    padding: 1.6rem 1.6rem 1.4rem;
     box-shadow: var(--shadow-lg);
+  }
+  .draft-card::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    pointer-events: none;
   }
   .draft-card__head {
     display: flex;
@@ -277,7 +285,7 @@ const lead = site.team[0];
   .draft-card__total dt,
   .draft-card__total dd {
     color: var(--navy-900);
-    font-weight: 800;
+    font-weight: 700;
   }
   .draft-card__actions {
     display: flex;
@@ -290,11 +298,11 @@ const lead = site.team[0];
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    background: var(--green-600);
-    color: #fff;
-    font-weight: 700;
+    background: var(--navy-800);
+    color: var(--ivory);
+    font-weight: 600;
     padding: 0.55rem 1rem;
-    border-radius: 999px;
+    border-radius: 3px;
     font-size: 0.95rem;
   }
   .service-card {
@@ -312,7 +320,7 @@ const lead = site.team[0];
     align-items: center;
     gap: 0.35rem;
     font-weight: 700;
-    color: var(--blue-600);
+    color: var(--navy-600);
   }
   .who {
     align-items: center;
@@ -323,7 +331,8 @@ const lead = site.team[0];
     border-radius: 50%;
     display: grid;
     place-items: center;
-    background: var(--blue-50);
+    background: var(--ivory);
+    border: 1px solid var(--gold-600);
     color: var(--navy-700);
     margin-bottom: 1rem;
   }

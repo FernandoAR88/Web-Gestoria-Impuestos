@@ -33,7 +33,8 @@ Documento de decisiones: qué vendemos, a quién, con qué tecnología, a qué p
 
 **Decisiones técnicas tomadas**
 
-- **Sin Google Fonts ni scripts de terceros**: tipografía del sistema. Cero peticiones externas, cero cookies, sin banner de consentimiento y mejor RGPD.
+- **Identidad visual señorial y sobria**: azul tinta, oro viejo y fondo marfil; titulares en Cormorant Garamond (serif clásica), texto en Source Sans 3, monograma «AR» tipo sello, filetes dorados y esquinas casi rectas. Transmite solvencia y tradición sin parecer anticuada.
+- **Fuentes alojadas en la propia web** (paquetes Fontsource, solo el juego latino): sin Google Fonts ni scripts de terceros. Cero peticiones externas, cero cookies, sin banner de consentimiento y mejor RGPD.
 - **Todo lo editable en datos**: marca, contacto, precios, FAQ y calendario viven en `src/config` y `src/data`; las páginas solo los pintan.
 - **Calendario fiscal generado por código**: calcula los vencimientos de cada año y los traslada si caen en fin de semana; en el navegador se ocultan los pasados y se marca el siguiente.
 - **Datos estructurados** (JSON-LD): ProfessionalService, BreadcrumbList, FAQPage, OfferCatalog y Article.

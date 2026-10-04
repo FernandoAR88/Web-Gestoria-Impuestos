@@ -124,7 +124,7 @@ const all = [...deadlinesForYear(year), ...deadlinesForYear(year + 1), ...deadli
     grid-template-columns: 9.5rem 1fr;
     gap: 1rem;
     align-items: start;
-    background: #fff;
+    background: var(--paper);
     border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 1rem 1.25rem;
@@ -133,7 +133,7 @@ const all = [...deadlinesForYear(year), ...deadlinesForYear(year + 1), ...deadli
     display: none;
   }
   .timeline__item.is-next {
-    border: 2px solid var(--green-600);
+    border: 2px solid var(--gold-600);
     box-shadow: var(--shadow);
   }
   .timeline__date {

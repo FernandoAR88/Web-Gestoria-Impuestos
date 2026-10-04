@@ -47,7 +47,7 @@ Web de **AR Fiscal**, asesoría fiscal 100 % online de Fernando Ávila Rivero, e
 │   ├── components/           Piezas reutilizables (cabecera, precios, pasos, FAQ, formulario...)
 │   ├── layouts/              Plantilla base (SEO, Open Graph, JSON-LD) y plantilla legal
 │   ├── pages/                Una ruta por fichero
-│   └── styles/global.css     Sistema de diseño (colores, tipografía, botones, tarjetas, tablas)
+│   └── styles/global.css     Sistema de diseño señorial: azul tinta, oro viejo, marfil y tipografía serif
 ├── scripts/
 │   ├── verify.mjs            Verificación estática: enlaces, títulos, descripciones, H1
 │   ├── screenshots.mjs       Capturas en escritorio y móvil + errores JS y scroll lateral

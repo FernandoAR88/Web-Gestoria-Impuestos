@@ -1,4 +1,10 @@
 ---
+import '@fontsource/cormorant-garamond/latin-500.css';
+import '@fontsource/cormorant-garamond/latin-600.css';
+import '@fontsource/cormorant-garamond/latin-700.css';
+import '@fontsource/source-sans-3/latin-400.css';
+import '@fontsource/source-sans-3/latin-600.css';
+import '@fontsource/source-sans-3/latin-700.css';
 import '../styles/global.css';
 import { site, pendingFields } from '../config/site';
 import Header from '../components/Header.astro';
@@ -55,7 +61,7 @@ if (import.meta.env.PROD && !g.__pendingWarned) {
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#102a4c" />
+    <meta name="theme-color" content="#0e1a2e" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={site.locale} />

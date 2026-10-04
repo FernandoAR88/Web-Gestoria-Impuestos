@@ -1,41 +1,51 @@
 /* ==========================================================================
-   Sistema de diseño
-   Tipografía del sistema (sin Google Fonts: cero peticiones a terceros, mejor
-   para RGPD y velocidad). Paleta sobria: azul marino (solvencia) + verde
-   (resultado correcto) sobre fondos claros.
+   Sistema de diseño · AR Fiscal
+   Identidad señorial y sobria: azul tinta, oro viejo y fondo marfil.
+   Titulares en Cormorant Garamond (serif clásica) y texto en Source Sans 3.
+   Las fuentes se sirven desde la propia web (sin Google Fonts): cero
+   peticiones a terceros, mejor para el RGPD y para la velocidad.
    ========================================================================== */
 
 :root {
-  --navy-900: #0b1f38;
-  --navy-800: #102a4c;
-  --navy-700: #16365f;
-  --blue-600: #1f5fbf;
-  --blue-50: #eef4fc;
-  --green-700: #0a7a5c;
-  --green-600: #0c8f6b;
-  --green-50: #e8f6f1;
-  --amber-600: #b26b00;
-  --amber-50: #fff6e5;
-  --red-600: #b42318;
+  /* Azul tinta */
+  --navy-900: #0e1a2e;
+  --navy-800: #15253f;
+  --navy-700: #1e3354;
+  --navy-600: #2b4670;
+  --navy-50: #edf0f5;
 
-  --ink: #14202e;
-  --ink-soft: #3f4c5c;
-  --muted: #5f6b7a;
-  --line: #dde3ea;
-  --bg: #ffffff;
-  --bg-soft: #f5f8fb;
+  /* Oro viejo: 600 para filetes e iconos, 700 para texto sobre claro, 400 sobre azul */
+  --gold-700: #765b28;
+  --gold-600: #a07f43;
+  --gold-400: #cdb07a;
+  --gold-50: #f5eedf;
 
-  --radius: 12px;
-  --radius-sm: 8px;
-  --shadow-sm: 0 1px 2px rgb(16 42 76 / 0.06), 0 1px 3px rgb(16 42 76 / 0.08);
-  --shadow: 0 4px 14px rgb(16 42 76 / 0.08), 0 1px 3px rgb(16 42 76 / 0.06);
-  --shadow-lg: 0 16px 40px rgb(16 42 76 / 0.12);
+  /* Marfil y neutros cálidos */
+  --ivory: #fbf8f2;
+  --ivory-200: #f3ede1;
+  --paper: #ffffff;
+  --ink: #1b2130;
+  --ink-soft: #3b4352;
+  --muted: #5e6572;
+  --line: #e3dac9;
+  --line-strong: #cbbd9f;
+
+  /* Estados */
+  --amber-600: #9a5b00;
+  --amber-50: #fff5e2;
+  --red-600: #a12a1f;
+
+  --radius: 6px;
+  --radius-sm: 4px;
+  --shadow-sm: 0 1px 2px rgb(14 26 46 / 0.05);
+  --shadow: 0 6px 18px rgb(14 26 46 / 0.07), 0 1px 2px rgb(14 26 46 / 0.05);
+  --shadow-lg: 0 18px 44px rgb(14 26 46 / 0.12);
 
   --container: 1200px;
   --gutter: clamp(16px, 4vw, 32px);
 
-  --font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
-  --font-num: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Roboto Mono', Menlo, Consolas, monospace;
+  --font-display: 'Cormorant Garamond', 'Cormorant', Garamond, 'Times New Roman', serif;
+  --font: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
   color-scheme: light;
 }
@@ -67,11 +77,12 @@ body {
   margin: 0;
   font-family: var(--font);
   font-size: 1.0625rem;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--ink);
-  background: var(--bg);
+  background: var(--ivory);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  font-variant-numeric: lining-nums;
 }
 
 img,
@@ -81,43 +92,46 @@ svg {
 }
 
 a {
-  color: var(--blue-600);
+  color: var(--navy-600);
+  text-decoration-color: var(--gold-600);
+  text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 
 a:hover {
-  color: var(--navy-700);
+  color: var(--navy-900);
 }
 
 :focus-visible {
-  outline: 3px solid var(--blue-600);
-  outline-offset: 2px;
-  border-radius: 4px;
+  outline: 2px solid var(--gold-600);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 h1,
 h2,
 h3,
 h4 {
+  font-family: var(--font-display);
   color: var(--navy-900);
-  line-height: 1.2;
-  letter-spacing: -0.015em;
+  line-height: 1.12;
+  letter-spacing: 0;
   margin: 0 0 0.5em;
   text-wrap: balance;
 }
 
 h1 {
-  font-size: clamp(2rem, 4.5vw, 3.1rem);
-  font-weight: 800;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 600;
 }
 
 h2 {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 750;
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  font-weight: 600;
 }
 
 h3 {
-  font-size: 1.2rem;
+  font-size: 1.45rem;
   font-weight: 700;
 }
 
@@ -130,13 +144,17 @@ ol {
   padding-left: 1.2em;
 }
 
+strong {
+  font-weight: 700;
+}
+
 .skip-link {
   position: absolute;
   left: -9999px;
   top: 0;
   z-index: 100;
   background: var(--navy-900);
-  color: #fff;
+  color: var(--ivory);
   padding: 0.75rem 1rem;
 }
 
@@ -167,30 +185,31 @@ ol {
 }
 
 .container--narrow {
-  max-width: 780px;
+  max-width: 800px;
 }
 
 .section {
-  padding-block: clamp(3rem, 7vw, 5.5rem);
+  padding-block: clamp(3.25rem, 7vw, 6rem);
 }
 
 .section--soft {
-  background: var(--bg-soft);
+  background: var(--ivory-200);
+  border-block: 1px solid var(--line);
 }
 
 .section--navy {
-  background: var(--navy-800);
-  color: #dfe8f4;
+  background: var(--navy-900);
+  color: #d9dfe9;
 }
 
 .section--navy h2,
 .section--navy h3 {
-  color: #fff;
+  color: var(--ivory);
 }
 
 .section-head {
-  max-width: 720px;
-  margin-bottom: 2.5rem;
+  max-width: 740px;
+  margin-bottom: 2.75rem;
 }
 
 .section-head--center {
@@ -198,14 +217,37 @@ ol {
   text-align: center;
 }
 
+/* Antetítulo en versalitas con filete dorado */
 .eyebrow {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--green-700);
-  margin-bottom: 0.75rem;
+  color: var(--gold-700);
+  margin-bottom: 0.9rem;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--gold-600);
+}
+
+.section-head--center .eyebrow::after,
+.text-center .eyebrow::after {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--gold-600);
+}
+
+.section--navy .eyebrow {
+  color: var(--gold-400);
 }
 
 .lead {
@@ -235,11 +277,33 @@ ol {
 }
 
 .grid-4 {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+}
+
+.grid > * {
+  min-width: 0;
 }
 
 .stack > * + * {
   margin-top: 1rem;
+}
+
+/* Filete ornamental: dos líneas finas con un rombo central */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--gold-600);
+  margin: 0 auto 1.25rem;
+  max-width: 180px;
+}
+
+.ornament::before,
+.ornament::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: currentColor;
 }
 
 /* ---------- Botones ---------- */
@@ -250,50 +314,62 @@ ol {
   justify-content: center;
   gap: 0.5rem;
   min-height: 48px;
-  padding: 0.75rem 1.4rem;
-  border-radius: 999px;
-  border: 2px solid transparent;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
   font: inherit;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1rem;
+  letter-spacing: 0.02em;
   line-height: 1.2;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
-}
-
-.btn:active {
-  transform: translateY(1px);
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 }
 
 .btn--primary {
-  background: var(--green-600);
-  color: #fff;
+  background: var(--navy-800);
+  color: var(--ivory);
+  border-color: var(--navy-800);
 }
 
 .btn--primary:hover {
-  background: var(--green-700);
+  background: var(--navy-900);
+  border-color: var(--gold-600);
   color: #fff;
 }
 
 .btn--secondary {
-  background: #fff;
+  background: transparent;
   color: var(--navy-800);
-  border-color: var(--line);
+  border-color: var(--line-strong);
 }
 
 .btn--secondary:hover {
-  border-color: var(--navy-700);
+  border-color: var(--navy-800);
   color: var(--navy-900);
+  background: var(--paper);
 }
 
 .btn--light {
-  background: #fff;
+  background: var(--ivory);
   color: var(--navy-900);
+  border-color: var(--ivory);
 }
 
 .btn--light:hover {
-  background: var(--blue-50);
+  background: var(--gold-50);
+  color: var(--navy-900);
+}
+
+.btn--gold {
+  background: var(--gold-400);
+  color: var(--navy-900);
+  border-color: var(--gold-400);
+}
+
+.btn--gold:hover {
+  background: #d9c08f;
   color: var(--navy-900);
 }
 
@@ -311,10 +387,10 @@ ol {
 /* ---------- Tarjetas ---------- */
 
 .card {
-  background: #fff;
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: clamp(1.25rem, 3vw, 1.75rem);
+  padding: clamp(1.25rem, 3vw, 1.85rem);
   box-shadow: var(--shadow-sm);
 }
 
@@ -329,13 +405,12 @@ ol {
 a.card {
   color: inherit;
   text-decoration: none;
-  transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+  transition: box-shadow 0.15s, border-color 0.15s;
 }
 
 a.card:hover {
-  border-color: #b8c7da;
+  border-color: var(--gold-600);
   box-shadow: var(--shadow);
-  transform: translateY(-2px);
 }
 
 .icon-badge {
@@ -343,15 +418,17 @@ a.card:hover {
   place-items: center;
   width: 48px;
   height: 48px;
-  border-radius: 12px;
-  background: var(--blue-50);
-  color: var(--blue-600);
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--ivory);
+  color: var(--navy-700);
   margin-bottom: 1rem;
 }
 
 .icon-badge--green {
-  background: var(--green-50);
-  color: var(--green-700);
+  color: var(--gold-700);
+  border-color: var(--gold-600);
+  background: var(--gold-50);
 }
 
 /* ---------- Listas ---------- */
@@ -372,13 +449,14 @@ a.card:hover {
   content: '';
   position: absolute;
   left: 0;
-  top: 0.3em;
-  width: 1.1rem;
-  height: 1.1rem;
+  top: 0.35em;
+  width: 1.05rem;
+  height: 1.05rem;
   border-radius: 50%;
-  background: var(--green-50)
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a7a5c' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E")
-    center / 0.7rem no-repeat;
+  border: 1px solid var(--gold-600);
+  background: var(--gold-50)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23765b28' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E")
+    center / 0.62rem no-repeat;
 }
 
 .cross-list {
@@ -407,17 +485,19 @@ a.card:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.25rem 0.7rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  background: var(--blue-50);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--navy-50);
   color: var(--navy-700);
 }
 
 .badge--green {
-  background: var(--green-50);
-  color: var(--green-700);
+  background: var(--gold-50);
+  color: var(--gold-700);
 }
 
 .badge--amber {
@@ -426,13 +506,16 @@ a.card:hover {
 }
 
 .model-code {
-  font-family: var(--font-num);
+  font-family: var(--font);
+  font-variant-numeric: tabular-nums;
   font-weight: 700;
-  font-size: 0.9em;
-  background: var(--blue-50);
+  font-size: 0.88em;
+  letter-spacing: 0.03em;
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
   color: var(--navy-700);
-  padding: 0.1em 0.45em;
-  border-radius: 6px;
+  padding: 0.05em 0.45em;
+  border-radius: 3px;
   white-space: nowrap;
 }
 
@@ -442,13 +525,14 @@ a.card:hover {
   overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: #fff;
+  background: var(--paper);
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.97rem;
+  font-variant-numeric: tabular-nums;
 }
 
 th,
@@ -460,12 +544,12 @@ td {
 }
 
 th {
-  background: var(--bg-soft);
+  background: var(--ivory-200);
   color: var(--navy-800);
-  font-weight: 700;
-  font-size: 0.85rem;
+  font-weight: 600;
+  font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.1em;
 }
 
 tr:last-child td {
@@ -483,15 +567,17 @@ th.num {
 .notice {
   border-radius: var(--radius-sm);
   padding: 1rem 1.25rem;
-  background: var(--blue-50);
-  border-left: 4px solid var(--blue-600);
-  color: var(--navy-800);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold-600);
+  color: var(--ink-soft);
 }
 
 .notice--amber {
   background: var(--amber-50);
+  border-color: #efd7a8;
   border-left-color: var(--amber-600);
-  color: #5a3a00;
+  color: #4f3300;
 }
 
 .notice p:last-child {
@@ -501,16 +587,16 @@ th.num {
 /* ---------- Contenido largo (guías y textos legales) ---------- */
 
 .prose {
-  max-width: 72ch;
+  max-width: 70ch;
 }
 
 .prose h2 {
-  font-size: 1.55rem;
-  margin-top: 2.2em;
+  font-size: 1.85rem;
+  margin-top: 2em;
 }
 
 .prose h3 {
-  margin-top: 1.8em;
+  margin-top: 1.6em;
 }
 
 .prose li {
@@ -520,30 +606,43 @@ th.num {
 .prose table {
   margin: 1.5rem 0;
   border: 1px solid var(--line);
+  background: var(--paper);
 }
 
 .prose blockquote {
   margin: 1.5rem 0;
   padding: 1rem 1.25rem;
-  background: var(--bg-soft);
-  border-left: 4px solid var(--green-600);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold-600);
   border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--navy-800);
 }
 
 .prose blockquote p:last-child {
   margin: 0;
 }
 
+.prose hr {
+  border: 0;
+  height: 1px;
+  background: var(--line-strong);
+  margin: 2.5rem 0;
+}
+
 /* ---------- Cabecera de página interior ---------- */
 
 .page-hero {
-  background: linear-gradient(180deg, var(--blue-50), #fff);
+  background: var(--ivory-200);
   padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(2rem, 4vw, 3rem);
   border-bottom: 1px solid var(--line);
+  box-shadow: inset 0 -4px 0 -3px var(--gold-600);
 }
 
 .page-hero p.lead {
-  max-width: 680px;
+  max-width: 700px;
 }
 
 .breadcrumbs {
@@ -562,9 +661,9 @@ th.num {
 }
 
 .breadcrumbs li + li::before {
-  content: '/';
+  content: '›';
   margin-right: 0.4rem;
-  color: #a0abb8;
+  color: var(--gold-600);
 }
 
 .breadcrumbs a {
@@ -591,9 +690,9 @@ th.num {
   width: 100%;
   min-height: 48px;
   padding: 0.7rem 0.9rem;
-  border: 1px solid #b9c4d1;
+  border: 1px solid var(--line-strong);
   border-radius: var(--radius-sm);
-  background: #fff;
+  background: var(--paper);
   color: var(--ink);
 }
 
@@ -605,8 +704,8 @@ th.num {
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
-  outline: 3px solid rgb(31 95 191 / 0.25);
-  border-color: var(--blue-600);
+  outline: 3px solid rgb(160 127 67 / 0.25);
+  border-color: var(--gold-600);
 }
 
 .checkbox {
@@ -622,6 +721,7 @@ th.num {
   width: 1.1rem;
   height: 1.1rem;
   flex: none;
+  accent-color: var(--navy-800);
 }
 
 .hp-field {

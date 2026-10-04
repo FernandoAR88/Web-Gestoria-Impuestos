@@ -62,7 +62,7 @@ for (const file of all) {
   await mkdir(dirname(dest), { recursive: true });
 
   if (!rel.endsWith('.html')) {
-    if (!rel.endsWith('.css')) {
+    if (!rel.endsWith('.css') && !/\.woff2?$/.test(rel)) {
       await cp(file, dest);
       files[rel] = relative(ROOT, dest);
     }
@@ -73,11 +73,20 @@ for (const file of all) {
   const prefix = '../'.repeat(depth);
   let html = await readFile(file, 'utf8');
 
-  // Hojas de estilo locales -> <style> incrustado.
+  // Hojas de estilo locales -> <style> incrustado, con las fuentes woff2 como data: URI
+  // (el visor no siempre permite cargar fuentes desde ficheros).
   const links = [...html.matchAll(/<link rel="stylesheet" href="(\/[^"]+)">/g)];
   for (const [tag, href] of links) {
-    if (!cssCache.has(href)) cssCache.set(href, await readFile(join(DIST, href), 'utf8'));
-    html = html.replace(tag, `<style>${cssCache.get(href)}</style>`);
+    if (!cssCache.has(href)) {
+      let css = await readFile(join(DIST, href), 'utf8');
+      for (const [match, url] of [...css.matchAll(/url\((\/[^)]+\.woff2)\)/g)]) {
+        const data = (await readFile(join(DIST, url))).toString('base64');
+        css = css.replace(match, `url(data:font/woff2;base64,${data})`);
+      }
+      css = css.replace(/,\s*url\(\/[^)]+\.woff\) format\(["']woff["']\)/g, '');
+      cssCache.set(href, css);
+    }
+    html = html.replace(tag, () => `<style>${cssCache.get(href)}</style>`);
   }
 
   // Quita enlaces que no aplican en la vista previa.
