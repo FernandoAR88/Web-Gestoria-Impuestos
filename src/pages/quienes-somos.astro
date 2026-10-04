@@ -2,46 +2,21 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
-import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
 ---
 
 <BaseLayout
   title="Quiénes somos"
-  description={`Conoce al equipo de ${site.name}: asesoría fiscal online especializada en IVA, retenciones e IRPF de autónomos y pymes.`}
+  description={`Conoce ${site.name}: asesoría fiscal online especializada en IVA, retenciones e IRPF de autónomos y pymes.`}
 >
   <PageHero
     eyebrow="Quiénes somos"
-    title={`${site.name}: la asesoría fiscal online de ${site.founder}`}
-    lead="Creemos que los impuestos de un autónomo no deberían ser caros ni opacos. Por eso nos centramos en pocos modelos, los automatizamos y ponemos a una persona a revisar cada uno."
+    title={`${site.name}: asesoría fiscal online`}
+    lead="Creemos que los impuestos de un autónomo deben estar documentados, explicados y presentados a tiempo. Por eso nos centramos en pocos modelos y revisamos cada uno a fondo."
     crumbs={[{ label: 'Quiénes somos' }]}
   />
 
   <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <h2>El equipo</h2>
-        <p class="lead">Las personas que preparan y revisan tus declaraciones, con nombre, cara y credenciales.</p>
-      </div>
-      <div class="grid grid-3">
-        {
-          site.team.map((m) => (
-            <article class="card member">
-              <div class="member__avatar" aria-hidden="true">
-                <Icon name="user" size={44} />
-              </div>
-              <h3>{m.name}</h3>
-              <p class="member__role">{m.role}</p>
-              <p class="small muted">{m.credentials}</p>
-              <p>{m.bio}</p>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--soft">
     <div class="container grid grid-2">
       <div>
         <h2>Cómo entendemos este trabajo</h2>
@@ -77,21 +52,6 @@ import { site } from '../config/site';
 </BaseLayout>
 
 <style>
-  .member__avatar {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: var(--navy-50);
-    color: var(--navy-700);
-    margin-bottom: 1rem;
-  }
-  .member__role {
-    font-weight: 600;
-    color: var(--gold-700);
-    margin-bottom: 0.2rem;
-  }
   .h3-like {
     font-size: 1.3rem;
   }

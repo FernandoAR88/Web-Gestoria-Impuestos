@@ -110,15 +110,6 @@ export const site = {
   /** Enlace al perfil público de reseñas (Google, Trustpilot...). */
   reviewsProfileUrl: '',
 
-  /** Equipo. Poner caras y nombres reales es de lo que más confianza genera. */
-  team: [
-    {
-      name: 'Fernando Ávila Rivero',
-      role: 'Fundador · Responsable del servicio',
-      credentials: '[Titulación] · [Colegio/asociación y nº de colegiado]',
-      bio: '[Dos líneas sobre tu experiencia: años, sectores en los que has trabajado y por qué creaste AR Fiscal.]',
-    },
-  ],
 
   /** Formulario de contacto. Por defecto preparado para Netlify Forms. */
   form: {
@@ -146,9 +137,6 @@ export const nav = [
 
 /** La garantía de plazo solo se anuncia si hay seguro de responsabilidad civil que la respalde. */
 export const showDeadlineGuarantee = site.guarantees.deadlineGuarantee && site.credentials.seguroRC;
-
-/** Ancla de la ficha del fundador (autoría de las guías y datos estructurados). */
-export const founderAnchor = '/quienes-somos/#fernando-avila-rivero';
 
 export const whatsappUrl = (text = 'Hola, quiero información sobre vuestros servicios') =>
   `https://wa.me/${site.contact.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`;

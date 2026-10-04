@@ -24,7 +24,7 @@ const articleLd = {
   description: guide.data.description,
   dateModified: guide.data.updated,
   inLanguage: 'es',
-  author: { '@type': 'Person', name: site.founder },
+  author: { '@type': 'Organization', name: site.name },
   publisher: { '@type': 'Organization', name: site.name },
 };
 ---
@@ -32,7 +32,7 @@ const articleLd = {
 <BaseLayout title={guide.data.title} description={guide.data.description} jsonLd={[articleLd]}>
   <PageHero title={guide.data.title} crumbs={[{ href: '/guias/', label: 'Guías' }, { label: guide.data.title }]}>
     <p class="small muted mb-0">
-      Por {site.founder} · Actualizada el {formatDate(guide.data.updated)}
+      Por {site.name} · Actualizada el {formatDate(guide.data.updated)}
     </p>
   </PageHero>
   <section class="section">

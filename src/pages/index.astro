@@ -11,7 +11,7 @@ import Reviews from '../components/Reviews.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
 import PhotoBand from '../components/PhotoBand.astro';
-import { photoVar, photo } from '../lib/photos';
+import { photoVar } from '../lib/photos';
 import { site } from '../config/site';
 import { services, notCovered } from '../data/services';
 import { faqs } from '../data/faq';
@@ -19,7 +19,6 @@ import { faqs } from '../data/faq';
 const homeFaqs = faqs.filter((f) =>
   ['¿Hay permanencia?', '¿Presentáis algo sin que yo lo vea antes?', '¿Y si os equivocáis vosotros?', '¿Puedo cambiarme desde otra gestoría o asesoría?'].includes(f.q),
 );
-const lead = site.team[0];
 ---
 
 <BaseLayout
@@ -162,8 +161,8 @@ const lead = site.team[0];
         <span class="eyebrow">Quién está detrás</span>
         <h2>Personas reales, no un algoritmo</h2>
         <p class="lead">
-          {site.name} es la asesoría fiscal online de {site.founder}. Automatizamos lo repetitivo para dedicar el tiempo a lo
-          importante: revisar cada declaración y responderte cuando tienes una duda.
+          Automatizamos lo repetitivo para dedicar el tiempo a lo importante: revisar cada declaración y responderte cuando tienes
+          una duda.
         </p>
         <ul class="check-list">
           <li>Un asesor fiscal revisa cada modelo antes de enviártelo.</li>
@@ -172,22 +171,12 @@ const lead = site.team[0];
           {site.credentials.colaboradorSocialAEAT && <li>Somos colaboradores sociales de la Agencia Tributaria.</li>}
           {site.credentials.seguroRC && <li>Seguro de responsabilidad civil profesional contratado.</li>}
         </ul>
-        <a href="/quienes-somos/">Conoce al equipo</a>
+        <a href="/quienes-somos/">Quiénes somos</a>
       </div>
       <div class="card who__card">
-        {
-          photo('fernando') ? (
-            <img class="who__photo" src={photo('fernando')} alt={`Retrato de ${site.founder}`} width="160" height="200" />
-          ) : (
-            <div class="who__avatar" aria-hidden="true">
-              <Icon name="user" size={40} />
-            </div>
-          )
-        }
-        <h3>{lead.name}</h3>
-        <p class="muted mb-0">{lead.role}</p>
-        <p class="small muted">{lead.credentials}</p>
-        <p>{lead.bio}</p>
+        <div class="icon-badge icon-badge--green"><Icon name="lock" /></div>
+        <h3>Confidencialidad y secreto profesional</h3>
+        <p class="muted">Tu documentación solo la ve quien prepara tus declaraciones. Nunca cedemos tus datos.</p>
         <a class="btn btn--secondary" href="/seguridad/"><Icon name="lock" size={18} /> Cómo protegemos tus datos</a>
       </div>
     </div>
