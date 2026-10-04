@@ -22,7 +22,7 @@ const lead = site.team[0];
 ---
 
 <BaseLayout
-  title={`${site.name} · IVA, retenciones e IRPF de autónomos online desde ${eur(fromPrice)}/mes`}
+  title={`Asesoría fiscal online para autónomos desde ${eur(fromPrice)}/mes | ${site.name}`}
   description={site.description}
 >
   <!-- HERO -->
@@ -32,7 +32,7 @@ const lead = site.team[0];
         <span class="eyebrow">{site.descriptor}</span>
         <h1>Tu IVA y tus retenciones, presentados a tiempo y sin sorpresas</h1>
         <p class="lead">
-          Nos encargamos de tus modelos trimestrales y anuales con Hacienda por un precio cerrado desde
+          Nos encargamos de tus modelos trimestrales y anuales con Hacienda por un precio cerrado desde{' '}
           <strong class="nowrap">{eur(fromPrice)}/mes</strong>. Tú nos mandas las facturas; nosotros te enseñamos el resultado antes de
           presentarlo.
         </p>
@@ -223,9 +223,12 @@ const lead = site.team[0];
     padding-block: clamp(3rem, 7vw, 5.5rem);
     border-bottom: 1px solid var(--line);
   }
+  .hero h1 {
+    font-size: clamp(2rem, 4vw, 2.85rem);
+  }
   .hero__inner {
     display: grid;
-    grid-template-columns: 1.15fr 1fr;
+    grid-template-columns: 1.2fr 1fr;
     gap: clamp(2rem, 5vw, 4rem);
     align-items: center;
   }

@@ -15,8 +15,9 @@ const days = daysUntil(next.date, now);
   <div>
     <p class="next-deadline__label">Próximo plazo con Hacienda</p>
     <p class="next-deadline__title">
-      <strong data-nd-date>{formatDate(next.date, { day: 'numeric', month: 'long' })}</strong>
-      · <span data-nd-title>{next.title}</span>
+      <strong data-nd-date>{formatDate(next.date, { day: 'numeric', month: 'long' })}</strong>{' · '}<span data-nd-title
+        >{next.title}</span
+      >
     </p>
     <p class="next-deadline__meta">
       Modelos <span data-nd-models>{next.models.join(', ')}</span> · <span data-nd-days

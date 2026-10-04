@@ -15,7 +15,7 @@ export const site = {
   /** Descriptor que acompaña a la marca. Ver nota sobre "gestoría" en docs/ANALISIS.md §6. */
   descriptor: 'Asesoría fiscal online para autónomos y pymes',
   description:
-    'Presentamos tu IVA, tus retenciones y tus pagos a cuenta del IRPF por un precio cerrado y sin permanencia. Asesoría fiscal 100 % online para autónomos y pequeñas empresas de toda España.',
+    'Presentamos tu IVA, tus retenciones y tu IRPF por un precio cerrado y sin permanencia. Asesoría fiscal 100 % online para autónomos y pymes de toda España.',
   locale: 'es_ES',
 
   /** Muestra una franja superior de "web en preparación". Ponlo a false al lanzar. */
@@ -108,7 +108,7 @@ export const nav = [
   { href: '/servicios/', label: 'Servicios' },
   { href: '/precios/', label: 'Precios' },
   { href: '/como-funciona/', label: 'Cómo funciona' },
-  { href: '/calendario-fiscal/', label: 'Calendario fiscal' },
+  { href: '/calendario-fiscal/', label: 'Calendario' },
   { href: '/guias/', label: 'Guías' },
   { href: '/quienes-somos/', label: 'Quiénes somos' },
 ];

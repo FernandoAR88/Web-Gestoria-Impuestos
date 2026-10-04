@@ -15,3 +15,6 @@ npm-debug.log*
 
 # sistema
 .DS_Store
+
+# vista previa y capturas (las genera el agente de ejecución)
+.preview/

@@ -8,6 +8,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "verify": "node scripts/verify.mjs",
+    "screenshots": "node scripts/screenshots.mjs",
+    "preview:bundle": "node scripts/preview-bundle.mjs",
+    "ejecucion": "astro build && node scripts/verify.mjs && node scripts/screenshots.mjs && node scripts/preview-bundle.mjs",
     "astro": "astro"
   },
   "dependencies": {
