@@ -235,14 +235,26 @@ const lead = site.team[0];
 <style>
   .hero {
     position: relative;
+    isolation: isolate;
+    overflow: hidden;
     color: #d9dfe9;
     padding-block: clamp(4rem, 9vw, 7.5rem);
     background-color: var(--navy-900);
-    background-image:
-      linear-gradient(100deg, rgb(14 26 46 / 0.96) 0%, rgb(14 26 46 / 0.86) 48%, rgb(14 26 46 / 0.6) 100%),
-      var(--photo, repeating-linear-gradient(90deg, rgb(205 176 122 / 0.06) 0 1px, transparent 1px 96px));
-    background-size: cover;
-    background-position: center;
+    background-image: repeating-linear-gradient(90deg, rgb(205 176 122 / 0.05) 0 1px, transparent 1px 96px);
+  }
+  /* Foto difuminada: se funde con el azul hacia la izquierda (texto) y hacia abajo. */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--photo) center / cover no-repeat;
+    opacity: 0.62;
+    filter: saturate(0.75) contrast(1.05);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgb(0 0 0 / 0.35) 35%, #000 70%), linear-gradient(180deg, #000 55%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(90deg, transparent 0%, rgb(0 0 0 / 0.35) 35%, #000 70%), linear-gradient(180deg, #000 55%, transparent 100%);
+    mask-composite: intersect;
   }
   .hero::after {
     content: '';

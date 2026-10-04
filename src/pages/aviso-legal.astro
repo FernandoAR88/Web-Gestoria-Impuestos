@@ -2,6 +2,7 @@
 // PLANTILLA: revísala con un abogado antes de publicar.
 import LegalLayout from '../layouts/LegalLayout.astro';
 import { site } from '../config/site';
+import { photoCredits, ccBy } from '../data/photo-credits';
 const l = site.legal;
 ---
 
@@ -40,13 +41,23 @@ const l = site.legal;
     reproducción, distribución o transformación con fines comerciales sin autorización expresa.
   </p>
 
-  <h2>5. Enlaces</h2>
+  <h2 id="creditos">5. Créditos de las fotografías</h2>
+  <p>Las fotografías de esta web se usan bajo licencia <a href={ccBy} rel="noopener">Creative Commons Reconocimiento 2.0</a>:</p>
+  <ul>
+    {photoCredits.map((c) => (
+      <li>
+        «<a href={c.url} rel="noopener">{c.title}</a>», de {c.author}.
+      </li>
+    ))}
+  </ul>
+
+  <h2>6. Enlaces</h2>
   <p>
     Este sitio puede incluir enlaces a webs de terceros, como la sede electrónica de la Agencia Tributaria. No somos responsables de sus
     contenidos ni de sus políticas de privacidad.
   </p>
 
-  <h2>6. Legislación aplicable</h2>
+  <h2>7. Legislación aplicable</h2>
   <p>
     Este aviso legal se rige por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales
     que correspondan conforme a la normativa aplicable; si el usuario es consumidor, los de su domicilio.

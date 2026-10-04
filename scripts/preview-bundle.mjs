@@ -95,6 +95,9 @@ for (const file of all) {
   // Enlaces absolutos internos -> relativos.
   html = html.replace(/(\s(?:href|src|action))="(\/(?!\/)[^"]*)"/g, (_, attr, url) => `${attr}="${toRelative(url, prefix)}"`);
 
+  // Fotos referenciadas desde estilos en línea (style="--photo: url('/img/…')").
+  html = html.replace(/url\('\/(?!\/)([^']*)'\)/g, (_, path) => `url('${prefix}${path}')`);
+
   // Envío del formulario simulado.
   html = html.replace('</body>', `${formShim(prefix)}</body>`);
 
