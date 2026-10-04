@@ -6,7 +6,7 @@
  *  - desbordamiento horizontal (scroll lateral en móvil)
  *  - respuestas HTTP con error
  *
- * Uso: npm run build && node scripts/screenshots.mjs [--out .preview/screenshots] [--pages /,/precios/]
+ * Uso: npm run build && node scripts/screenshots.mjs [--out .preview/screenshots] [--pages /,/contacto/]
  * En un equipo nuevo instala antes el navegador: npx playwright install chromium
  */
 import { createServer } from 'node:http';
@@ -25,7 +25,7 @@ const PORT = Number(arg('port', 4329));
 const BASE = `http://localhost:${PORT}`;
 const PAGES = arg(
   'pages',
-  '/,/precios/,/servicios/,/servicios/iva/,/como-funciona/,/calendario-fiscal/,/guias/modelo-303/,/quienes-somos/,/contacto/',
+  '/,/servicios/,/servicios/iva/,/como-funciona/,/calendario-fiscal/,/guias/modelo-303/,/quienes-somos/,/contacto/',
 ).split(',');
 const VIEWPORTS = [
   { name: 'escritorio', width: 1440, height: 900 },

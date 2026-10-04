@@ -3,11 +3,6 @@ export type Faq = { q: string; a: string; group: 'servicio' | 'honorarios' | 'se
 export const faqs: Faq[] = [
   {
     group: 'servicio',
-    q: '¿Cómo presentáis los impuestos en mi nombre?',
-    a: 'Mediante un apoderamiento que firmas una sola vez en la sede electrónica de la Agencia Tributaria (o con tu autorización como colaboradores sociales, si aplica). Te guiamos paso a paso. Puedes revocarlo cuando quieras y en todo momento verás en tu propia área de la AEAT lo que se ha presentado.',
-  },
-  {
-    group: 'servicio',
     q: '¿Presentáis algo sin que yo lo vea antes?',
     a: 'No. Antes de cada presentación te enviamos el papel de trabajo con el detalle del cálculo y el borrador con el resultado (a pagar, a compensar o a devolver), y solo lo presentamos con tu conformidad. Después recibes el justificante oficial de la AEAT.',
   },
@@ -39,7 +34,7 @@ export const faqs: Faq[] = [
   {
     group: 'honorarios',
     q: '¿Hay permanencia?',
-    a: 'No. Puedes dar por terminado el encargo cuando quieras por escrito. Te entregamos toda tu documentación y te ayudamos a revocar la autorización ante la Agencia Tributaria.',
+    a: 'No. Puedes dar por terminado el encargo cuando quieras por escrito. Te entregamos toda tu documentación.',
   },
   {
     group: 'honorarios',
@@ -50,11 +45,6 @@ export const faqs: Faq[] = [
     group: 'seguridad',
     q: '¿Dónde se guardan mis datos?',
     a: 'En servidores ubicados en la Unión Europea, cifrados en tránsito y en reposo. Solo acceden las personas del equipo que llevan tu cuenta y nunca cedemos tus datos con fines comerciales.',
-  },
-  {
-    group: 'seguridad',
-    q: '¿Necesito certificado digital?',
-    a: 'No es imprescindible para que presentemos por ti, aunque te recomendamos tenerlo (o Cl@ve) para consultar tus notificaciones de Hacienda. Te ayudamos a obtenerlo.',
   },
   {
     group: 'impuestos',

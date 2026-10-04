@@ -3,10 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import Steps from '../components/Steps.astro';
 import CtaBand from '../components/CtaBand.astro';
-import Icon from '../components/Icon.astro';
 import Deliverables from '../components/Deliverables.astro';
 import FeesNote from '../components/FeesNote.astro';
-import { site } from '../config/site';
 ---
 
 <BaseLayout
@@ -16,7 +14,7 @@ import { site } from '../config/site';
   <PageHero
     eyebrow="Cómo trabajamos"
     title="Así trabajamos contigo cada trimestre"
-    lead="Un proceso riguroso y siempre igual: sabrás en todo momento qué toca, qué falta y cuánto vas a pagar a Hacienda, con cada cálculo documentado."
+    lead="Cuatro pasos, siempre iguales. Sabes qué toca, cuánto pagas y por qué."
     crumbs={[{ label: 'Cómo trabajamos' }]}
   />
 
@@ -27,96 +25,12 @@ import { site } from '../config/site';
   </section>
 
   <section class="section section--soft">
-    <div class="container grid grid-2">
-      <div class="prose">
-        <h2 class="mt-0">1. Alta y autorización</h2>
-        <p>
-          Tras una primera consulta te enviamos una propuesta de honorarios por escrito. Al aceptarla, firmas el encargo online y te pedimos tu
-          documento de identidad, porque la ley de prevención del blanqueo de capitales nos obliga a identificar a nuestros clientes.
-        </p>
-        <p>
-          Para poder presentar en tu nombre, firmas un <strong>apoderamiento en la sede electrónica de la Agencia Tributaria</strong>. Es
-          un trámite oficial, gratuito y revocable en cualquier momento: tú mantienes siempre el control y ves todo lo presentado desde tu
-          propia área de Hacienda.
-        </p>
-
-        <h2>2. Envío de documentación</h2>
-        <p>Durante el trimestre, nos haces llegar:</p>
-        <ul>
-          <li>Las facturas que emites a tus clientes.</li>
-          <li>Las facturas de tus gastos (suministros, material, software, asesoría...).</li>
-          <li>Si alquilas un local, los recibos del alquiler.</li>
-          <li>Si tienes trabajadores, el resumen de nóminas.</li>
-        </ul>
-        <p>
-          Puedes subirlas en PDF o foto, reenviarlas a tu email de documentación o exportarlas desde tu programa de facturación. La fecha
-          límite es el <strong>día {site.docsDeadlineDay} del mes de presentación</strong>, para tener tiempo de revisarlo todo con calma.
-        </p>
-      </div>
-      <div class="prose">
-        <h2 class="mt-0">3. Papel de trabajo y borrador</h2>
-        <p>
-          Clasificamos tus facturas, comprobamos que cumplen los requisitos y calculamos cada modelo. Un asesor revisa el resultado y te
-          enviamos dos documentos:
-        </p>
-        <ul>
-          <li>
-            <strong>El papel de trabajo</strong>: el detalle del cálculo factura a factura, las facturas descartadas o que necesitan
-            corrección y por qué, y los ajustes aplicados.
-          </li>
-          <li>
-            <strong>El borrador de cada modelo</strong>: el importe a ingresar, a compensar o a devolver, y la fecha de cargo si lo
-            domicilias.
-          </li>
-        </ul>
-
-        <h2>4. Presentación y justificante</h2>
-        <p>
-          Cuando nos das tu conformidad por escrito, presentamos los modelos y te enviamos el justificante oficial con su código seguro de verificación
-          (CSV). Todo queda archivado en tu área durante el tiempo que exige la ley.
-        </p>
-        <div class="notice">
-          <p>
-            <strong>¿Y si no recibimos tu documentación a tiempo?</strong> Te avisamos varias veces antes del plazo. Si aun así no nos llega,
-            presentamos con la información disponible para evitar recargos y te explicamos cómo regularizarlo.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">En cada presentación</span>
         <h2>Lo que recibes</h2>
       </div>
       <Deliverables />
-    </div>
-  </section>
-
-  <section class="section section--soft">
-    <div class="container">
-      <div class="section-head">
-        <h2>Qué necesitas para empezar</h2>
-      </div>
-      <div class="grid grid-3">
-        <div class="card">
-          <div class="icon-badge"><Icon name="user" /></div>
-          <h3>Tu DNI o NIE</h3>
-          <p class="muted">Para identificarte y firmar el contrato. Si eres una sociedad, también la escritura y el NIF de la empresa.</p>
-        </div>
-        <div class="card">
-          <div class="icon-badge"><Icon name="file" /></div>
-          <h3>Tus últimas declaraciones</h3>
-          <p class="muted">Si ya estabas de alta, los modelos del último año. Así revisamos tu situación y continuamos sin saltos.</p>
-        </div>
-        <div class="card">
-          <div class="icon-badge"><Icon name="lock" /></div>
-          <h3>Cl@ve o certificado digital</h3>
-          <p class="muted">Para firmar el apoderamiento en la Agencia Tributaria. Si no lo tienes, te ayudamos a conseguirlo.</p>
-        </div>
-      </div>
     </div>
   </section>
 

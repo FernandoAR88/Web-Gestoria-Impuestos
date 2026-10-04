@@ -22,11 +22,6 @@ const blocks: { icon: IconName; title: string; text: string }[] = [
     text: 'Solo acceden a tu documentación las personas que llevan tu cuenta, con autenticación en dos pasos y registro de accesos.',
   },
   {
-    icon: 'eye',
-    title: 'Tú mantienes el control',
-    text: 'El apoderamiento en la Agencia Tributaria es revocable en cualquier momento y puedes consultar todo lo presentado en tu propia área de Hacienda.',
-  },
-  {
     icon: 'file',
     title: 'Secreto profesional',
     text: 'Todo el equipo firma un compromiso de confidencialidad. Nunca cedemos ni vendemos tus datos.',
@@ -41,7 +36,7 @@ const blocks: { icon: IconName; title: string; text: string }[] = [
 
 <BaseLayout
   title="Seguridad y protección de datos"
-  description="Cómo protegemos tu información fiscal: cifrado, servidores en la UE, acceso mínimo, apoderamiento revocable y cumplimiento del RGPD."
+  description="Cómo protegemos tu información fiscal: conexión cifrada, acceso mínimo, confidencialidad y cumplimiento del RGPD."
 >
   <PageHero
     eyebrow="Seguridad"
@@ -70,12 +65,6 @@ const blocks: { icon: IconName; title: string; text: string }[] = [
 
   <section class="section section--soft">
     <div class="container container--narrow prose">
-      <h2 class="mt-0">Cómo presentamos en tu nombre</h2>
-      <p>
-        Para presentar tus declaraciones utilizamos un <strong>apoderamiento</strong> inscrito en el Registro de Apoderamientos de la
-        Agencia Tributaria{site.credentials.colaboradorSocialAEAT ? ' o nuestra condición de colaboradores sociales' : ''}. No necesitamos
-        tu contraseña ni tu certificado digital, y nunca te los pediremos.
-      </p>
       <div class="notice notice--amber">
         <p>
           <strong>Aviso de seguridad:</strong> nunca te pediremos tus claves de Cl@ve, tu certificado digital ni los datos de tu tarjeta por
