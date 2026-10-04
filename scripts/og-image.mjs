@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Genera public/og-default.png (1200 × 630), la imagen que se ve al compartir
- * la web en WhatsApp, LinkedIn o redes. Toma la marca y el precio de los datos.
+ * la web en WhatsApp, LinkedIn o redes. Toma la marca y el lema de src/config/site.ts.
  *
  * Uso: node scripts/og-image.mjs
  */
@@ -10,11 +10,8 @@ import { chromium } from 'playwright';
 
 const root = new URL('..', import.meta.url).pathname;
 const site = await readFile(`${root}src/config/site.ts`, 'utf8');
-const pricing = await readFile(`${root}src/data/pricing.ts`, 'utf8');
 const brand = site.match(/name: '([^']+)'/)?.[1] ?? 'AR Fiscal';
 const tagline = site.match(/tagline: '([^']+)'/)?.[1] ?? '';
-const minPrice = Math.min(...[...pricing.matchAll(/monthly: ([\d.]+)/g)].map((m) => Number(m[1])));
-const price = minPrice.toLocaleString('es-ES', { minimumFractionDigits: 2 });
 
 const fontCss = async (pkg, weight) => {
   const css = await readFile(`${root}node_modules/@fontsource/${pkg}/latin-${weight}.css`, 'utf8');
@@ -45,7 +42,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><style>${fonts}
     <text x="20" y="26.6" text-anchor="middle" fill="#cdb07a" font-family="Cormorant Garamond" font-weight="700" font-size="19">AR</text></svg>
     <div><div class="name">${brand.replace(/^(\S+)\s(.*)$/, '$1 <span>$2</span>')}</div><div class="sub">Asesoría fiscal · Ávila Rivero</div></div></div>
   <div><div class="rule"></div><h1>${tagline}. IVA, retenciones e IRPF de autónomos y pymes.</h1></div>
-  <div class="foot"><span><b>Desde ${price} €</b>/mes + IVA</span><span>Sin permanencia</span><span>100 % online</span></div>
+  <div class="foot"><span><b>Papel de trabajo</b> y borrador antes de presentar</span><span>100 % online</span></div>
 </div></body></html>`;
 
 const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});

@@ -3,7 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import TrustBar from '../components/TrustBar.astro';
 import NextDeadline from '../components/NextDeadline.astro';
 import Steps from '../components/Steps.astro';
-import PricingCards from '../components/PricingCards.astro';
+import Deliverables from '../components/Deliverables.astro';
+import FeesNote from '../components/FeesNote.astro';
 import Guarantees from '../components/Guarantees.astro';
 import FaqList from '../components/FaqList.astro';
 import Reviews from '../components/Reviews.astro';
@@ -12,17 +13,15 @@ import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
 import { services, notCovered } from '../data/services';
 import { faqs } from '../data/faq';
-import { plans, eur } from '../data/pricing';
 
 const homeFaqs = faqs.filter((f) =>
   ['¿Hay permanencia?', '¿Presentáis algo sin que yo lo vea antes?', '¿Cómo presentáis los impuestos en mi nombre?', '¿Y si os equivocáis vosotros?', '¿Puedo cambiarme desde otra gestoría o asesoría?'].includes(f.q),
 );
-const fromPrice = Math.min(...plans.map((p) => p.monthly));
 const lead = site.team[0];
 ---
 
 <BaseLayout
-  title={`Asesoría fiscal online para autónomos desde ${eur(fromPrice)}/mes | ${site.name}`}
+  title={`Asesoría fiscal online para autónomos y pymes | ${site.name}`}
   description={site.description}
 >
   <!-- HERO -->
@@ -32,35 +31,35 @@ const lead = site.team[0];
         <span class="eyebrow">{site.descriptor}</span>
         <h1>Tu IVA y tus retenciones, presentados a tiempo y sin sorpresas</h1>
         <p class="lead">
-          Nos encargamos de tus modelos trimestrales y anuales con Hacienda por un precio cerrado desde{' '}
-          <strong class="nowrap">{eur(fromPrice)}/mes</strong>. Tú nos mandas las facturas; nosotros te enseñamos el resultado antes de
-          presentarlo.
+          Preparamos y presentamos tus modelos trimestrales y anuales con Hacienda. Antes de cada presentación recibes el
+          <strong>papel de trabajo</strong> con el detalle del cálculo y el <strong>borrador</strong> para tu aprobación.
         </p>
         <div class="btn-row">
-          <a class="btn btn--primary" href="/precios/">Ver planes y precios <Icon name="arrow" size={18} /></a>
-          <a class="btn btn--secondary" href="/contacto/">Hablar con un asesor</a>
+          <a class="btn btn--primary" href="/contacto/?motivo=propuesta">Solicitar propuesta <Icon name="arrow" size={18} /></a>
+          <a class="btn btn--secondary" href="/como-funciona/">Cómo trabajamos</a>
         </div>
         <div class="hero__trust">
           <TrustBar />
         </div>
       </div>
 
-      <div class="hero__visual" aria-label="Ejemplo de borrador que recibes antes de cada presentación">
+      <div class="hero__visual" aria-label="Ejemplo del resumen del papel de trabajo que recibes antes de cada presentación">
         <NextDeadline />
         <div class="draft-card">
           <div class="draft-card__head">
             <span class="badge">Ejemplo</span>
-            <span class="small muted">Borrador · 3.er trimestre</span>
+            <span class="small muted">Papel de trabajo · 3.er trimestre</span>
           </div>
           <dl class="draft-card__rows">
+            <div><dt>Facturas revisadas</dt><dd>46 emitidas · 118 recibidas</dd></div>
             <div><dt>IVA repercutido</dt><dd>3.150,00 €</dd></div>
             <div><dt>IVA soportado deducible</dt><dd>− 1.237,65 €</dd></div>
             <div class="draft-card__total"><dt>Modelo 303 · a ingresar</dt><dd>1.912,35 €</dd></div>
             <div><dt>Modelo 130 · a ingresar</dt><dd>486,20 €</dd></div>
           </dl>
           <div class="draft-card__actions">
-            <span class="draft-card__btn"><Icon name="check" size={18} /> Aprobar y presentar</span>
-            <span class="small muted">o pregúntanos cualquier duda</span>
+            <span class="draft-card__btn"><Icon name="check" size={18} /> Aprobar el borrador</span>
+            <span class="small muted">2 incidencias explicadas en el papel de trabajo</span>
           </div>
         </div>
       </div>
@@ -75,7 +74,7 @@ const lead = site.team[0];
         <h2>Solo impuestos periódicos. Y los hacemos muy bien.</h2>
         <p class="lead">
           Nos especializamos en los modelos que todo autónomo y pequeña empresa tiene que presentar cada trimestre. Al centrarnos en
-          ellos, podemos automatizar el trabajo, cobrar menos y no fallar un plazo.
+          ellos, podemos revisarlos a fondo, documentar cada cálculo y no fallar un plazo.
         </p>
       </div>
       <div class="grid grid-3">
@@ -100,8 +99,8 @@ const lead = site.team[0];
         }
       </div>
       <p class="mt-2">
-        ¿Solo necesitas presentar un modelo concreto? <a href="/precios/#modelos-sueltos">Consulta los precios de modelos sueltos</a>, sin
-        suscripción.
+        ¿Necesitas presentar un modelo concreto o regularizar trimestres atrasados?
+        <a href="/contacto/?motivo=suelto">Cuéntanos tu caso</a> y te enviamos una propuesta.
       </p>
     </div>
   </section>
@@ -119,18 +118,20 @@ const lead = site.team[0];
     </div>
   </section>
 
-  <!-- PRECIOS -->
-  <section class="section" id="precios">
+  <!-- MÉTODO Y HONORARIOS -->
+  <section class="section" id="metodo">
     <div class="container">
       <div class="section-head section-head--center">
-        <span class="eyebrow">Precios</span>
-        <h2>Tarifa plana, sin letra pequeña</h2>
-        <p class="lead">Elige el plan según los modelos que necesitas. Puedes cambiar de plan o darte de baja cuando quieras.</p>
+        <span class="eyebrow">Nuestro método</span>
+        <h2>Cada presentación, documentada y aprobada por ti</h2>
+        <p class="lead">
+          Trabajamos como un despacho: cada cálculo queda justificado por escrito y nada se presenta sin tu conformidad.
+        </p>
       </div>
-      <PricingCards showToggle={false} />
-      <p class="text-center mt-2">
-        <a class="btn btn--secondary" href="/precios/">Comparar planes, pago anual y modelos sueltos</a>
-      </p>
+      <Deliverables />
+      <div class="mt-2">
+        <FeesNote />
+      </div>
     </div>
   </section>
 
@@ -186,7 +187,7 @@ const lead = site.team[0];
         <ul class="check-list">
           <li>Eres autónomo en estimación directa o tienes una pequeña sociedad.</li>
           <li>Quieres olvidarte de los plazos trimestrales de Hacienda.</li>
-          <li>Prefieres un precio cerrado a pagar por horas.</li>
+          <li>Valoras un trabajo documentado y revisado, con honorarios cerrados por escrito.</li>
           <li>Te basta con que todo sea online, con un asesor que te atienda cuando lo necesites.</li>
         </ul>
       </div>

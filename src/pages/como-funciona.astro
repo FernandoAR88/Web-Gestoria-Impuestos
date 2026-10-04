@@ -4,18 +4,20 @@ import PageHero from '../components/PageHero.astro';
 import Steps from '../components/Steps.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
+import Deliverables from '../components/Deliverables.astro';
+import FeesNote from '../components/FeesNote.astro';
 import { site } from '../config/site';
 ---
 
 <BaseLayout
-  title="Cómo funciona nuestra asesoría fiscal online"
-  description="Te das de alta online, nos envías tus facturas, revisas el borrador y presentamos tus impuestos en plazo. Así trabajamos, paso a paso."
+  title="Cómo trabajamos: papel de trabajo, borrador y aprobación"
+  description="Nos envías tus facturas, te entregamos el papel de trabajo y el borrador para tu aprobación y presentamos tus impuestos en plazo. Así trabajamos."
 >
   <PageHero
-    eyebrow="Cómo funciona"
+    eyebrow="Cómo trabajamos"
     title="Así trabajamos contigo cada trimestre"
-    lead="Un proceso sencillo y siempre igual, para que sepas en todo momento qué toca, qué falta y cuánto vas a pagar."
-    crumbs={[{ label: 'Cómo funciona' }]}
+    lead="Un proceso riguroso y siempre igual: sabrás en todo momento qué toca, qué falta y cuánto vas a pagar a Hacienda, con cada cálculo documentado."
+    crumbs={[{ label: 'Cómo trabajamos' }]}
   />
 
   <section class="section">
@@ -29,7 +31,7 @@ import { site } from '../config/site';
       <div class="prose">
         <h2 class="mt-0">1. Alta y autorización</h2>
         <p>
-          Eliges plan y rellenas un formulario con tus datos y tu actividad. Te enviamos el contrato para firmarlo online y te pedimos tu
+          Tras una primera consulta te enviamos una propuesta de honorarios por escrito. Al aceptarla, firmas el encargo online y te pedimos tu
           documento de identidad, porque la ley de prevención del blanqueo de capitales nos obliga a identificar a nuestros clientes.
         </p>
         <p>
@@ -52,20 +54,25 @@ import { site } from '../config/site';
         </p>
       </div>
       <div class="prose">
-        <h2 class="mt-0">3. Revisión y borrador</h2>
+        <h2 class="mt-0">3. Papel de trabajo y borrador</h2>
         <p>
           Clasificamos tus facturas, comprobamos que cumplen los requisitos y calculamos cada modelo. Un asesor revisa el resultado y te
-          enviamos un borrador con:
+          enviamos dos documentos:
         </p>
         <ul>
-          <li>El importe de cada modelo: a ingresar, a compensar o a devolver.</li>
-          <li>Las facturas que hemos descartado o que necesitan corrección, y por qué.</li>
-          <li>La fecha en la que se cargará el pago si lo domicilias.</li>
+          <li>
+            <strong>El papel de trabajo</strong>: el detalle del cálculo factura a factura, las facturas descartadas o que necesitan
+            corrección y por qué, y los ajustes aplicados.
+          </li>
+          <li>
+            <strong>El borrador de cada modelo</strong>: el importe a ingresar, a compensar o a devolver, y la fecha de cargo si lo
+            domicilias.
+          </li>
         </ul>
 
         <h2>4. Presentación y justificante</h2>
         <p>
-          Cuando nos das el visto bueno, presentamos los modelos y te enviamos el justificante oficial con su código seguro de verificación
+          Cuando nos das tu conformidad por escrito, presentamos los modelos y te enviamos el justificante oficial con su código seguro de verificación
           (CSV). Todo queda archivado en tu área durante el tiempo que exige la ley.
         </p>
         <div class="notice">
@@ -79,6 +86,16 @@ import { site } from '../config/site';
   </section>
 
   <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">En cada presentación</span>
+        <h2>Lo que recibes</h2>
+      </div>
+      <Deliverables />
+    </div>
+  </section>
+
+  <section class="section section--soft">
     <div class="container">
       <div class="section-head">
         <h2>Qué necesitas para empezar</h2>
@@ -100,6 +117,12 @@ import { site } from '../config/site';
           <p class="muted">Para firmar el apoderamiento en la Agencia Tributaria. Si no lo tienes, te ayudamos a conseguirlo.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <FeesNote />
     </div>
   </section>
 

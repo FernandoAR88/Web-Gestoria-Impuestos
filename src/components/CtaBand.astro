@@ -8,7 +8,7 @@ interface Props {
 }
 const {
   title = '¿Hablamos de tus impuestos?',
-  text = 'Cuéntanos tu caso y te decimos qué modelos tienes que presentar y qué plan te encaja. Sin compromiso.',
+  text = 'Cuéntanos tu caso y te enviamos una propuesta con los modelos que necesitas y sus honorarios, por escrito y sin compromiso.',
 } = Astro.props;
 ---
 
@@ -19,7 +19,7 @@ const {
       <p>{text}</p>
     </div>
     <div class="btn-row">
-      <a class="btn btn--gold" href="/contacto/">Pedir información</a>
+      <a class="btn btn--gold" href="/contacto/?motivo=propuesta">Solicitar propuesta</a>
       <a class="btn btn--light" href={whatsappUrl()} rel="noopener">
         <Icon name="whatsapp" size={20} /> WhatsApp
       </a>

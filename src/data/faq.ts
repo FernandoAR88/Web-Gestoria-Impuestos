@@ -1,4 +1,4 @@
-export type Faq = { q: string; a: string; group: 'servicio' | 'precios' | 'seguridad' | 'impuestos' };
+export type Faq = { q: string; a: string; group: 'servicio' | 'honorarios' | 'seguridad' | 'impuestos' };
 
 export const faqs: Faq[] = [
   {
@@ -9,7 +9,7 @@ export const faqs: Faq[] = [
   {
     group: 'servicio',
     q: '¿Presentáis algo sin que yo lo vea antes?',
-    a: 'No. Antes de cada presentación te enviamos el borrador con el resultado (a pagar, a compensar o a devolver) y solo lo presentamos cuando nos das el visto bueno. Después recibes el justificante oficial de la AEAT.',
+    a: 'No. Antes de cada presentación te enviamos el papel de trabajo con el detalle del cálculo y el borrador con el resultado (a pagar, a compensar o a devolver), y solo lo presentamos con tu conformidad. Después recibes el justificante oficial de la AEAT.',
   },
   {
     group: 'servicio',
@@ -27,22 +27,22 @@ export const faqs: Faq[] = [
     a: 'Sí, de todo el territorio común. No llevamos de momento País Vasco y Navarra (régimen foral) ni Canarias, Ceuta y Melilla, que no tributan por IVA.',
   },
   {
-    group: 'precios',
+    group: 'honorarios',
+    q: '¿Cuánto cuestan vuestros servicios?',
+    a: 'Depende de los modelos que necesites y del volumen de documentación. Tras una primera consulta sin compromiso te enviamos una propuesta de honorarios cerrada y por escrito, antes de empezar ningún trabajo.',
+  },
+  {
+    group: 'honorarios',
+    q: '¿Qué incluyen los honorarios?',
+    a: 'El proceso completo de cada modelo: revisión de la documentación, papel de trabajo con el detalle del cálculo, borrador para tu aprobación, presentación en plazo, justificante oficial y archivo. Cualquier trabajo adicional se presupuesta antes.',
+  },
+  {
+    group: 'honorarios',
     q: '¿Hay permanencia?',
-    a: 'No. Puedes darte de baja cuando quieras desde tu área o por email. La baja es efectiva al final del mes en curso y te entregamos toda tu documentación.',
+    a: 'No. Puedes dar por terminado el encargo cuando quieras por escrito. Te entregamos toda tu documentación y te ayudamos a revocar la autorización ante la Agencia Tributaria.',
   },
   {
-    group: 'precios',
-    q: '¿Los precios llevan IVA?',
-    a: 'Los precios se indican sin IVA, como es habitual en servicios para profesionales. Junto a cada precio mostramos también el total con el 21 % de IVA, que como autónomo normalmente podrás deducirte.',
-  },
-  {
-    group: 'precios',
-    q: '¿Qué pasa si un trimestre tengo más facturas de las incluidas?',
-    a: 'Te avisamos antes y se suman 5 € al mes por cada bloque de 50 facturas adicionales. Si te ocurre a menudo, te propondremos el plan que mejor encaje.',
-  },
-  {
-    group: 'precios',
+    group: 'honorarios',
     q: '¿Y si os equivocáis vosotros?',
     a: 'Si un modelo se presenta fuera de plazo o con un error imputable a nosotros, corregimos la declaración sin coste y asumimos el recargo o la sanción correspondiente.',
   },

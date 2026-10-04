@@ -42,4 +42,4 @@ En enero se presenta el **modelo 190**, con el detalle de cada perceptor (NIF, i
 
 ---
 
-En los planes Completo y Plus presentamos tu 111 cada trimestre y preparamos el 190 cuadrado al céntimo.
+Si nos lo encargas, presentamos tu 111 cada trimestre y preparamos el 190 cuadrado al céntimo.

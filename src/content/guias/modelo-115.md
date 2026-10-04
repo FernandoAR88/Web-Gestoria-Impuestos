@@ -41,4 +41,4 @@ En enero se presenta el **modelo 180**, con el total anual retenido a cada propi
 
 ---
 
-En los planes Completo y Plus presentamos tu 115 y tu 180, y revisamos tu contrato para confirmar si hay que retener.
+Si nos lo encargas, presentamos tu 115 y tu 180 y revisamos tu contrato para confirmar si hay que retener.

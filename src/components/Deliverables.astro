@@ -1,0 +1,55 @@
+---
+import Icon, { type IconName } from './Icon.astro';
+
+// Lo que recibe el cliente en cada presentación: el método de trabajo del despacho.
+const items: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: 'file',
+    title: 'Papel de trabajo',
+    text: 'El detalle del cálculo, factura a factura: bases, cuotas, IVA deducible, retenciones y ajustes, con las incidencias señaladas y explicadas.',
+  },
+  {
+    icon: 'eye',
+    title: 'Borrador del modelo',
+    text: 'La declaración tal y como se presentará, con su resultado: a ingresar, a compensar o a devolver, y la fecha de cargo si se domicilia.',
+  },
+  {
+    icon: 'check',
+    title: 'Tu aprobación',
+    text: 'Revisas la documentación, nos preguntas lo que necesites y das tu conformidad por escrito. Sin ella, no se presenta nada.',
+  },
+  {
+    icon: 'shield',
+    title: 'Justificante y archivo',
+    text: 'Presentamos en plazo y te entregamos el justificante oficial de la Agencia Tributaria. Todo queda archivado y a tu disposición.',
+  },
+];
+---
+
+<ol class="deliverables">
+  {
+    items.map((i) => (
+      <li class="card deliverable">
+        <div class="icon-badge icon-badge--green">
+          <Icon name={i.icon} />
+        </div>
+        <h3>{i.title}</h3>
+        <p class="muted">{i.text}</p>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .deliverables {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 1.5rem;
+  }
+  .deliverable {
+    min-width: 0;
+  }
+</style>

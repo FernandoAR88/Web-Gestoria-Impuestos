@@ -5,7 +5,7 @@ import Icon, { type IconName } from './Icon.astro';
 // Solo se muestran afirmaciones verificables y activadas en la configuración.
 const items: { icon: IconName; text: string }[] = [
   site.guarantees.noPermanence && { icon: 'refresh' as IconName, text: 'Sin permanencia' },
-  { icon: 'euro' as IconName, text: 'Precio cerrado y público' },
+  { icon: 'file' as IconName, text: 'Papel de trabajo en cada presentación' },
   site.guarantees.approvalBeforeFiling && { icon: 'eye' as IconName, text: 'Nada se presenta sin tu visto bueno' },
   { icon: 'lock' as IconName, text: 'Datos cifrados en la UE' },
   site.credentials.colaboradorSocialAEAT && { icon: 'shield' as IconName, text: 'Colaboradores sociales de la AEAT' },

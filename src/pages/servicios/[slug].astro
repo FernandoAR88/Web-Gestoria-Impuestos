@@ -5,7 +5,8 @@ import CtaBand from '../../components/CtaBand.astro';
 import FaqList from '../../components/FaqList.astro';
 import Icon from '../../components/Icon.astro';
 import { services, type Service } from '../../data/services';
-import { singleModels, plans, eur } from '../../data/pricing';
+import Deliverables from '../../components/Deliverables.astro';
+import FeesNote from '../../components/FeesNote.astro';
 import type { Faq } from '../../data/faq';
 
 export function getStaticPaths() {
@@ -24,8 +25,8 @@ type Extra = {
   forWhom: string[];
   weDo: string[];
   youDo: string[];
-  planIds: string[];
-  planNote?: string;
+  /** Valor del parámetro ?servicio= del formulario de contacto. */
+  formValue: string;
   guide?: { href: string; label: string }[];
   faqs: Faq[];
 };
@@ -46,13 +47,12 @@ const extra: Record<string, Extra> = {
     weDo: [
       'Revisamos tus facturas emitidas y recibidas y detectamos errores.',
       'Calculamos el IVA repercutido y el soportado deducible.',
-      'Te enviamos el borrador con el resultado: a ingresar, a compensar o a devolver.',
+      'Te enviamos el papel de trabajo con el detalle del cálculo y el borrador con el resultado: a ingresar, a compensar o a devolver.',
       'Presentamos el modelo y, si quieres, domiciliamos el pago.',
       'Preparamos los resúmenes anuales (390 y 347) con los datos de todo el año.',
     ],
-    youDo: ['Subir tus facturas del trimestre.', 'Aprobar el borrador.'],
-    planIds: ['esencial', 'completo', 'plus'],
-    planNote: 'El plan Esencial incluye los modelos 303 y 390. Los modelos 349 y 347 están incluidos a partir del plan Completo.',
+    youDo: ['Subir tus facturas del trimestre.', 'Revisar el papel de trabajo y aprobar el borrador.'],
+    formValue: 'iva',
     guide: [{ href: '/guias/modelo-303/', label: 'Guía del modelo 303' }],
     faqs: [
       {
@@ -86,7 +86,7 @@ const extra: Record<string, Extra> = {
       'Preparamos los resúmenes anuales 190 y 180 cuadrados con los trimestres.',
     ],
     youDo: ['Subir las facturas de profesionales y los recibos del alquiler.', 'Si tienes trabajadores, enviarnos las nóminas o el resumen de tu gestor laboral.'],
-    planIds: ['completo', 'plus'],
+    formValue: 'retenciones',
     guide: [
       { href: '/guias/modelo-111/', label: 'Guía del modelo 111' },
       { href: '/guias/modelo-115/', label: 'Guía del modelo 115' },
@@ -123,8 +123,7 @@ const extra: Record<string, Extra> = {
       'Preparamos tu declaración de la renta con tu actividad y tus demás rentas.',
     ],
     youDo: ['Subir tus facturas y gastos.', 'En la renta, darnos acceso a tus datos fiscales y contarnos los cambios personales del año.'],
-    planIds: ['esencial', 'completo', 'plus'],
-    planNote: 'La declaración de la renta está incluida en los planes Completo y Plus; con el plan Esencial cuesta 59 € + IVA.',
+    formValue: 'irpf',
     guide: [{ href: '/guias/modelo-130/', label: 'Guía del modelo 130' }],
     faqs: [
       {
@@ -142,8 +141,6 @@ const extra: Record<string, Extra> = {
 };
 
 const e = extra[service.slug];
-const related = singleModels.filter((m) => service.models.some((sm) => m.code === sm.code));
-const relevantPlans = plans.filter((p) => e.planIds.includes(p.id));
 ---
 
 <BaseLayout title={e.seoTitle} description={e.lead}>
@@ -154,8 +151,8 @@ const relevantPlans = plans.filter((p) => e.planIds.includes(p.id));
     crumbs={[{ href: '/servicios/', label: 'Servicios' }, { label: service.title }]}
   >
     <div class="btn-row mt-2">
-      <a class="btn btn--primary" href="/precios/">Ver planes</a>
-      <a class="btn btn--secondary" href={`/contacto/?motivo=info`}>Consultar mi caso</a>
+      <a class="btn btn--primary" href={`/contacto/?motivo=propuesta&servicio=${e.formValue}`}>Solicitar propuesta</a>
+      <a class="btn btn--secondary" href="/como-funciona/">Cómo trabajamos</a>
     </div>
   </PageHero>
 
@@ -223,38 +220,13 @@ const relevantPlans = plans.filter((p) => e.planIds.includes(p.id));
   <section class="section">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Precio</span>
-        <h2>Cuánto cuesta</h2>
-        <p class="lead">Incluido en los planes {relevantPlans.map((p) => p.name).join(', ').replace(/, ([^,]*)$/, ' y $1')}, o por presentación si lo prefieres.</p>
-        {e.planNote && <p class="muted">{e.planNote}</p>}
+        <span class="eyebrow">En cada presentación</span>
+        <h2>Lo que recibes</h2>
       </div>
-      <div class="grid grid-3">
-        {
-          relevantPlans.map((p) => (
-            <a class:list={['card', 'mini-plan', { 'mini-plan--hl': p.highlighted }]} href={`/contacto/?motivo=alta&plan=${p.id}`}>
-              <h3>Plan {p.name}</h3>
-              <p class="mini-plan__price">
-                {eur(p.monthly)} <span>/mes + IVA</span>
-              </p>
-              <p class="small muted mb-0">{p.audience}</p>
-            </a>
-          ))
-        }
+      <Deliverables />
+      <div class="mt-2">
+        <FeesNote compact />
       </div>
-      {
-        related.length > 0 && (
-          <p class="mt-2">
-            Sin suscripción:{' '}
-            {related.map((m, i) => (
-              <>
-                {i > 0 && ' · '}
-                modelo {m.code} por <strong>{eur(m.price)}</strong> + IVA
-              </>
-            ))}
-            . <a href="/precios/#modelos-sueltos">Ver todos los modelos sueltos</a>.
-          </p>
-        )
-      }
     </div>
   </section>
 
@@ -303,23 +275,6 @@ const relevantPlans = plans.filter((p) => e.planIds.includes(p.id));
   }
   .h3-like {
     font-size: 1.3rem;
-  }
-  .mini-plan h3 {
-    margin-bottom: 0.2rem;
-  }
-  .mini-plan--hl {
-    border: 2px solid var(--gold-600);
-  }
-  .mini-plan__price {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: var(--navy-900);
-    margin-bottom: 0.4rem;
-  }
-  .mini-plan__price span {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--muted);
   }
   @media (max-width: 860px) {
     .svc__aside {

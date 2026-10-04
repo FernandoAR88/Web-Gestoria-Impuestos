@@ -52,4 +52,4 @@ Junto al 303 del cuarto trimestre, en enero se presenta el **modelo 390**, que r
 
 ---
 
-¿Prefieres no preocuparte? En nuestros planes preparamos tu 303 y tu 390, te enseñamos el resultado y lo presentamos en plazo.
+¿Prefieres no preocuparte? Preparamos tu 303 y tu 390 con su papel de trabajo, te enviamos el borrador para tu aprobación y lo presentamos en plazo.

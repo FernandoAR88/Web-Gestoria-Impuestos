@@ -15,7 +15,7 @@ export const site = {
   /** Descriptor que acompaña a la marca. Ver nota sobre "gestoría" en docs/ANALISIS.md §6. */
   descriptor: 'Asesoría fiscal online para autónomos y pymes',
   description:
-    'Presentamos tu IVA, tus retenciones y tu IRPF por un precio cerrado y sin permanencia. Asesoría fiscal 100 % online para autónomos y pymes de toda España.',
+    'Preparamos y presentamos tu IVA, tus retenciones y tu IRPF con papel de trabajo y borrador para tu aprobación. Asesoría fiscal online para autónomos y pymes.',
   locale: 'es_ES',
 
   /** Muestra una franja superior de "web en preparación". Ponlo a false al lanzar. */
@@ -29,8 +29,9 @@ export const site = {
     whatsapp: '+34600000000',
     hours: 'Lunes a jueves de 9:00 a 18:00 y viernes de 9:00 a 15:00',
     /** Horario reforzado en semanas de presentación trimestral. */
-    hoursPeak: 'Del 1 al 20 de enero, abril, julio y octubre: lunes a viernes de 9:00 a 19:00',
-    responseTime: '24 horas laborables',
+    hoursPeak: 'Del 1 al 20 de abril, julio y octubre y del 1 al 31 de enero: lunes a viernes de 9:00 a 19:00',
+    /** Compromiso de respuesta (se usa en toda la web: «en menos de …»). */
+    responseTime: '1 día laborable',
   },
 
   /** Datos obligatorios por la LSSI (art. 10). Deben coincidir con tu alta censal. */
@@ -38,9 +39,11 @@ export const site = {
     ownerName: '[RAZÓN SOCIAL O NOMBRE Y APELLIDOS DEL TITULAR]',
     taxId: '[NIF/CIF]',
     address: '[DOMICILIO FISCAL COMPLETO]',
-    registry: '[DATOS DEL REGISTRO MERCANTIL, si eres sociedad: tomo, folio, hoja]',
+    /** Solo sociedades. Pon null si eres autónomo y la línea desaparece del aviso legal. */
+    registry: '[DATOS DEL REGISTRO MERCANTIL, si eres sociedad: tomo, folio, hoja]' as string | null,
     /** Colegio o asociación profesional de los asesores (si aplica). */
-    professionalBody: '[COLEGIO / ASOCIACIÓN PROFESIONAL Y Nº DE COLEGIADO]',
+    /** Pon null si no perteneces a ningún colegio o asociación. */
+    professionalBody: '[COLEGIO / ASOCIACIÓN PROFESIONAL Y Nº DE COLEGIADO]' as string | null,
     insurer: '[ASEGURADORA DEL SEGURO DE RESPONSABILIDAD CIVIL PROFESIONAL]',
     dpoEmail: 'privacidad@example.com',
     /** Fecha de la última revisión de los textos legales. */
@@ -61,10 +64,39 @@ export const site = {
     yearsExperience: null as number | null,
   },
 
+  /**
+   * Medidas de seguridad realmente implantadas. Cada sello o frase de la web depende
+   * de estos valores: actívalos solo cuando sean ciertos (publicidad engañosa y RGPD).
+   */
+  security: {
+    /** Todos los proveedores (formulario, correo, documentos) guardan los datos en la UE. */
+    euDataOnly: false,
+    /** Los documentos se almacenan cifrados en reposo. */
+    encryptionAtRest: false,
+    /** Acceso con verificación en dos pasos y registro de accesos. */
+    twoFactor: false,
+    /** Copias de seguridad automáticas diarias. */
+    dailyBackups: false,
+  },
+
+  /** Canal real por el que el cliente envía su documentación (se muestra en «Cómo trabajamos»). */
+  documentChannel: '[CANAL DE DOCUMENTACIÓN: p. ej. una carpeta privada en un proveedor con servidores en la UE, con tu enlace personal]',
+
+  /** Primera consulta y propuesta de honorarios. */
+  firstConsultation: {
+    free: true,
+    minutes: 30,
+    /** Plazo comprometido para enviar la propuesta tras la consulta. */
+    proposalHours: 48,
+  },
+
   /** Garantías comerciales. Son compromisos contractuales: mantén solo las que vayas a cumplir. */
   guarantees: {
     noPermanence: true,
-    /** Si presentamos fuera de plazo por un error nuestro, pagamos el recargo o la sanción. */
+    /**
+     * Si presentamos fuera de plazo por un error nuestro, pagamos el recargo o la sanción.
+     * Solo se muestra si además credentials.seguroRC es true (ver showDeadlineGuarantee).
+     */
     deadlineGuarantee: true,
     /** Te enviamos el borrador con el importe y no presentamos nada sin tu aprobación. */
     approvalBeforeFiling: true,
@@ -106,14 +138,19 @@ export const site = {
 
 export const nav = [
   { href: '/servicios/', label: 'Servicios' },
-  { href: '/precios/', label: 'Precios' },
-  { href: '/como-funciona/', label: 'Cómo funciona' },
+  { href: '/como-funciona/', label: 'Cómo trabajamos' },
   { href: '/calendario-fiscal/', label: 'Calendario' },
   { href: '/guias/', label: 'Guías' },
   { href: '/quienes-somos/', label: 'Quiénes somos' },
 ];
 
-export const whatsappUrl = (text = 'Hola, quiero información sobre vuestros planes') =>
+/** La garantía de plazo solo se anuncia si hay seguro de responsabilidad civil que la respalde. */
+export const showDeadlineGuarantee = site.guarantees.deadlineGuarantee && site.credentials.seguroRC;
+
+/** Ancla de la ficha del fundador (autoría de las guías y datos estructurados). */
+export const founderAnchor = '/quienes-somos/#fernando-avila-rivero';
+
+export const whatsappUrl = (text = 'Hola, quiero información sobre vuestros servicios') =>
   `https://wa.me/${site.contact.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`;
 
 /** Devuelve las rutas de los campos que aún contienen [PENDIENTE] o ejemplos. */

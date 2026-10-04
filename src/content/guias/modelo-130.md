@@ -47,4 +47,4 @@ Del **1 al 20 de abril, julio y octubre**, y del **1 al 30 de enero** para el cu
 
 ---
 
-En todos nuestros planes calculamos tu 130 con tus ingresos y gastos, y te avisamos si te conviene revisar algo antes de la renta.
+Si nos lo encargas, calculamos tu 130 con tus ingresos y gastos, lo documentamos en el papel de trabajo y te avisamos si conviene revisar algo antes de la renta.

@@ -12,7 +12,7 @@ const year = new Date().getFullYear();
     <div class="site-footer__grid">
       <div class="site-footer__brand">
         <Logo inverted />
-        <p>{site.descriptor}. Precio cerrado, sin permanencia y sin presentar nada sin tu visto bueno.</p>
+        <p>{site.descriptor}. Papel de trabajo y borrador antes de cada presentación, y nada se presenta sin tu aprobación.</p>
         <ul class="site-footer__contact">
           <li><Icon name="phone" size={18} /><a href={`tel:${site.contact.phone}`}>{site.contact.phoneDisplay}</a></li>
           <li><Icon name="whatsapp" size={18} /><a href={whatsappUrl()} rel="noopener">WhatsApp</a></li>
@@ -25,15 +25,14 @@ const year = new Date().getFullYear();
         <h2>Servicios</h2>
         <ul>
           {services.map((s) => <li><a href={`/servicios/${s.slug}/`}>{s.title}</a></li>)}
-          <li><a href="/precios/">Precios</a></li>
-          <li><a href="/precios/#modelos-sueltos">Modelos sueltos</a></li>
+          <li><a href="/contacto/?motivo=propuesta">Solicitar propuesta</a></li>
         </ul>
       </nav>
 
       <nav aria-label="Recursos">
         <h2>Recursos</h2>
         <ul>
-          <li><a href="/como-funciona/">Cómo funciona</a></li>
+          <li><a href="/como-funciona/">Cómo trabajamos</a></li>
           <li><a href="/calendario-fiscal/">Calendario fiscal</a></li>
           <li><a href="/guias/">Guías</a></li>
           <li><a href="/preguntas-frecuentes/">Preguntas frecuentes</a></li>

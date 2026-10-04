@@ -1,0 +1,47 @@
+---
+import { site } from '../config/site';
+// Bloque de honorarios sin cifras: la propuesta se envía por escrito tras la primera consulta.
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<div class:list={['fees', { 'fees--compact': compact }]}>
+  <div>
+    <span class="eyebrow">Honorarios</span>
+    <h2 class="fees__title">Honorarios cerrados, por escrito y antes de empezar</h2>
+    <p class="mb-0">
+      Tras una primera consulta sin compromiso, te enviamos una propuesta con los modelos que necesitas y sus honorarios. Cualquier
+      trabajo adicional se presupuesta y solo se realiza si lo apruebas. {site.guarantees.noPermanence && 'Sin permanencia.'}
+    </p>
+  </div>
+  <a class="btn btn--primary" href="/contacto/?motivo=propuesta">Solicitar propuesta</a>
+</div>
+
+<style>
+  .fees {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem 2.5rem;
+    background: var(--paper);
+    border: 1px solid var(--gold-600);
+    outline: 1px solid var(--gold-600);
+    outline-offset: 5px;
+    border-radius: var(--radius-sm);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    margin: 6px;
+  }
+  .fees > div {
+    max-width: 680px;
+    min-width: 0;
+  }
+  .fees__title {
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  }
+  .fees--compact .fees__title {
+    font-size: 1.6rem;
+  }
+</style>
