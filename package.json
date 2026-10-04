@@ -11,6 +11,7 @@
     "verify": "node scripts/verify.mjs",
     "screenshots": "node scripts/screenshots.mjs",
     "preview:bundle": "node scripts/preview-bundle.mjs",
+    "og": "node scripts/og-image.mjs",
     "ejecucion": "astro build && node scripts/verify.mjs && node scripts/screenshots.mjs && node scripts/preview-bundle.mjs",
     "astro": "astro"
   },

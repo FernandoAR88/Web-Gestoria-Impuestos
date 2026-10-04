@@ -51,7 +51,8 @@ Web de **AR Fiscal**, asesoría fiscal 100 % online de Fernando Ávila Rivero, e
 ├── scripts/
 │   ├── verify.mjs            Verificación estática: enlaces, títulos, descripciones, H1
 │   ├── screenshots.mjs       Capturas en escritorio y móvil + errores JS y scroll lateral
-│   └── preview-bundle.mjs    Versión autocontenida para publicar como vista previa
+│   ├── preview-bundle.mjs    Versión autocontenida para publicar como vista previa
+│   └── og-image.mjs          Imagen para redes (public/og-default.png) con la marca y el precio
 ├── .claude/agents/
 │   ├── ejecucion-web.md      Agente de ejecución (compila, verifica, captura, empaqueta)
 │   └── revisor-especialista.md  Agente revisor (fiscal, legal, conversión, SEO)
@@ -69,6 +70,7 @@ npm run build          # genera la web en dist/
 npm run verify         # comprueba enlaces, títulos y descripciones
 npm run screenshots    # capturas y errores en navegador real (.preview/screenshots/)
 npm run ejecucion      # todo lo anterior + vista previa empaquetada
+npm run og             # regenera la imagen para redes si cambias marca o precios
 ```
 
 En un equipo nuevo, antes de las capturas: `npx playwright install chromium`.
