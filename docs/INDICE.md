@@ -1,6 +1,6 @@
 # Índice del proyecto · AR Fiscal
 
-Web de **AR Fiscal**, asesoría fiscal 100 % online de Fernando Ávila Rivero, especializada en los impuestos periódicos de autónomos y pymes: IVA, retenciones y pagos a cuenta del IRPF.
+Web de **AR Fiscal**, asesoría fiscal 100 % online, especializada en los impuestos periódicos de autónomos y pymes: IVA, retenciones y pagos a cuenta del IRPF.
 
 | Documento | Para qué sirve |
 | --- | --- |
@@ -55,7 +55,8 @@ Web de **AR Fiscal**, asesoría fiscal 100 % online de Fernando Ávila Rivero, e
 │   └── og-image.mjs          Imagen para redes (public/og-default.png) con la marca y el precio
 ├── .claude/agents/
 │   ├── ejecucion-web.md      Agente de ejecución (compila, verifica, captura, empaqueta)
-│   └── revisor-especialista.md  Agente revisor (fiscal, legal, conversión, SEO)
+│   ├── revisor-especialista.md  Agente revisor (fiscal, legal, conversión, SEO)
+│   └── auditor-web.md        Auditor web externo (navegación, formularios, rendimiento, SEO, seguridad)
 └── docs/                     Esta documentación
 ```
 
@@ -90,6 +91,7 @@ En un equipo nuevo, antes de las capturas: `npx playwright install chromium`.
 ## 4. Agentes
 
 - **Agente de ejecución** (`ejecucion-web`): tras cada cambio compila, verifica, recorre la web en escritorio y móvil, guarda capturas y prepara la vista previa. Devuelve un informe de estado.
+- **Auditor web externo** (`auditor-web`): desarrollador senior independiente; recorre la web pulsando cada enlace y botón (`npm run auditoria`), revisa adónde llegan los datos del formulario, rendimiento, SEO, accesibilidad y seguridad, y deja su informe en `docs/AUDITORIA-WEB.md`.
 - **Agente revisor especialista** (`revisor-especialista`): actúa como asesor fiscal, abogado de derecho digital, experto en conversión y experto en SEO; deja sus hallazgos priorizados en `docs/REVISION.md`.
 
 Ambos se pueden invocar desde Claude Code pidiéndolo por su nombre (por ejemplo: «usa el agente revisor-especialista»).

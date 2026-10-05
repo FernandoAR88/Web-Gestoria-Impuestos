@@ -1,6 +1,6 @@
 # AR Fiscal · Web
 
-Web de **AR Fiscal**, asesoría fiscal 100 % online de Fernando Ávila Rivero para autónomos y pymes: IVA, retenciones y pagos a cuenta del IRPF por un precio cerrado y sin permanencia.
+Web de **AR Fiscal**, asesoría fiscal 100 % online para autónomos y pymes: IVA, retenciones y pagos a cuenta del IRPF por un.
 
 Construida con [Astro](https://astro.build) como sitio estático: rápida, segura, sin cookies de terceros y fácil de alojar gratis.
 

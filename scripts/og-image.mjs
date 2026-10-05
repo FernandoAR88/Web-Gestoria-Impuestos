@@ -40,7 +40,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><style>${fonts}
   <div class="brand"><svg width="84" height="84" viewBox="0 0 40 40"><rect width="40" height="40" rx="3" fill="#1e3354"/>
     <rect x="3" y="3" width="34" height="34" rx="1.5" fill="none" stroke="#cdb07a" stroke-width="0.8"/>
     <text x="20" y="26.6" text-anchor="middle" fill="#cdb07a" font-family="Cormorant Garamond" font-weight="700" font-size="19">AR</text></svg>
-    <div><div class="name">${brand.replace(/^(\S+)\s(.*)$/, '$1 <span>$2</span>')}</div><div class="sub">Asesoría fiscal · Ávila Rivero</div></div></div>
+    <div><div class="name">${brand.replace(/^(\S+)\s(.*)$/, '$1 <span>$2</span>')}</div><div class="sub">Asesoría fiscal online</div></div></div>
   <div><div class="rule"></div><h1>${tagline}. IVA, retenciones e IRPF de autónomos y pymes.</h1></div>
   <div class="foot"><span><b>Papel de trabajo</b> y borrador antes de presentar</span><span>100 % online</span></div>
 </div></body></html>`;

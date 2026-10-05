@@ -7,10 +7,8 @@
  */
 
 export const site = {
-  /** Marca comercial: AR = Ávila Rivero. Pendiente de comprobar y registrar en la OEPM. */
+  /** Marca comercial. Pendiente de comprobar y registrar en la OEPM. */
   name: 'AR Fiscal',
-  /** Persona fundadora: dar la cara genera confianza y autoridad (E-E-A-T en Google). */
-  founder: 'Fernando Ávila Rivero',
   tagline: 'Tus impuestos, siempre al día',
   /** Descriptor que acompaña a la marca. Ver nota sobre "gestoría" en docs/ANALISIS.md §6. */
   descriptor: 'Asesoría fiscal online para autónomos y pymes',

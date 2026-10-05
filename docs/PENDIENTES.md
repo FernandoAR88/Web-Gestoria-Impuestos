@@ -9,7 +9,6 @@ Marca cada casilla al completarla. El build avisa por consola de los datos de `s
 - [ ] Colegio o asociación profesional y número (si aplica)
 - [ ] Email, teléfono y WhatsApp reales (`site.contact`)
 - [ ] Email de privacidad (`site.legal.dpoEmail`)
-- [ ] Titulación, credenciales y biografía de Fernando Ávila Rivero (`site.team`)
 - [ ] Foto profesional del equipo (sustituye al icono de usuario)
 - [ ] Dominio definitivo en `astro.config.mjs` (`site`)
 - [ ] Quitar la franja de «web en preparación» (`site.preLaunch = false`)

@@ -9,7 +9,6 @@ import { join } from 'node:path';
  *   hero.jpg       Portada: despacho, reunión o persona trabajando
  *   despacho.jpg   Banda intermedia de la portada
  *   cabecera.jpg   Fondo de las cabeceras de las páginas interiores
- *   fernando.jpg   Retrato del fundador (vertical, ≥ 800 px)
  */
 export function photo(name: string): string | null {
   return existsSync(join(process.cwd(), 'public', 'img', `${name}.jpg`)) ? `/img/${name}.jpg` : null;

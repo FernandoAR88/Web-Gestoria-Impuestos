@@ -6,7 +6,7 @@ Documento de decisiones: qué vendemos, a quién, con qué tecnología, a qué p
 
 ## 1. Enfoque del negocio
 
-**Qué es.** Una asesoría fiscal 100 % online, con marca **AR Fiscal** (Ávila Rivero) y su fundador, Fernando Ávila Rivero, como cara visible.
+**Qué es.** Una asesoría fiscal 100 % online, con marca **AR Fiscal**.
 
 **Qué vende.** Solo impuestos periódicos sencillos y automatizables:
 
@@ -148,7 +148,7 @@ Si el ingreso por hora de Completo baja de 40 € con clientes reales, hay que a
 
 **Lo que más confianza añadiría (pendiente de material real)**
 
-1. Foto profesional y vídeo de 60 segundos de Fernando explicando cómo trabaja.
+1. Vídeo corto de presentación del despacho.
 2. Reseñas verificadas (perfil de Google y Trustpilot) desde los primeros clientes.
 3. Sellos reales: colaborador social de la AEAT, asociación profesional y seguro de RC.
 4. Casos reales anonimizados, con permiso del cliente.
@@ -163,7 +163,7 @@ Si el ingreso por hora de Completo baja de 40 € con clientes reales, hay que a
 | Transaccional | presentar modelo 303 online, alta autónomo online | Servicios y modelos sueltos |
 
 - **Calendario editorial**: publicar y actualizar guías antes de cada pico (marzo, junio, septiembre y diciembre para los trimestrales; diciembre y enero para 390, 190, 180 y 347; marzo y abril para la renta).
-- **E-E-A-T**: guías firmadas por Fernando Ávila Rivero con fecha de actualización; falta una ficha de autor con credenciales.
+- **E-E-A-T**: guías firmadas por AR Fiscal con fecha de actualización.
 - **Marca personal**: LinkedIn e Instagram del fundador con consejos de plazo; avisos por email a la lista.
 - **Imanes de captación**: calculadora de IVA y de pago fraccionado, calendario descargable, plantilla de factura.
 - **Técnico**: sitemap, robots, canónicas, datos estructurados y velocidad ya resueltos. Al lanzar: Google Search Console y analítica sin cookies con servidores en la UE.
