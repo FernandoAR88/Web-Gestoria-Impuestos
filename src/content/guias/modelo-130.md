@@ -3,6 +3,7 @@ title: 'Modelo 130: el pago fraccionado del IRPF del autónomo'
 description: 'Cómo se calcula el modelo 130, quién está exento, plazos y un ejemplo trimestre a trimestre para autónomos en estimación directa.'
 updated: '2026-10-04'
 models: ['130']
+service: 'irpf-autonomos'
 order: 4
 ---
 

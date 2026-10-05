@@ -11,6 +11,8 @@ const guias = defineCollection({
     updated: z.string(),
     models: z.array(z.string()).default([]),
     order: z.number().default(99),
+    /** Servicio relacionado (slug de /servicios/). */
+    service: z.string().optional(),
   }),
 });
 

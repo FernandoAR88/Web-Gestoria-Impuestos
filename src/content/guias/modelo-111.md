@@ -3,6 +3,7 @@ title: 'Modelo 111: retenciones de profesionales y trabajadores'
 description: 'Qué es el modelo 111, cuándo tienes que presentarlo si pagas a profesionales o tienes empleados, plazos, ejemplo y relación con el resumen anual 190.'
 updated: '2026-10-04'
 models: ['111', '190']
+service: 'retenciones'
 order: 2
 ---
 

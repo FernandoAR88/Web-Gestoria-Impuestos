@@ -3,6 +3,7 @@ title: 'Verifactu en 2027: qué cambia en tu facturación y cuándo'
 description: 'Fechas definitivas de Verifactu tras el Real Decreto-ley 15/2025, a quién afecta, qué tiene que cumplir tu programa de facturación y cómo prepararte.'
 updated: '2026-10-04'
 models: []
+service: 'iva'
 order: 5
 ---
 

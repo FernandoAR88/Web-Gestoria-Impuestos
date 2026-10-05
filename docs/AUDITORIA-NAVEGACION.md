@@ -1,6 +1,6 @@
 # Auditoría de navegación
 
-Generado: 5/10/2026, 7:26:11 · 23 páginas · 194 enlaces de contenido revisados
+Generado: 5/10/2026, 13:08:53 · 23 páginas · 205 enlaces de contenido revisados
 
 ## Resumen: 0 errores · 0 avisos
 
@@ -87,9 +87,16 @@ Generado: 5/10/2026, 7:26:11 · 23 páginas · 194 enlaces de contenido revisado
 | escríbenos → página /contacto/ | 5 páginas |
 | glass building → web externa www.flickr.com | /aviso-legal/ |
 | hola@example.com → email a hola@example.com | 5 páginas |
+| irpf del autónomo → página /servicios/irpf-autonomos/ | /guias/modelo-130/ |
 | overhang of 80s office building, port huron → web externa www.flickr.com | /aviso-legal/ |
 | política de privacidad → página /privacidad/ | /condiciones/, /contacto/, /seguridad/ |
+| presentación del IVA → página /servicios/iva/ | /guias/modelo-303/, /guias/verifactu-2027/ |
 | privacidad@example.com → email a privacidad@example.com | /cookies/, /privacidad/, /seguridad/ |
+| protección de datos → página /privacidad/ | /contacto/ |
+| retenciones → página /servicios/retenciones/ | /guias/modelo-111/, /guias/modelo-115/ |
+| solicita una propuesta → página /contacto/?motivo=propuesta&servicio=irpf | /guias/modelo-130/ |
+| solicita una propuesta → página /contacto/?motivo=propuesta&servicio=iva | /guias/modelo-303/, /guias/verifactu-2027/ |
+| solicita una propuesta → página /contacto/?motivo=propuesta&servicio=retenciones | /guias/modelo-111/, /guias/modelo-115/ |
 | www.aepd.es → web externa www.aepd.es | /privacidad/ |
 
 ## Accesibilidad (axe-core, WCAG 2.2 AA)

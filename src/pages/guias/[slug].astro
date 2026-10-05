@@ -5,6 +5,7 @@ import PageHero from '../../components/PageHero.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { formatDate } from '../../data/calendar';
 import { site } from '../../config/site';
+import { services } from '../../data/services';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guias');
@@ -16,6 +17,7 @@ interface Props {
 }
 const { guide } = Astro.props;
 const { Content } = await render(guide);
+const related = services.find((s) => s.slug === guide.data.service);
 
 const articleLd = {
   '@context': 'https://schema.org',
@@ -39,6 +41,17 @@ const articleLd = {
     <div class="container">
       <article class="prose">
         <Content />
+        {
+          related && (
+            <aside class="notice mt-2">
+              <p>
+                <strong>¿Prefieres que lo hagamos nosotros?</strong> Consulta nuestro servicio de{' '}
+                <a href={`/servicios/${related.slug}/`}>{related.title === 'IVA' ? 'presentación del IVA' : related.title.toLowerCase()}</a> o{' '}
+                <a href={`/contacto/?motivo=propuesta&servicio=${related.slug === 'irpf-autonomos' ? 'irpf' : related.slug}`}>solicita una propuesta</a>.
+              </p>
+            </aside>
+          )
+        }
         <p class="small muted mt-2">
           Esta guía es informativa y no sustituye el asesoramiento sobre tu caso concreto. Para consultas sobre tu situación, <a href="/contacto/">escríbenos</a>.
         </p>

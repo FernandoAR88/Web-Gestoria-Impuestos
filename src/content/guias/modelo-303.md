@@ -3,6 +3,7 @@ title: 'Modelo 303: qué es, plazos y cómo calcular el IVA'
 description: 'Guía práctica del modelo 303 para autónomos y pymes: quién lo presenta, plazos, cómo se calcula, qué hacer si sale a devolver y errores habituales.'
 updated: '2026-10-04'
 models: ['303', '390']
+service: 'iva'
 order: 1
 ---
 

@@ -27,9 +27,9 @@ for (const [nombre, ids] of Object.entries(FOTOS)) {
       const res = await fetch(`https://unsplash.com/photos/${id}/download?force=true`, { redirect: 'follow' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const buf = Buffer.from(await res.arrayBuffer());
-      const jpg = await sharp(buf).resize({ width: 2000, withoutEnlargement: true }).jpeg({ quality: 76, mozjpeg: true }).toBuffer();
-      await writeFile(`public/img/${nombre}.jpg`, jpg);
-      console.log(`✓ ${nombre}.jpg  ←  https://unsplash.com/photos/${id}  (${Math.round(jpg.length / 1024)} KB)`);
+      const jpg = await sharp(buf).resize({ width: 2000, withoutEnlargement: true }).webp({ quality: 72 }).toBuffer();
+      await writeFile(`public/img/${nombre}.webp`, jpg);
+      console.log(`✓ ${nombre}.webp  ←  https://unsplash.com/photos/${id}  (${Math.round(jpg.length / 1024)} KB)`);
       ok = true;
       break;
     } catch (e) {

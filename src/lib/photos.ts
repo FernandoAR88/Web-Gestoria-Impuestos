@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 /**
- * Fotos corporativas opcionales en public/img/ (formato .jpg, horizontal, ≥ 1920 px).
+ * Fotos corporativas opcionales en public/img/ (.webp o .jpg, horizontal, ≥ 1920 px).
  * Si la foto existe se usa; si no, la web muestra un fondo de «raya diplomática»
  * azul tinta y oro. Así puedes ir añadiendo fotos sin tocar el código.
  *
@@ -11,7 +11,11 @@ import { join } from 'node:path';
  *   cabecera.jpg   Fondo de las cabeceras de las páginas interiores
  */
 export function photo(name: string): string | null {
-  return existsSync(join(process.cwd(), 'public', 'img', `${name}.jpg`)) ? `/img/${name}.jpg` : null;
+  // WebP primero (más ligero); JPEG como alternativa.
+  for (const ext of ['webp', 'jpg']) {
+    if (existsSync(join(process.cwd(), 'public', 'img', `${name}.${ext}`))) return `/img/${name}.${ext}`;
+  }
+  return null;
 }
 
 /** Variable CSS --photo lista para usar en un atributo style. */

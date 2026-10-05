@@ -82,7 +82,7 @@ const formAction = provider === 'netlify' ? successPath : action;
   <label class="checkbox">
     <input type="checkbox" name="acepta_privacidad" required />
     <span>
-      He leído y acepto la <a href="/privacidad/" target="_blank">política de privacidad</a>.
+      He leído la información sobre <a href="/privacidad/">protección de datos</a>.
     </span>
   </label>
 
@@ -94,7 +94,10 @@ const formAction = provider === 'netlify' ? successPath : action;
   </p>
 
   <button class="btn btn--primary" type="submit">Enviar consulta</button>
-  <p class="small muted">Te respondemos en menos de {site.contact.responseTime}.</p>
+  <p class="small muted">
+    Te respondemos en menos de {site.contact.responseTime}. Si el formulario no funcionara, escríbenos a{' '}
+    <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+  </p>
 </form>
 
 <script>

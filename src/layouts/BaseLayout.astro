@@ -6,6 +6,8 @@ import '@fontsource/source-sans-3/latin-400.css';
 import '@fontsource/source-sans-3/latin-600.css';
 import '@fontsource/source-sans-3/latin-700.css';
 import '../styles/global.css';
+import serifFont from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-normal.woff2?url';
+import sansFont from '@fontsource/source-sans-3/files/source-sans-3-latin-400-normal.woff2?url';
 import { site, pendingFields } from '../config/site';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -60,6 +62,8 @@ if (import.meta.env.PROD && !g.__pendingWarned) {
     <link rel="canonical" href={canonical} />
     {(noindex || site.preLaunch) && <meta name="robots" content={site.preLaunch ? 'noindex, nofollow' : 'noindex, follow'} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={serifFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={sansFont} as="font" type="font/woff2" crossorigin />
     <meta name="theme-color" content="#0e1a2e" />
 
     <meta property="og:type" content="website" />

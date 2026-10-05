@@ -1,6 +1,6 @@
 # AR Fiscal · Web
 
-Web de **AR Fiscal**, asesoría fiscal 100 % online para autónomos y pymes: IVA, retenciones y pagos a cuenta del IRPF por un.
+Web de **AR Fiscal**, asesoría fiscal 100 % online para autónomos y pymes: IVA, retenciones y pagos a cuenta del IRPF, con papel de trabajo y borrador para tu aprobación.
 
 Construida con [Astro](https://astro.build) como sitio estático: rápida, segura, sin cookies de terceros y fácil de alojar gratis.
 
@@ -28,5 +28,5 @@ Para las capturas en un equipo nuevo: `npx playwright install chromium`.
 
 ## Lo que más vas a editar
 
-- `src/config/site.ts`: marca, contacto, datos legales, credenciales, garantías y equipo.
+- `src/config/site.ts`: marca, contacto, datos legales, credenciales, seguridad y garantías.
 - `src/content/guias/`: guías en Markdown.

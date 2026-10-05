@@ -3,6 +3,7 @@ title: 'Modelo 115: retenciones del alquiler de tu local u oficina'
 description: 'Si alquilas un local para tu negocio, tienes que retener el 19 % del alquiler e ingresarlo con el modelo 115. Quién lo presenta, ejemplo, excepciones y plazos.'
 updated: '2026-10-04'
 models: ['115', '180']
+service: 'retenciones'
 order: 3
 ---
 

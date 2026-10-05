@@ -91,6 +91,7 @@ for (const file of all) {
 
   // Quita enlaces que no aplican en la vista previa.
   html = html.replace(/<link rel="(canonical|sitemap)"[^>]*>/g, '');
+  html = html.replace(/<link rel="preload"[^>]*as="font"[^>]*>/g, '');
 
   // Enlaces absolutos internos -> relativos.
   html = html.replace(/(\s(?:href|src|action))="(\/(?!\/)[^"]*)"/g, (_, attr, url) => `${attr}="${toRelative(url, prefix)}"`);

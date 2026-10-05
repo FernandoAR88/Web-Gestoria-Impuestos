@@ -2,8 +2,8 @@
  * Calendario fiscal de los modelos que gestionamos (territorio común).
  *
  * Los vencimientos se generan con las reglas generales de la AEAT y se
- * trasladan al lunes si caen en sábado o domingo. No contempla festivos
- * nacionales: revisa cada año el calendario oficial del contribuyente.
+ * trasladan al siguiente día hábil si caen en sábado, domingo o festivo nacional.
+ * Revisa cada año el calendario oficial del contribuyente.
  */
 
 export type Deadline = {
@@ -18,10 +18,28 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
 const iso = (d: Date) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 
-/** Traslada al siguiente día hábil si cae en fin de semana. */
+/** Domingo de Pascua (algoritmo de Butcher). */
+function easter(year: number): Date {
+  const a = year % 19, b = Math.floor(year / 100), c = year % 100;
+  const d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25), g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30, i = Math.floor(c / 4), k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7, m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31), day = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(year, month - 1, day, 12);
+}
+
+/** Festivos nacionales (fijos y Viernes Santo). Los autonómicos y locales no se contemplan. */
+function nationalHolidays(year: number): Set<string> {
+  const fixed = ['01-01', '01-06', '05-01', '08-15', '10-12', '11-01', '12-06', '12-08', '12-25'].map((md) => `${year}-${md}`);
+  const goodFriday = easter(year);
+  goodFriday.setDate(goodFriday.getDate() - 2);
+  return new Set([...fixed, iso(goodFriday)]);
+}
+
+/** Traslada al siguiente día hábil si cae en sábado, domingo o festivo nacional. */
 function businessDay(year: number, month: number, day: number): string {
   const d = new Date(year, month - 1, day, 12);
-  while (d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate() + 1);
+  while (d.getDay() === 0 || d.getDay() === 6 || nationalHolidays(d.getFullYear()).has(iso(d))) d.setDate(d.getDate() + 1);
   return iso(d);
 }
 
