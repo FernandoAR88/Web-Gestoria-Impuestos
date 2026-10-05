@@ -15,9 +15,8 @@ Marca cada casilla al completarla. El build avisa por consola de los datos de `s
 
 ## 2. Decisiones de negocio
 
-- [ ] Confirmar los precios de `src/data/pricing.ts` (ver justificación en `ANALISIS.md` §4)
+- [ ] Revisar la tabla interna de honorarios (fuera del repositorio)
 - [ ] Mantener o quitar la **garantía de plazo** (pagar recargos y sanciones por error propio). Requiere seguro de RC
-- [ ] Mantener el descuento de modelos sueltos al contratar un plan el mismo trimestre (`/precios/`)
 - [ ] Baja en planes anuales: ¿se devuelve la parte proporcional? (`/condiciones/`, punto 4)
 - [ ] Día límite de entrega de documentación (ahora el día 10: `site.docsDeadlineDay`)
 - [ ] Horario de atención y horario reforzado en picos
@@ -40,6 +39,10 @@ Marca cada casilla al completarla. El build avisa por consola de los datos de `s
 - [ ] Programa de facturación propio adaptado a **Verifactu** antes de la fecha que te corresponda
 
 ## 4. Técnico
+
+- [ ] **Hacer privado el repositorio de GitHub** (Settings → General → Danger zone → Change visibility)
+- [ ] Activar `site.security.*` solo para las medidas realmente implantadas
+- [ ] Contrato de encargo del tratamiento con Netlify (o formulario con proveedor UE)
 
 - [ ] Elegir alojamiento (Netlify o Cloudflare Pages) y conectar el repositorio
 - [ ] Configurar el formulario: Netlify Forms (por defecto) o Formspree (`site.form`)

@@ -35,7 +35,7 @@ Documento de decisiones: qué vendemos, a quién, con qué tecnología, a qué p
 
 - **Identidad visual señorial y sobria**: azul tinta, oro viejo y fondo marfil; titulares en Cormorant Garamond (serif clásica), texto en Source Sans 3, monograma «AR» tipo sello, filetes dorados y esquinas casi rectas. Transmite solvencia y tradición sin parecer anticuada.
 - **Fuentes alojadas en la propia web** (paquetes Fontsource, solo el juego latino): sin Google Fonts ni scripts de terceros. Cero peticiones externas, cero cookies, sin banner de consentimiento y mejor RGPD.
-- **Todo lo editable en datos**: marca, contacto, precios, FAQ y calendario viven en `src/config` y `src/data`; las páginas solo los pintan.
+- **Todo lo editable en datos**: marca, contacto, servicios, FAQ y calendario viven en `src/config` y `src/data`; las páginas solo los pintan.
 - **Calendario fiscal generado por código**: calcula los vencimientos de cada año y los traslada si caen en fin de semana; en el navegador se ocultan los pasados y se marca el siguiente.
 - **Datos estructurados** (JSON-LD): ProfessionalService, BreadcrumbList, FAQPage, OfferCatalog y Article.
 - **Accesibilidad**: HTML semántico, enlace «saltar al contenido», foco visible, menú móvil con `aria-expanded`, contraste AA, `prefers-reduced-motion`.
@@ -43,78 +43,11 @@ Documento de decisiones: qué vendemos, a quién, con qué tecnología, a qué p
 
 **Alojamiento recomendado.** Netlify o Cloudflare Pages (plan gratuito suficiente al principio), con dominio `.es` propio y HTTPS. El formulario está preparado para Netlify Forms; ver el aviso de transferencias internacionales en el §6.
 
-## 3. Mercado y competencia
+## 3. Mercado, honorarios y monetización
 
-Precios publicados por cada competidor y recogidos por comparativas del sector (octubre de 2026). Cambian a menudo: revísalos antes de usarlos en comunicación comercial.
+La web no publica precios: los honorarios se comunican en una propuesta escrita tras la primera consulta. El análisis de mercado, la tabla de honorarios, las igualas y los escenarios de ingresos son **documentación interna** y se guardan fuera de este repositorio (`interno/`, excluido de Git).
 
-| Competidor | Precio | Qué incluye |
-| --- | --- | --- |
-| TaxDown | 29,90 €/mes (Standard) · 59,90 €/mes (Premium) | Alta, trimestrales de IVA e IRPF, renta, chat; Premium añade gestor, WhatsApp y requerimientos |
-| Declarando | 49,90 / 69,90 / 99,90 €/mes + IVA (planes con impuestos) | Software + gestión de impuestos |
-| Taxfix (Pro) | 39,90 €/mes | Trimestrales y alta gratuita |
-| Xolo | 0 € + 5 % por factura (Go) · 39 €/mes (Leap) · 59 €/mes (Global) | Orientado a freelance |
-| Billeo | 65 €/mes + IVA (hasta 15 facturas) · 80 €/mes + IVA (hasta 100) · SL desde 159 €/mes + IVA | Incluye contabilidad; extras como nóminas o renta de no clientes |
-| Holded Gestoría | desde 70 €/mes | Software + gestoría |
-| Quipu (gestoría) | desde 49 €/mes | Software + gestoría |
-| Asesorlex / Ayuda T Pymes | 39 €/mes / 29,95 €/mes | Gestoría online básica |
-| Gestoría tradicional | 50–120 €/mes | Presencial, precio variable |
-
-**Modelos sueltos en el mercado:** modelo 303 entre 25 y 60 € por presentación; modelo 115 entre 25 y 45 €; resúmenes anuales entre 40 y 150 €.
-
-**Hueco de mercado.** Los grandes compiten con software propio y paquetes amplios. AR Fiscal compite con **especialización + persona visible + transparencia**: menos cosas, más baratas, mejor explicadas y con una cara detrás.
-
-Fuentes: [TaxDown precios](https://taxdown.es/precios), [Declarando precios](https://declarando.es/precios), [Billeo precios](https://www.billeo.es/precios), [Guía Fiscal: 8 gestorías online comparadas](https://guiafiscal.es/comparativas/mejor-gestoria-online/), [Cronoshare: cuánto cuesta una gestoría](https://www.cronoshare.com/cuanto-cuesta/gestoria), [¿Cuánto cuesta presentar el 303?](https://cuantomecuesta.com/es/declaracion-modelo-303/).
-
-## 4. Estrategia de precios
-
-Precios **sin IVA** (servicio a profesionales), mostrando siempre el total con IVA al lado.
-
-| Plan | Mensual | Anual (2 meses gratis) | Posición frente al mercado |
-| --- | --- | --- | --- |
-| **Esencial** | 24,90 € | 249 € | Entrada más barata que TaxDown Standard (29,90 €) porque no incluye la renta. Gancho de captación. |
-| **Completo** ★ | 39,90 € | 399 € | Plan ancla. Igual que Taxfix Pro y por debajo de Declarando (69,90 €) y Billeo (65–80 €), con retenciones y renta incluidas. |
-| **Plus** | 64,90 € | 649 € | Sociedades que solo quieren delegar IVA y retenciones, más requerimientos y revisión trimestral. Muy por debajo de una SL completa (159 € o más) porque no incluye contabilidad ni Impuesto sobre Sociedades. |
-
-**Por qué estos números**
-
-- **El plan del medio se vende solo**: Plus hace de referencia alta y Esencial de entrada; Completo concentra el valor (renta incluida, valorada en 79 €).
-- **Precios terminados en ,90**: alineados con la competencia directa y percibidos como cerrados.
-- **Modelos sueltos más caros por unidad** para empujar a la suscripción: el pack trimestral 303 + 130 cuesta 65 €; un año suelto (4 × 65 € + 45 € del 390) son 305 €, más que el plan Esencial (298,80 €), que además incluye alta, avisos y soporte.
-- **Pago anual con 2 meses gratis** (−16,7 %): adelanta caja, reduce bajas y cubre el pico de trabajo de enero.
-- **Extras con precio publicado** (facturas adicionales, atrasados, requerimientos, complementarias): evitan discusiones y convierten el trabajo extra en ingreso.
-
-**Coste en tiempo estimado** (con automatización y revisión humana; estimación a validar con los primeros clientes):
-
-| Plan | Presentaciones al año | Horas al año por cliente | Ingreso por hora |
-| --- | --- | --- | --- |
-| Esencial | 9 (4 × 303, 4 × 130, 390) | ≈ 3,8 h | ≈ 79 € |
-| Completo | ≈ 21 + renta | ≈ 10,7 h | ≈ 45 € |
-| Plus | ≈ 21 + revisiones trimestrales | ≈ 14 h | ≈ 56 € |
-
-Si el ingreso por hora de Completo baja de 40 € con clientes reales, hay que automatizar más (importación de facturas) o subir el precio.
-
-## 5. Monetización
-
-1. **Suscripciones (ingreso recurrente)**: el núcleo del negocio.
-2. **Modelos sueltos**: producto de entrada en picos de demanda (enero, abril, renta) y para quien no quiere suscribirse. Si contrata un plan, se descuenta lo pagado ese trimestre.
-3. **Extras**: renta para clientes Esencial, facturas adicionales, trimestres atrasados, requerimientos y complementarias.
-4. **Altas de autónomo gratis con plan**: imán de captación en el momento de mayor necesidad.
-5. **Alianzas con comisión** (siempre declaradas al cliente): software de facturación adaptado a Verifactu, cuentas bancarias para autónomos y seguros. Verifactu será obligatorio para autónomos el 1 de julio de 2027: es una oportunidad comercial clara.
-6. **Derivación recíproca** con gestorías laborales (nóminas), abogados y coworkings.
-7. **Más adelante**: plan Empresa con contabilidad e Impuesto sobre Sociedades, talleres o cursos para autónomos.
-
-**Escenario orientativo** (mezcla 40 % Esencial, 45 % Completo, 15 % Plus):
-
-| Clientes | Ingreso mensual recurrente | Ingreso anual (sin extras) | Horas de trabajo al año |
-| --- | --- | --- | --- |
-| 100 | ≈ 3.765 € | ≈ 45.200 € | ≈ 840 h (media jornada) |
-| 300 | ≈ 11.300 € | ≈ 135.500 € | ≈ 2.530 h (1,5 personas) |
-
-**Métricas que hay que seguir desde el primer día**: coste de captación por cliente, valor de vida del cliente (un cliente Completo durante 24 meses ≈ 958 €), bajas mensuales (objetivo < 2 %), porcentaje de pago anual, minutos por modelo y satisfacción.
-
-**Costes fijos a prever**: dominio y alojamiento (0–20 €/mes), programa fiscal para preparar y presentar modelos, firma electrónica, correo profesional, seguro de responsabilidad civil profesional, cuota de la asociación profesional, pasarela de cobro (domiciliación SEPA o tarjeta) y marketing.
-
-## 6. Legal y cumplimiento
+## 4. Legal y cumplimiento
 
 | Tema | Qué implica | Estado |
 | --- | --- | --- |
@@ -133,11 +66,11 @@ Si el ingreso por hora de Completo baja de 40 € con clientes reales, hay que a
 
 > Los textos legales de la web son plantillas de trabajo. Deben revisarlos un abogado y, en lo fiscal, un asesor colegiado antes de publicar.
 
-## 7. Confianza y conversión
+## 5. Confianza y conversión
 
 **Ya implementado**
 
-- Precio público, cerrado y con IVA visible; comparativa de planes; modelos sueltos y extras con precio.
+- Honorarios cerrados por escrito antes de empezar, sin permanencia.
 - Garantías concretas y por escrito: borrador antes de presentar, garantía de plazo, sin permanencia y precio cerrado.
 - Persona real con nombre (el fundador) y datos completos de la empresa.
 - Canales y horario publicados (teléfono, WhatsApp, email) y tiempo de respuesta comprometido.
@@ -154,12 +87,12 @@ Si el ingreso por hora de Completo baja de 40 € con clientes reales, hay que a
 4. Casos reales anonimizados, con permiso del cliente.
 5. Número de clientes o declaraciones presentadas, solo cuando sea real.
 
-## 8. SEO y captación
+## 6. SEO y captación
 
 | Intención | Búsquedas objetivo | Página |
 | --- | --- | --- |
 | Informativa | modelo 303, modelo 130, modelo 111, modelo 115, calendario fiscal autónomos, Verifactu 2027 | Guías y calendario |
-| Comparativa | gestoría online autónomos, asesoría fiscal online, cuánto cuesta una gestoría | Inicio y precios |
+| Comparativa | gestoría online autónomos, asesoría fiscal online, cuánto cuesta una gestoría | Inicio y servicios |
 | Transaccional | presentar modelo 303 online, alta autónomo online | Servicios y modelos sueltos |
 
 - **Calendario editorial**: publicar y actualizar guías antes de cada pico (marzo, junio, septiembre y diciembre para los trimestrales; diciembre y enero para 390, 190, 180 y 347; marzo y abril para la renta).
@@ -168,11 +101,11 @@ Si el ingreso por hora de Completo baja de 40 € con clientes reales, hay que a
 - **Imanes de captación**: calculadora de IVA y de pago fraccionado, calendario descargable, plantilla de factura.
 - **Técnico**: sitemap, robots, canónicas, datos estructurados y velocidad ya resueltos. Al lanzar: Google Search Console y analítica sin cookies con servidores en la UE.
 
-## 9. Hoja de ruta
+## 7. Hoja de ruta
 
 | Fase | Plazo | Contenido |
 | --- | --- | --- |
-| **0. Web base** | Hecho | Esta web: marca, páginas, precios, guías, legales, agentes de ejecución y revisión |
+| **0. Web base** | Hecho | Esta web: marca, páginas, guías, legales, agentes de ejecución y revisión |
 | **1. Prelanzamiento** | 2–4 semanas | Completar `PENDIENTES.md`: datos legales, revisión jurídica, dominio y alojamiento, formulario con datos en la UE, email profesional, imagen para redes, asociación con convenio, seguro de RC, manual de prevención del blanqueo, contrato y anexo de encargo del tratamiento, pasarela de cobro, registro de marca |
 | **2. Captación** | 1–3 meses | Contenidos SEO, marca personal, alianzas, campañas en los picos de enero y abril, imanes de captación |
 | **3. Área de cliente** | 3–6 meses | Acceso privado: subida de facturas, estado de cada trimestre, aprobación del borrador con un clic, cobros recurrentes y notificaciones. Astro con servidor y base de datos con alojamiento en la UE |

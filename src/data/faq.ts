@@ -1,3 +1,5 @@
+import { site, showDeadlineGuarantee } from '../config/site';
+
 export type Faq = { q: string; a: string; group: 'servicio' | 'honorarios' | 'seguridad' | 'impuestos' };
 
 export const faqs: Faq[] = [
@@ -39,12 +41,16 @@ export const faqs: Faq[] = [
   {
     group: 'honorarios',
     q: '¿Y si os equivocáis vosotros?',
-    a: 'Si un modelo se presenta fuera de plazo o con un error imputable a nosotros, corregimos la declaración sin coste y asumimos el recargo o la sanción correspondiente.',
+    a: showDeadlineGuarantee
+      ? 'Si un modelo se presenta fuera de plazo o con un error imputable a nosotros, corregimos la declaración sin coste y asumimos el recargo o la sanción correspondiente.'
+      : 'Si un modelo tiene un error imputable a nosotros, lo corregimos sin coste.',
   },
   {
     group: 'seguridad',
     q: '¿Dónde se guardan mis datos?',
-    a: 'En servidores ubicados en la Unión Europea, cifrados en tránsito y en reposo. Solo acceden las personas del equipo que llevan tu cuenta y nunca cedemos tus datos con fines comerciales.',
+    a: site.security.euDataOnly
+      ? 'En servidores ubicados en la Unión Europea, cifrados en tránsito y en reposo. Solo acceden las personas que preparan tus declaraciones y nunca cedemos tus datos con fines comerciales.'
+      : 'En proveedores que cumplen el RGPD, con contrato de encargo del tratamiento. Tienes el detalle de cada proveedor y su ubicación en la política de privacidad. Solo acceden las personas que preparan tus declaraciones y nunca cedemos tus datos con fines comerciales.',
   },
   {
     group: 'impuestos',

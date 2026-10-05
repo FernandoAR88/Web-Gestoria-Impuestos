@@ -7,7 +7,7 @@ const items: { icon: IconName; text: string }[] = [
   site.guarantees.noPermanence && { icon: 'refresh' as IconName, text: 'Sin permanencia' },
   { icon: 'file' as IconName, text: 'Papel de trabajo en cada presentación' },
   site.guarantees.approvalBeforeFiling && { icon: 'eye' as IconName, text: 'Nada se presenta sin tu visto bueno' },
-  { icon: 'lock' as IconName, text: 'Datos cifrados en la UE' },
+  { icon: 'lock' as IconName, text: site.security.euDataOnly ? 'Datos cifrados en la UE' : 'Datos protegidos conforme al RGPD' },
   site.credentials.colaboradorSocialAEAT && { icon: 'shield' as IconName, text: 'Colaboradores sociales de la AEAT' },
   site.credentials.seguroRC && { icon: 'shield' as IconName, text: 'Seguro de responsabilidad civil' },
 ].filter(Boolean) as { icon: IconName; text: string }[];

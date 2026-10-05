@@ -66,10 +66,19 @@ const l = site.legal;
     legal. También acceden a ellos, como encargados del tratamiento y con contrato conforme al art. 28 RGPD, nuestros proveedores de
     alojamiento, correo electrónico, gestión documental, firma electrónica y cobros: [LISTA DE PROVEEDORES Y PAÍS].
   </p>
-  <p>
-    No realizamos transferencias internacionales fuera del Espacio Económico Europeo. Si algún proveedor lo hiciera, se haría con las
-    garantías del capítulo V del RGPD (decisión de adecuación o cláusulas contractuales tipo).
-  </p>
+  {
+    site.security.euDataOnly ? (
+      <p>No realizamos transferencias internacionales de datos fuera del Espacio Económico Europeo.</p>
+    ) : (
+      <p>
+        Los datos que nos envías por el formulario de la web los recibe nuestro proveedor de alojamiento, Netlify, Inc. (Estados Unidos),
+        como encargado del tratamiento. Si nos escribes por WhatsApp, el servicio lo presta WhatsApp Ireland Limited (grupo Meta), que
+        puede tratar datos fuera del EEE. Estas transferencias se amparan en el Marco de Privacidad de Datos UE-EE. UU. y en cláusulas
+        contractuales tipo aprobadas por la Comisión Europea (capítulo V del RGPD). Te pedimos que no envíes documentación fiscal por
+        WhatsApp.
+      </p>
+    )
+  }
 
   <h2>4. Tus derechos</h2>
   <p>
@@ -81,8 +90,8 @@ const l = site.legal;
 
   <h2>5. Seguridad</h2>
   <p>
-    Aplicamos medidas técnicas y organizativas adecuadas al riesgo: cifrado en tránsito y en reposo, control de accesos, copias de
-    seguridad y deber de confidencialidad del personal. Más detalle en <a href="/seguridad/">Seguridad</a>.
+    Aplicamos medidas técnicas y organizativas adecuadas al riesgo: conexión cifrada, control de accesos y deber de confidencialidad de
+    quienes tratan tus datos. Más detalle en <a href="/seguridad/">Seguridad</a>.
   </p>
 
   <h2>6. Datos de terceros</h2>

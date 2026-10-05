@@ -6,7 +6,7 @@ La web es estática: se compila una vez (`npm run build`) y la carpeta `dist/` s
 
 1. Rellenar los datos reales en `src/config/site.ts`: titular, NIF, domicilio, teléfono, email, WhatsApp y tu biografía. Ahora hay marcadores entre [CORCHETES].
 2. Revisar los textos legales (aviso legal, privacidad, condiciones) con un abogado.
-3. Dejar `preLaunch: false` en `src/config/site.ts` para quitar la franja de «web en preparación».
+3. Dejar `preLaunch: false` en `src/config/site.ts`: quita la franja de «web en preparación» y permite que Google la indexe (mientras esté en `true`, la web lleva `noindex` y `robots.txt` lo bloquea todo).
 
 ## Paso a paso
 
@@ -21,7 +21,7 @@ La web es estática: se compila una vez (`npm run build`) y la carpeta `dist/` s
 
 ## Costes orientativos
 
-- Netlify: 0 € (plan gratuito, 100 envíos de formulario al mes).
+- Netlify: 0 € en el plan gratuito (funciona por créditos mensuales; revisa el consumo en el panel).
 - Dominio `.es`: unos 10–15 €/año.
 - Email profesional con el dominio: desde unos 3–6 €/mes por buzón.
 

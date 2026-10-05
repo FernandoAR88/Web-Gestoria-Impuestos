@@ -1,7 +1,7 @@
 ---
 // PLANTILLA: estas condiciones son el contrato con tus clientes. Revísalas con un abogado antes de publicar.
 import LegalLayout from '../layouts/LegalLayout.astro';
-import { site } from '../config/site';
+import { site, showDeadlineGuarantee } from '../config/site';
 const l = site.legal;
 const g = site.guarantees;
 ---
@@ -68,7 +68,7 @@ const g = site.guarantees;
 
   <h2>7. Responsabilidad y garantía</h2>
   {
-    g.deadlineGuarantee && (
+    showDeadlineGuarantee && (
       <p>
         Si una declaración se presenta fuera de plazo o con errores imputables al prestador, este la corregirá sin coste y asumirá los
         recargos, intereses y sanciones que se deriven directamente de su error.

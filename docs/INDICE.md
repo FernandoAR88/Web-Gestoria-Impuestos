@@ -5,7 +5,7 @@ Web de **AR Fiscal**, asesoría fiscal 100 % online, especializada en los impues
 | Documento | Para qué sirve |
 | --- | --- |
 | [INDICE.md](INDICE.md) | Este índice: estructura, páginas y cómo trabajar con el proyecto |
-| [ANALISIS.md](ANALISIS.md) | Análisis completo: enfoque, tecnología, mercado, precios, monetización, legal, SEO y hoja de ruta |
+| [ANALISIS.md](ANALISIS.md) | Análisis completo: enfoque, tecnología, legal, SEO y hoja de ruta |
 | [PENDIENTES.md](PENDIENTES.md) | Lista de comprobación antes del lanzamiento |
 | [REVISION.md](REVISION.md) | Informe del agente revisor especialista (se regenera en cada revisión) |
 
@@ -13,12 +13,11 @@ Web de **AR Fiscal**, asesoría fiscal 100 % online, especializada en los impues
 
 | Ruta | Página | Objetivo |
 | --- | --- | --- |
-| `/` | Inicio | Propuesta de valor, servicios, proceso, precios, garantías, equipo, FAQ |
+| `/` | Inicio | Propuesta de valor, servicios, método, honorarios por propuesta, garantías, FAQ |
 | `/servicios/` | Servicios | Catálogo de modelos y lo que no hacemos |
 | `/servicios/iva/` | IVA | Modelos 303, 390, 349 y 347 |
 | `/servicios/retenciones/` | Retenciones | Modelos 111, 190, 115 y 180 |
 | `/servicios/irpf-autonomos/` | IRPF del autónomo | Modelos 130, 036 y renta (100) |
-| `/precios/` | Precios | Planes, comparativa, pago anual, modelos sueltos y extras |
 | `/como-funciona/` | Cómo funciona | Proceso en 4 pasos y requisitos para empezar |
 | `/calendario-fiscal/` | Calendario fiscal | Próximos vencimientos (se actualiza solo) y calendario general |
 | `/guias/` | Guías | Contenidos SEO: 303, 111, 115, 130 y Verifactu |
@@ -38,13 +37,12 @@ Web de **AR Fiscal**, asesoría fiscal 100 % online, especializada en los impues
 ├── src/
 │   ├── config/site.ts        ★ Marca, contacto, datos legales, credenciales, garantías, equipo, formulario
 │   ├── data/
-│   │   ├── pricing.ts        ★ Planes, modelos sueltos y extras (precios sin IVA)
 │   │   ├── services.ts       Servicios, modelos tributarios y exclusiones
 │   │   ├── calendar.ts       Generador del calendario fiscal (traslada fines de semana)
 │   │   └── faq.ts            Preguntas frecuentes
 │   ├── content/guias/*.md    Guías en Markdown (añadir una = crear un fichero)
 │   ├── content.config.ts     Esquema de las guías
-│   ├── components/           Piezas reutilizables (cabecera, precios, pasos, FAQ, formulario...)
+│   ├── components/           Piezas reutilizables (cabecera, pasos, entregables, FAQ, formulario...)
 │   ├── layouts/              Plantilla base (SEO, Open Graph, JSON-LD) y plantilla legal
 │   ├── pages/                Una ruta por fichero
 │   └── styles/global.css     Sistema de diseño señorial: azul tinta, oro viejo, marfil y tipografía serif
@@ -71,7 +69,7 @@ npm run build          # genera la web en dist/
 npm run verify         # comprueba enlaces, títulos y descripciones
 npm run screenshots    # capturas y errores en navegador real (.preview/screenshots/)
 npm run ejecucion      # todo lo anterior + vista previa empaquetada
-npm run og             # regenera la imagen para redes si cambias marca o precios
+npm run og             # regenera la imagen para redes si cambias la marca o el lema
 ```
 
 En un equipo nuevo, antes de las capturas: `npx playwright install chromium`.
@@ -81,7 +79,6 @@ En un equipo nuevo, antes de las capturas: `npx playwright install chromium`.
 | Quiero... | Edita |
 | --- | --- |
 | Cambiar teléfono, email, horario o datos legales | `src/config/site.ts` |
-| Cambiar precios o lo que incluye cada plan | `src/data/pricing.ts` (y la tabla de `src/pages/precios.astro`) |
 | Activar el sello de colaborador social o del seguro de RC | `site.credentials` en `src/config/site.ts` |
 | Añadir reseñas reales | `site.reviews` en `src/config/site.ts` |
 | Añadir una guía | Nuevo `.md` en `src/content/guias/` con el mismo encabezado que las demás |

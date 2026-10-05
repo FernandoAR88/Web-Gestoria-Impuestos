@@ -23,11 +23,10 @@ Para las capturas en un equipo nuevo: `npx playwright install chromium`.
 ## Documentación
 
 - [Índice del proyecto](docs/INDICE.md): mapa de la web, estructura y cambios habituales.
-- [Análisis](docs/ANALISIS.md): enfoque, tecnología, mercado, precios, monetización, legal, SEO y hoja de ruta.
+- [Análisis](docs/ANALISIS.md): enfoque, tecnología, legal, SEO y hoja de ruta.
 - [Pendientes](docs/PENDIENTES.md): lista de comprobación antes de lanzar.
 
 ## Lo que más vas a editar
 
 - `src/config/site.ts`: marca, contacto, datos legales, credenciales, garantías y equipo.
-- `src/data/pricing.ts`: planes, modelos sueltos y extras.
 - `src/content/guias/`: guías en Markdown.

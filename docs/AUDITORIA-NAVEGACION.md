@@ -1,6 +1,6 @@
 # Auditoría de navegación
 
-Generado: 5/10/2026, 7:16:22 · 23 páginas · 194 enlaces de contenido revisados
+Generado: 5/10/2026, 7:26:11 · 23 páginas · 194 enlaces de contenido revisados
 
 ## Resumen: 0 errores · 0 avisos
 

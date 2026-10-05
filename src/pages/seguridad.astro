@@ -5,33 +5,39 @@ import CtaBand from '../components/CtaBand.astro';
 import Icon, { type IconName } from '../components/Icon.astro';
 import { site } from '../config/site';
 
-const blocks: { icon: IconName; title: string; text: string }[] = [
+const sec = site.security;
+// Solo se anuncian las medidas marcadas como implantadas en site.security.
+const blocks = [
   {
-    icon: 'lock',
-    title: 'Cifrado en tránsito y en reposo',
-    text: 'Toda la comunicación con la web y con tu área de cliente va cifrada (HTTPS/TLS). Tus documentos se guardan cifrados en reposo.',
+    icon: 'lock' as IconName,
+    title: sec.encryptionAtRest ? 'Cifrado en tránsito y en reposo' : 'Conexión cifrada',
+    text: sec.encryptionAtRest
+      ? 'Toda la comunicación con la web va cifrada (HTTPS/TLS) y tus documentos se guardan cifrados.'
+      : 'Toda la comunicación con la web va cifrada mediante HTTPS/TLS.',
   },
-  {
-    icon: 'shield',
+  sec.euDataOnly && {
+    icon: 'shield' as IconName,
     title: 'Servidores en la Unión Europea',
     text: 'Alojamos tus datos en proveedores con centros de datos en la UE y contrato de encargo del tratamiento conforme al RGPD.',
   },
   {
-    icon: 'user',
+    icon: 'user' as IconName,
     title: 'Acceso mínimo',
-    text: 'Solo acceden a tu documentación las personas que llevan tu cuenta, con autenticación en dos pasos y registro de accesos.',
+    text: `Solo acceden a tu documentación las personas que preparan tus declaraciones${sec.twoFactor ? ', con verificación en dos pasos y registro de accesos' : ''}.`,
   },
   {
-    icon: 'file',
+    icon: 'file' as IconName,
     title: 'Secreto profesional',
-    text: 'Todo el equipo firma un compromiso de confidencialidad. Nunca cedemos ni vendemos tus datos.',
+    text: 'Toda persona con acceso a tus datos firma un compromiso de confidencialidad. Nunca cedemos ni vendemos tus datos.',
   },
   {
-    icon: 'refresh',
-    title: 'Copias de seguridad',
-    text: 'Copias automáticas diarias y conservación de tu documentación durante los plazos legales. Si te vas, te la entregamos completa.',
+    icon: 'refresh' as IconName,
+    title: sec.dailyBackups ? 'Copias de seguridad diarias' : 'Conservación y entrega',
+    text: sec.dailyBackups
+      ? 'Copias automáticas diarias y conservación durante los plazos legales. Si te vas, te entregamos tu documentación completa.'
+      : 'Conservamos tu documentación durante los plazos legales. Si te vas, te la entregamos completa.',
   },
-];
+].filter(Boolean) as { icon: IconName; title: string; text: string }[];
 ---
 
 <BaseLayout
